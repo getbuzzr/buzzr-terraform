@@ -37,7 +37,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Assume Role
         run: |
-          apt-get install jq
+          sudo apt-get install jq
           temp_role=$(aws sts assume-role \
                     --role-arn "arn:aws:iam::073157105290:role/dev_admin" \
                     --role-session-name "AWSCLI-Session")
