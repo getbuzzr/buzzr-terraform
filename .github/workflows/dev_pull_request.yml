@@ -39,16 +39,12 @@ jobs:
           export AWS_ACCESS_KEY_ID=$(echo $temp_role | jq -r .Credentials.AccessKeyId)
           export AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq -r .Credentials.SecretAccessKey)
           export AWS_SESSION_TOKEN=$(echo $temp_role | jq -r .Credentials.SessionToken)
-      # change directory to us-east-1
-      - name: get directory
-        run: ls -l
-      - name: Change Directory to us-east-1
-        run: cd terraform/us-east-1
-      # terraform init stage
+      # initialize terraform
       - name: Terraform init
         run: |
           cd terraform/us-east-1
           terraform init
+      # plan terraform
       - name: Terraform plan
         run: |
           cd terraform/us-east-1  
