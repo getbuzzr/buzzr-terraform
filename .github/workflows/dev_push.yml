@@ -3,7 +3,7 @@ name: Terraform apply stage
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
-  pull_request:
+  push:
     branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -44,4 +44,6 @@ jobs:
         run: terraform init
       - name: Terraform plan
         run: terraform plan
+      - name: Terraform apply
+        run: terraform apply
       
