@@ -48,8 +48,9 @@ jobs:
       - name: Terraform init
         run: |
           cd terraform/us-east-1
-          pwd
           terraform init
       - name: Terraform plan
-        run: terraform plan
+        run: |
+          cd terraform/us-east-1  
+          terraform plan
       
