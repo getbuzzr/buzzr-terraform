@@ -38,7 +38,11 @@ jobs:
         with:
           filters: |
             dev:  
-              - 'dev/*'
+              - 'dev/**'
+            staging:
+              - 'staging/**'
+            prod:
+              - 'prod/**'
       
       # check if dev edited
       - name: Terraform plan dev us-east-1
