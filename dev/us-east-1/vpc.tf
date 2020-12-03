@@ -8,70 +8,70 @@ resource "aws_default_vpc" "default" {
 
 #  Subnet definitions
 resource "aws_subnet" "public1" {
-  vpc_id     = aws_default_vpc.default.id
-  cidr_block = "172.31.0.0/24"
+  vpc_id            = aws_default_vpc.default.id
+  cidr_block        = "172.31.0.0/24"
   availability_zone = "us-east-1a"
 
   tags = {
     Service = "ELB"
-    type = "public"
+    type    = "public"
   }
 }
 
 resource "aws_subnet" "public2" {
-  vpc_id     = aws_default_vpc.default.id
-  cidr_block = "172.31.1.0/24"
+  vpc_id            = aws_default_vpc.default.id
+  cidr_block        = "172.31.1.0/24"
   availability_zone = "us-east-1b"
 
 
   tags = {
     Service = "ELB"
-    type = "public"
+    type    = "public"
   }
 }
 resource "aws_subnet" "private1" {
-  vpc_id     = aws_default_vpc.default.id
-  cidr_block = "172.31.2.0/24"
+  vpc_id            = aws_default_vpc.default.id
+  cidr_block        = "172.31.2.0/24"
   availability_zone = "us-east-1a"
 
 
   tags = {
-    type = "private"
+    type    = "private"
     Service = "webserver"
   }
 }
 resource "aws_subnet" "private2" {
-  vpc_id     = aws_default_vpc.default.id
-  cidr_block = "172.31.3.0/24"
+  vpc_id            = aws_default_vpc.default.id
+  cidr_block        = "172.31.3.0/24"
   availability_zone = "us-east-1b"
 
 
   tags = {
-    type = "private"
+    type    = "private"
     Service = "webserver"
   }
 }
 
 resource "aws_subnet" "private3" {
-  vpc_id     = aws_default_vpc.default.id
-  cidr_block = "172.31.4.0/24"
+  vpc_id            = aws_default_vpc.default.id
+  cidr_block        = "172.31.4.0/24"
   availability_zone = "us-east-1c"
 
 
   tags = {
-    type = "private"
+    type    = "private"
     Service = "db"
   }
 }
 
 resource "aws_subnet" "private4" {
-  vpc_id     = aws_default_vpc.default.id
-  cidr_block = "172.31.5.0/24"
+  vpc_id            = aws_default_vpc.default.id
+  cidr_block        = "172.31.5.0/24"
   availability_zone = "us-east-1d"
 
 
   tags = {
-    type = "private"
+    type    = "private"
     Service = "db"
   }
 }

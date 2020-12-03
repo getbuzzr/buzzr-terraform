@@ -12,7 +12,7 @@ provider "aws" {
   region  = "us-east-1"
   
   assume_role {
-    role_arn="arn:aws:iam::073157105290:role/dev_admin"
+    role_arn = "arn:aws:iam::073157105290:role/dev_admin"
   }
 
 }
