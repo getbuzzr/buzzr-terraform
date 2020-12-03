@@ -102,7 +102,7 @@ resource "aws_default_route_table" "default_route_table" {
 }
 
 resource "aws_route_table" "private_route_table" {
-  vpc_id = aws_vpc.default.id
+  vpc_id = aws_default_vpc.default.id
 
   tags = {
     type = "private"
