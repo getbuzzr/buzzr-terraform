@@ -8,7 +8,7 @@ resource "aws_default_vpc" "default" {
 
 #  Subnet definitions
 resource "aws_subnet" "public1" {
-  vpc_id     = aws_vpc.main.id
+  vpc_id     = aws_default_vpc.defaut.id
   cidr_block = "172.31.0.0/20"
 
   tags = {
@@ -17,7 +17,7 @@ resource "aws_subnet" "public1" {
 }
 
 resource "aws_subnet" "public2" {
-  vpc_id     = aws_vpc.main.id
+  vpc_id     = aws_default_vpc.defaut.id
   cidr_block = "172.31.16.0/20"
 
   tags = {
@@ -25,7 +25,7 @@ resource "aws_subnet" "public2" {
   }
 }
 resource "aws_subnet" "private1" {
-  vpc_id     = aws_vpc.main.id
+  vpc_id     = aws_default_vpc.defaut.id
   cidr_block = "172.31.32.0/20"
 
   tags = {
@@ -33,7 +33,7 @@ resource "aws_subnet" "private1" {
   }
 }
 resource "aws_subnet" "private2" {
-  vpc_id     = aws_vpc.main.id
+  vpc_id     = aws_default_vpc.defaut.id
   cidr_block = "172.31.48.0/20"
 
   tags = {
@@ -42,7 +42,7 @@ resource "aws_subnet" "private2" {
 }
 
 resource "aws_subnet" "private3" {
-  vpc_id     = aws_vpc.main.id
+  vpc_id     = aws_default_vpc.defaut.id
   cidr_block = "172.31.54.0/20"
 
   tags = {
@@ -51,7 +51,7 @@ resource "aws_subnet" "private3" {
 }
 
 resource "aws_subnet" "private4" {
-  vpc_id     = aws_vpc.main.id
+  vpc_id     = aws_default_vpc.defaut.id
   cidr_block = "172.31.70.0/20"
 
   tags = {
