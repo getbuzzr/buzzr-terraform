@@ -9,4 +9,7 @@ terraform {
 
 provider "aws" {
   profile = "default"
+  assume_role {
+    role_arn="arn:aws:iam::073157105290:role/dev_admin"
+  }
 }
