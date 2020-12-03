@@ -10,6 +10,9 @@ terraform {
 provider "aws" {
   profile = "default"
   region  = "us-east-1"
-  role_arn="arn:aws:iam::995213493585:role/prod_admin"
+  
+  assume_role {
+    role_arn="arn:aws:iam::995213493585:role/prod_admin"
+  }
 
 }
