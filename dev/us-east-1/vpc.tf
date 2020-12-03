@@ -13,6 +13,7 @@ resource "aws_subnet" "public1" {
 
   tags = {
     Service = "ELB"
+    type = "public"
   }
 }
 
@@ -22,6 +23,7 @@ resource "aws_subnet" "public2" {
 
   tags = {
     Service = "ELB"
+    type = "public"
   }
 }
 resource "aws_subnet" "private1" {
@@ -29,6 +31,7 @@ resource "aws_subnet" "private1" {
   cidr_block = "172.31.32.0/20"
 
   tags = {
+    type = "private"
     Service = "webserver"
   }
 }
@@ -37,6 +40,7 @@ resource "aws_subnet" "private2" {
   cidr_block = "172.31.48.0/20"
 
   tags = {
+    type = "private"
     Service = "webserver"
   }
 }
@@ -46,6 +50,7 @@ resource "aws_subnet" "private3" {
   cidr_block = "172.31.54.0/20"
 
   tags = {
+    type = "private"
     Service = "db"
   }
 }
@@ -55,6 +60,7 @@ resource "aws_subnet" "private4" {
   cidr_block = "172.31.70.0/20"
 
   tags = {
+    type = "private"
     Service = "db"
   }
 }
@@ -99,6 +105,7 @@ resource "aws_default_route_table" "default_route_table" {
     Name = "default table"
     type = "public"
   }
+  
 }
 
 resource "aws_route_table" "private_route_table" {
@@ -107,4 +114,5 @@ resource "aws_route_table" "private_route_table" {
   tags = {
     type = "private"
   }
+
 }
