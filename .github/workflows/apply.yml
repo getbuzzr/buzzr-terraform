@@ -1,0 +1,75 @@
+# workflow only runs on pull request
+name: Terraform apply
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+    paths:
+      - 'dev/**'
+      - 'prod/**'
+      - 'staging/**'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # terraform plan job
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      
+      # Checks-out repo
+      - uses: actions/checkout@v2
+      
+      # install terraform
+      - uses: hashicorp/setup-terraform@v1
+      
+      # install aws with configure on env vars
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
+          aws-region: us-east-1
+      
+      # get path changed to see where to run
+      - uses: dorny/paths-filter@v2
+        id: edited_files
+        with:
+          filters: |
+            dev:  
+              - 'dev/**'
+            staging:
+              - 'staging/**'
+            prod:
+              - 'prod/**'
+      
+      # check if dev edited
+      - name: Terraform plan dev us-east-1
+        if: steps.edited_files.outputs.dev == 'true'
+        run: |
+          cd dev/us-east-1
+          terraform init
+          terraform plan
+          terraform apply
+
+      
+      
+    # check if staging edited
+      - name: Terraform plan staging us-east-1
+        if: steps.edited_files.outputs.staging == 'true'
+        run: |
+          cd staging/us-east-1
+          terraform init
+          terraform plan
+          terraform apply
+    
+    # check if prod edited
+      - name: Terraform plan prod us-east-1
+        if: steps.edited_files.outputs.prod == 'true'
+        run: |
+          cd prod/us-east-1
+          terraform init
+          terraform plan
+          terraform apply
