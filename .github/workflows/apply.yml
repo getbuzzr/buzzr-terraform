@@ -52,7 +52,7 @@ jobs:
           cd dev/us-east-1
           terraform init
           terraform plan
-          terraform apply
+          terraform apply -auto-approve
 
       
       
@@ -63,7 +63,7 @@ jobs:
           cd staging/us-east-1
           terraform init
           terraform plan
-          terraform apply
+          terraform apply -auto-approve
     
     # check if prod edited
       - name: Terraform apply prod us-east-1
@@ -72,4 +72,4 @@ jobs:
           cd prod/us-east-1
           terraform init
           terraform plan
-          terraform apply
+          terraform apply -auto-approve
