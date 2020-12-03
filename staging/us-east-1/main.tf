@@ -10,6 +10,6 @@ terraform {
 provider "aws" {
   profile = "default"
   region  = "us-east-1"
-  role_arn="arn:aws:iam::995213493585:role/prod_admin"
+  role_arn="arn:aws:iam::732983264044:role/staging_admin"
 
 }
