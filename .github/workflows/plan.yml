@@ -46,7 +46,7 @@ jobs:
       
       # check if dev edited
       - name: Terraform plan dev us-east-1
-        if: steps.changes.outputs.dev == 'true'
+        if: steps.edited_files.outputs.dev == 'true'
         run: |
           cd dev/us-east-1
           terraform init
@@ -56,7 +56,7 @@ jobs:
       
     # check if staging edited
       - name: Terraform plan staging us-east-1
-        if: steps.changes.outputs.staging == 'true'
+        if: steps.edited_files.outputs.staging == 'true'
         run: |
           cd staging/us-east-1
           terraform init
@@ -64,7 +64,7 @@ jobs:
     
     # check if prod edited
       - name: Terraform plan prod us-east-1
-        if: steps.changes.outputs.prod == 'true'
+        if: steps.edited_files.outputs.prod == 'true'
         run: |
           cd prod/us-east-1
           terraform init
