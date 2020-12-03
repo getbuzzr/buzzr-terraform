@@ -14,8 +14,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  # terraform plan job
-  plan:
+  # terraform apply job
+  apply:
     runs-on: ubuntu-latest
     steps:
       
@@ -46,7 +46,7 @@ jobs:
               - 'prod/**'
       
       # check if dev edited
-      - name: Terraform plan dev us-east-1
+      - name: Terraform apply dev us-east-1
         if: steps.edited_files.outputs.dev == 'true'
         run: |
           cd dev/us-east-1
@@ -57,7 +57,7 @@ jobs:
       
       
     # check if staging edited
-      - name: Terraform plan staging us-east-1
+      - name: Terraform apply staging us-east-1
         if: steps.edited_files.outputs.staging == 'true'
         run: |
           cd staging/us-east-1
@@ -66,7 +66,7 @@ jobs:
           terraform apply
     
     # check if prod edited
-      - name: Terraform plan prod us-east-1
+      - name: Terraform apply prod us-east-1
         if: steps.edited_files.outputs.prod == 'true'
         run: |
           cd prod/us-east-1
