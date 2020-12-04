@@ -11,7 +11,7 @@ provider "aws" {
   profile = "default"
   
   assume_role {
-    role_arn="arn:aws:iam::995213493585:role/prod_admin"
+    role_arn = "arn:aws:iam::995213493585:role/prod_admin"
   }
 
 }
