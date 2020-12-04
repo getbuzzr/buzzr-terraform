@@ -38,6 +38,7 @@ jobs:
               - 'staging/**'
             prod:
               - 'prod/**'
+      
       # install aws with configure on env vars
       - name: Configure AWS Dev
         if: steps.edited_files.outputs.dev == 'true'
@@ -57,7 +58,16 @@ jobs:
           terraform plan
 
       
-      
+    # install aws with configure on env vars
+      - name: Configure AWS Staging
+        if: steps.edited_files.outputs.staging == 'true'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::732983264044:role/staging_admin
+          role-session-name: terraform-staging
+          aws-region: us-east-1
+          role-duration-seconds: 1200
+
     # check if staging edited
       - name: Terraform plan staging us-east-1
         if: steps.edited_files.outputs.staging == 'true'
@@ -65,6 +75,16 @@ jobs:
           cd staging/us-east-1
           terraform init TF_LOG=DEBUG
           terraform plan
+    
+    # install aws with configure on env vars
+      - name: Configure AWS Prod
+        if: steps.edited_files.outputs.prod == 'true'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::995213493585:role/prod_admin
+          role-session-name: terraform-prod
+          aws-region: us-east-1
+          role-duration-seconds: 1200
     
     # check if prod edited
       - name: Terraform plan prod us-east-1
