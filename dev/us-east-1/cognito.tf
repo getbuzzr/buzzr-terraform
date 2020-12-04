@@ -8,6 +8,12 @@ resource "aws_cognito_user_pool" "default" {
   software_token_mfa_configuration {
     enabled = true
   }
+  
+  schema {
+    attribute_data_type = "String"
+    name                = "email"
+    required            = true
+  }
 
   password_policy {
     minimum_length  = 8
