@@ -13,3 +13,9 @@ variable "metadata_url" {
   type        = string
   description = "This is the metadata url provided by Okta"
 }
+
+variable "provider_name" {
+  type        = string
+  description = "This is the name of the provider(only chars no symbols)"
+  default     = ""
+}

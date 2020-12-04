@@ -1,5 +1,5 @@
-resource "aws_cognito_user_pool_client" "okta" {
-  name         = "okta_app_client"
+resource "aws_cognito_user_pool_client" "default" {
+  name         = var.app_client_name
   user_pool_id = var.user_pool_id
 
   generate_secret = true

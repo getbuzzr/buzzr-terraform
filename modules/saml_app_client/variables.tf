@@ -21,5 +21,9 @@ variable "logout_urls" {
   default     = []
 }
 
+variable "app_client_name" {
+  type        = string
+  description = "This is the app client name"
+}
 
 
