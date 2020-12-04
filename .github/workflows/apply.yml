@@ -56,7 +56,7 @@ jobs:
           cd dev/us-east-1
           terraform init
           terraform plan
-          terraform apply
+          terraform apply -auto-approve
 
       
     # install aws with configure on env vars
@@ -76,7 +76,7 @@ jobs:
           cd staging/us-east-1
           terraform init 
           terraform plan
-          terraform apply
+          terraform apply -auto-approve
     
     # install aws with configure on env vars
       - name: Configure AWS Prod
@@ -95,4 +95,4 @@ jobs:
           cd prod/us-east-1
           terraform init
           terraform plan
-          terraform apply
+          terraform apply -auto-approve
