@@ -1,3 +1,3 @@
-output "userpool_id" {
-  value = aws_cognito_user_pool.default.id
+output "user_pool_id" {
+  value = aws_cognito_user_pool.okta.id
 }

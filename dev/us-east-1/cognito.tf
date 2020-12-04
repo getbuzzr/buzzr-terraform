@@ -22,14 +22,14 @@ resource "aws_cognito_user_pool_domain" "default" {
 
 module "okta_app_client" {
   source       = "../../modules/okta_app_client"
-  user_pool_id = aws_cognito_user_pool.defaut.id
+  user_pool_id = aws_cognito_user_pool.default.id
 }
 
 
 module "okta_dev_identity_provider" {
   source = "../../modules/okta_identity_provider"
 
-  user_pool_id = aws_cognito_user_pool.defaut.id
+  user_pool_id = aws_cognito_user_pool.default.id
   metadata_url = "https://dev-4181175.okta.com/app/exk1lkocfKhH8ytxx5d6/sso/saml/metadata"
 
 }
