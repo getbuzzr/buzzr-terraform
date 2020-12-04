@@ -1,4 +1,4 @@
-# workflow only runs on pull request
+# workflow only runs on push
 name: Terraform apply
 # Controls when the action will run. 
 on:
@@ -17,23 +17,17 @@ jobs:
   # terraform apply job
   apply:
     runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.TERRAFORM_AWS_SECRET }}
     steps:
-      
       # Checks-out repo
       - uses: actions/checkout@v2
       
       # install terraform
       - uses: hashicorp/setup-terraform@v1
       
-      # install aws with configure on env vars
-      - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
-          aws-region: us-east-1
-      
-      # get path changed to see where to run
+      # get path changed
       - uses: dorny/paths-filter@v2
         id: edited_files
         with:
@@ -45,8 +39,18 @@ jobs:
             prod:
               - 'prod/**'
       
+      # install aws with configure on env vars
+      - name: Configure AWS Dev
+        if: steps.edited_files.outputs.dev == 'true'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::073157105290:role/dev_admin
+          role-session-name: terraform-dev
+          aws-region: us-east-1
+          role-duration-seconds: 1200
+
       # check if dev edited
-      - name: Terraform apply dev us-east-1
+      - name: Terraform plan dev us-east-1
         if: steps.edited_files.outputs.dev == 'true'
         run: |
           cd dev/us-east-1
@@ -55,18 +59,37 @@ jobs:
           terraform apply -auto-approve
 
       
-      
+    # install aws with configure on env vars
+      - name: Configure AWS Staging
+        if: steps.edited_files.outputs.staging == 'true'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::732983264044:role/staging_admin
+          role-session-name: terraform-staging
+          aws-region: us-east-1
+          role-duration-seconds: 1200
+
     # check if staging edited
-      - name: Terraform apply staging us-east-1
+      - name: Terraform plan staging us-east-1
         if: steps.edited_files.outputs.staging == 'true'
         run: |
           cd staging/us-east-1
-          terraform init
+          terraform init 
           terraform plan
           terraform apply -auto-approve
     
+    # install aws with configure on env vars
+      - name: Configure AWS Prod
+        if: steps.edited_files.outputs.prod == 'true'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::995213493585:role/prod_admin
+          role-session-name: terraform-prod
+          aws-region: us-east-1
+          role-duration-seconds: 1200
+    
     # check if prod edited
-      - name: Terraform apply prod us-east-1
+      - name: Terraform plan prod us-east-1
         if: steps.edited_files.outputs.prod == 'true'
         run: |
           cd prod/us-east-1

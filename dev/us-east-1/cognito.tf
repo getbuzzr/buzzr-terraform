@@ -16,7 +16,7 @@ resource "aws_cognito_user_pool" "default" {
 }
 resource "aws_cognito_user_pool_domain" "default" {
   user_pool_id = aws_cognito_user_pool.default.id
-  domain       = "onguard-dev"
+  domain       = "onguard-auth-dev"
 }
 
 
@@ -26,7 +26,7 @@ module "okta_app_client" {
   #default_redirect_uri
   default_redirect_uri = ""
   # add callback urls here
-  callback_urls = []
+  callback_urls = ["https://google.ca"]
   # signout urls
   logout_urls = []
 
