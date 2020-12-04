@@ -1,3 +1,4 @@
+
 resource "aws_cognito_user_pool" "default" {
   name                      = "onguard-user-pool"
   auto_verified_attributes  = ["email"]
@@ -13,26 +14,24 @@ resource "aws_cognito_user_pool" "default" {
     require_symbols = false
   }
 }
-
 resource "aws_cognito_user_pool_domain" "default" {
   user_pool_id  = aws_cognito_user_pool.default.id
   domain        = "onguard-dev"
 }
 
-resource "aws_cognito_identity_provider" "okta" {
-  user_pool_id  = aws_cognito_user_pool.default.id
-  provider_name = "Okta"
-  provider_type = "SAML"
 
-  attribute_mapping = {
-    email       = "email"
-    family_name = "lastName"
-    given_name  = "firstName"
-  }
+module "okta_app_client" {
+  source = "../../modules/okta_app_client"
+  user_pool_id = aws_cognito_user_pool.defaut.id
+}
 
-  provider_details = {
-    MetadataURL = "https://dev-4181175.okta.com/app/exk1lkocfKhH8ytxx5d6/sso/saml/metadata"
-  }
+
+module "okta_dev_identity_provider" {
+  source = "../../modules/okta_identity_provider"
+
+  user_pool_id = aws_cognito_user_pool.defaut.id
+  metadata_url = "https://dev-4181175.okta.com/app/exk1lkocfKhH8ytxx5d6/sso/saml/metadata"
 
 }
+
 
