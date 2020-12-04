@@ -9,7 +9,7 @@ variable "callback_urls" {
   default     = []
 }
 
-variable "defaut_redirect_uri" {
+variable "default_redirect_uri" {
   type        = string
   description = "This is the default reirect uri"
   default     = ""
