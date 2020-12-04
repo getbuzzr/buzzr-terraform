@@ -49,7 +49,7 @@ module "okta_dev_identity_provider" {
   source = "../../modules/identity_provider"
   # mapping attributes used to handle attributes returned by saml
   attribute_mapping = {}
-  provider_name     = "okta_dev"
+  provider_name     = "Okta"
   user_pool_id      = aws_cognito_user_pool.default.id
   metadata_url      = "https://dev-4181175.okta.com/app/exk1lkocfKhH8ytxx5d6/sso/saml/metadata"
 
@@ -59,7 +59,7 @@ module "adfs_dev_identity_provider" {
   source = "../../modules/identity_provider"
   # mapping attributes used to handle attributes returned by saml
   attribute_mapping = {}
-  provider_name     = "adfs_dev"
+  provider_name     = "ADFS"
   user_pool_id      = aws_cognito_user_pool.default.id
   metadata_url      = "https://s3-hosted-adfs-xml.com"
 

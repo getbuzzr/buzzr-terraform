@@ -16,6 +16,6 @@ variable "metadata_url" {
 
 variable "provider_name" {
   type        = string
-  description = "This is the name of the provider"
+  description = "This is the name of the provider(only chars no symbols)"
   default     = ""
 }
