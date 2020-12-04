@@ -8,7 +8,7 @@ resource "aws_cognito_user_pool_client" "okta" {
 
   allowed_oauth_scopes = ["email", "openid"]
 
-  callback_urls = ["https://google.ca"]
+  callback_urls = var.callback_urls
 
   default_redirect_uri = var.default_redirect_uri
 
