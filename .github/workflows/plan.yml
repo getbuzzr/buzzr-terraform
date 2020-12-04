@@ -17,8 +17,11 @@ jobs:
   # terraform plan job
   plan:
     runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.TERRAFORM_AWS_SECRET }}
+      AWS_DEFAULT_REGION: us-east-1
     steps:
-      
       # Checks-out repo
       - uses: actions/checkout@v2
       
@@ -36,12 +39,6 @@ jobs:
               - 'staging/**'
             prod:
               - 'prod/**'
-      - name: Set env vars
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.TERRAFORM_AWS_SECRET }}
-          AWS_DEFAULT_REGION: us-east-1
-
       # install aws with configure on env vars
       - name: Configure AWS Dev
         if: steps.edited_files.outputs.dev == 'true'
