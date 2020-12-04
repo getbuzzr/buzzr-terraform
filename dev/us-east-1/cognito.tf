@@ -27,10 +27,10 @@ module "okta_app_client" {
 
 
 module "okta_dev_identity_provider" {
-  source = "../../modules/okta_identity_provider"
-
-  user_pool_id = aws_cognito_user_pool.default.id
-  metadata_url = "https://dev-4181175.okta.com/app/exk1lkocfKhH8ytxx5d6/sso/saml/metadata"
+  source            = "../../modules/okta_identity_provider"
+  attribute_mapping = {}
+  user_pool_id      = aws_cognito_user_pool.default.id
+  metadata_url      = "https://dev-4181175.okta.com/app/exk1lkocfKhH8ytxx5d6/sso/saml/metadata"
 
 }
 
