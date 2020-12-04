@@ -23,11 +23,19 @@ resource "aws_cognito_user_pool_domain" "default" {
 module "okta_app_client" {
   source       = "../../modules/okta_app_client"
   user_pool_id = aws_cognito_user_pool.default.id
+  #default_redirect_uri
+  default_redirect_uri = ""
+  # add callback urls here
+  callback_urls = []
+  # signout urls
+  logout_urls = []
+
 }
 
 
 module "okta_dev_identity_provider" {
-  source            = "../../modules/okta_identity_provider"
+  source = "../../modules/okta_identity_provider"
+  # mapping attributes used to handle attributes returned by saml
   attribute_mapping = {}
 
   user_pool_id = aws_cognito_user_pool.default.id
