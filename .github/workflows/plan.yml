@@ -25,16 +25,16 @@ jobs:
       # install terraform
       - uses: hashicorp/setup-terraform@v1
       
-      # install aws with configure on env vars
-      - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::073157105290:role/dev_admin
-          role-duration-seconds: 1200
-          role-session-name: awsroleassumed
+      # # install aws with configure on env vars
+      # - name: Configure AWS
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
+      #     aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
+      #     aws-region: us-east-1
+      #     role-to-assume: arn:aws:iam::073157105290:role/dev_admin
+      #     role-duration-seconds: 1200
+      #     role-session-name: terraform-assumed-role
       
       # get path changed
       - uses: dorny/paths-filter@v2
@@ -51,9 +51,16 @@ jobs:
       # check if dev edited
       - name: Terraform plan dev us-east-1
         if: steps.edited_files.outputs.dev == 'true'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::073157105290:role/dev_admin
+          role-duration-seconds: 1200
+          role-session-name: terraform-assumed-role
         run: |
           cd dev/us-east-1
-          aws sts get-caller-identity
           terraform init
           terraform plan
 
