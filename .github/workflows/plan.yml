@@ -36,15 +36,17 @@ jobs:
               - 'staging/**'
             prod:
               - 'prod/**'
-      
+      - name: Set env vars
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.TERRAFORM_AWS_SECRET }}
+          AWS_DEFAULT_REGION: us-east-1
+
       # install aws with configure on env vars
       - name: Configure AWS Dev
         if: steps.edited_files.outputs.dev == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
-          aws-region: us-east-1
           role-to-assume: arn:aws:iam::073157105290:role/dev_admin
           role-session-name: terraform-dev
 
