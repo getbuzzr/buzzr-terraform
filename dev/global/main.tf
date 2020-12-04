@@ -5,12 +5,15 @@ terraform {
       version = "~> 2.70"
     }
   }
-}
-backend "s3" {
+
+  backend "s3" {
   bucket = "onguard-dev-terraform-state"
   key    = "global/terraform.state"
   region = "us-east-1"
 }
+
+}
+
 provider "aws" {
   profile = "default"
 
