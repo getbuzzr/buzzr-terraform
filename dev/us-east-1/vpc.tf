@@ -1,6 +1,6 @@
 # VPC definitions
 resource "aws_default_vpc" "default" {
-  
+
   tags = {
     Name = "Default VPC"
   }
@@ -116,7 +116,7 @@ resource "aws_default_route_table" "default_route_table" {
     Name = "default table"
     type = "public"
   }
-  
+
 }
 
 resource "aws_route_table" "private_route_table" {

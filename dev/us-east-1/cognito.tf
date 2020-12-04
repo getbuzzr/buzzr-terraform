@@ -1,9 +1,9 @@
 
 resource "aws_cognito_user_pool" "default" {
-  name                      = "onguard-user-pool"
-  auto_verified_attributes  = ["email"]
-  username_attributes       = ["email"]
-  mfa_configuration         = "OPTIONAL"
+  name                     = "onguard-user-pool"
+  auto_verified_attributes = ["email"]
+  username_attributes      = ["email"]
+  mfa_configuration        = "OPTIONAL"
 
   software_token_mfa_configuration {
     enabled = true
@@ -15,13 +15,13 @@ resource "aws_cognito_user_pool" "default" {
   }
 }
 resource "aws_cognito_user_pool_domain" "default" {
-  user_pool_id  = aws_cognito_user_pool.default.id
-  domain        = "onguard-dev"
+  user_pool_id = aws_cognito_user_pool.default.id
+  domain       = "onguard-dev"
 }
 
 
 module "okta_app_client" {
-  source = "../../modules/okta_app_client"
+  source       = "../../modules/okta_app_client"
   user_pool_id = aws_cognito_user_pool.defaut.id
 }
 

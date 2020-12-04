@@ -1,12 +1,12 @@
 resource "aws_cognito_user_pool_client" "okta" {
   name         = "okta_app_client"
   user_pool_id = var.user_pool_id
-  
-  generate_secret     = true
+
+  generate_secret = true
 
   allowed_oauth_flows = ["implicit"]
-  
-  allowed_oauth_scopes = [ "email", "openid" ]
+
+  allowed_oauth_scopes = ["email", "openid"]
 
   callback_urls = var.callback_urls
 
