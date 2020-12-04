@@ -3,7 +3,7 @@ resource "aws_cognito_identity_provider" "okta" {
   provider_name = "Okta"
   provider_type = "SAML"
 
-  attribute_mapping = vars.attribute_mapping
+  attribute_mapping = var.attribute_mapping
 
   provider_details = {
     MetadataURL = var.metadata_url
