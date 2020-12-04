@@ -50,7 +50,7 @@ jobs:
         if: steps.edited_files.outputs.dev == 'true'
         run: |
           cd dev/us-east-1
-          terraform init
+          terraform init TF_LOG=DEBUG
           terraform plan
 
       
@@ -60,7 +60,7 @@ jobs:
         if: steps.edited_files.outputs.staging == 'true'
         run: |
           cd staging/us-east-1
-          terraform init
+          terraform init TF_LOG=DEBUG
           terraform plan
     
     # check if prod edited
