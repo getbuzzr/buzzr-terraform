@@ -7,6 +7,12 @@ terraform {
   }
 }
 
+backend "s3" {
+  bucket = "onguard-dev-terraform-state"
+  key    = "us-east-1/terraform.state"
+  region = "us-east-1"
+}
+
 provider "aws" {
   profile = "default"
   region  = "us-east-1"
