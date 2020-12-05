@@ -1,7 +1,7 @@
 
 locals {
   okta_idp_provider_name = "okta"
-  adfs_idp_provider_name        = "adfs
+  adfs_idp_provider_name        = "adfs"
 }
 
 resource "aws_cognito_user_pool" "default" {
