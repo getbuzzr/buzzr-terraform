@@ -13,4 +13,6 @@ resource "aws_cognito_user_pool_client" "default" {
   default_redirect_uri = var.default_redirect_uri
 
   logout_urls = var.logout_urls
+
+  supported_identity_providers = var.supported_identity_providers
 }
