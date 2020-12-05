@@ -35,6 +35,7 @@ module "okta_app_client" {
   callback_urls = ["https://google.ca"]
   # signout urls
   logout_urls = []
+  depends_on = [module.okta_dev_identity_provider]
 }
 
 module "adfs_app_client" {
@@ -48,6 +49,7 @@ module "adfs_app_client" {
   callback_urls = ["https://google.ca"]
   # signout urls
   logout_urls = []
+  depends_on = [module.adfs_dev_identity_provider]
 }
 
 
