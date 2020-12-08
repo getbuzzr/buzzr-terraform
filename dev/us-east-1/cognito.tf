@@ -1,7 +1,12 @@
 
 locals {
+<<<<<<< HEAD
   okta_idp_provider_name = "okta"
   adfs_idp_provider_name = "adfs"
+=======
+  okta_idp_provider_name = "Okta"
+  adfs_idp_provider_name = "ADFS"
+>>>>>>> master
 }
 
 resource "aws_cognito_user_pool" "default" {
@@ -30,9 +35,9 @@ module "mobile_app_client" {
   app_client_name              = "mobile_app_client"
   supported_identity_providers = [local.okta_idp_provider_name, local.adfs_idp_provider_name]
   #TODO: replace test URL
-  default_redirect_uri = "https://authtest.oglw.io/auth/callback"
+  default_redirect_uri = "https://authtest.oglw.io/auth/callback/"
   # add callback urls here
-  callback_urls = ["https://authtest.oglw.io/auth/callback"]
+  callback_urls = ["https://authtest.oglw.io/auth/callback/"]
   # signout urls
   logout_urls = []
   depends_on  = [module.okta_dev_identity_provider, local.adfs_idp_provider_name]
@@ -56,10 +61,14 @@ module "web_app_client" {
 module "okta_dev_identity_provider" {
   source = "../../modules/identity_provider"
   # mapping attributes used to handle attributes returned by saml
-  attribute_mapping = {}
-  provider_name     = local.okta_idp_provider_name
-  user_pool_id      = aws_cognito_user_pool.default.id
-  metadata_url      = "https://dev-4181175.okta.com/app/exk1lkocfKhH8ytxx5d6/sso/saml/metadata"
+  attribute_mapping = {
+    email       = "email"
+    given_name  = "firstName"
+    family_name = "lastName"
+  }
+  provider_name = local.okta_idp_provider_name
+  user_pool_id  = aws_cognito_user_pool.default.id
+  metadata_url  = "https://dev-4181175.okta.com/app/exk1lkocfKhH8ytxx5d6/sso/saml/metadata"
 
 }
 
@@ -67,9 +76,15 @@ module "adfs_dev_identity_provider" {
   source = "../../modules/identity_provider"
   # mapping attributes used to handle attributes returned by saml
   attribute_mapping = {}
+<<<<<<< HEAD
   provider_name     = local.adfs_idp_provider_name
   user_pool_id      = aws_cognito_user_pool.default.id
   metadata_url      = "https://adfs-saml-metadata-dev.s3.amazonaws.com/adfs_test.xml"
+=======
+  provider_name = local.adfs_idp_provider_name
+  user_pool_id  = aws_cognito_user_pool.default.id
+  metadata_url  = "https://dev-4181175.okta.com/app/exk1lkocfKhH8ytxx5d6/sso/saml/metadata"
+>>>>>>> master
 
 }
 
