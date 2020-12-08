@@ -17,6 +17,9 @@ jobs:
   # terraform plan job
   plan:
     runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.TERRAFORM_AWS_SECRET }}
     steps:
       # Checks-out repo
       - uses: actions/checkout@v2
@@ -41,8 +44,6 @@ jobs:
         if: steps.edited_files.outputs.dev == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
           role-to-assume: arn:aws:iam::073157105290:role/dev_admin
           role-session-name: terraform-dev
           aws-region: us-east-1
@@ -62,8 +63,6 @@ jobs:
         if: steps.edited_files.outputs.staging == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
           role-to-assume: arn:aws:iam::732983264044:role/staging_admin
           role-session-name: terraform-staging
           aws-region: us-east-1
@@ -82,8 +81,6 @@ jobs:
         if: steps.edited_files.outputs.prod == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
           role-to-assume: arn:aws:iam::995213493585:role/prod_admin
           role-session-name: terraform-prod
           aws-region: us-east-1
