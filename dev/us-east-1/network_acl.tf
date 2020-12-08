@@ -1,6 +1,8 @@
 # network acl where the webservers will exists
 resource "aws_network_acl" "webserver" {
-  vpc_id = aws_default_vpc.default.id
+  vpc_id     = aws_default_vpc.default.id
+  subnet_ids = [aws_subnet.private1.id, aws_subnet.private2.id]
+
 }
 # This is the nacl tcp rule for http traffic
 module "webserver_http" {
@@ -25,7 +27,9 @@ module "webserver_https" {
 
 # network acl where the db will exists
 resource "aws_network_acl" "db" {
-  vpc_id = aws_default_vpc.default.id
+  vpc_id     = aws_default_vpc.default.id
+  subnet_ids = [aws_subnet.private3.id, aws_subnet.private4.id]
+
 }
 # This is the nacl rule for db traffic
 module "db_aurora" {
