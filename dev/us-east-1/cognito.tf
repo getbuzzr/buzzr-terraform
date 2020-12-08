@@ -70,10 +70,15 @@ module "okta_dev_identity_provider" {
 module "adfs_dev_identity_provider" {
   source = "../../modules/identity_provider"
   # mapping attributes used to handle attributes returned by saml
-  attribute_mapping = {}
-  provider_name     = local.adfs_idp_provider_name
-  user_pool_id      = aws_cognito_user_pool.default.id
-  metadata_url      = "https://adfs-saml-metadata-dev.s3.amazonaws.com/adfs_test.xml"
+  attribute_mapping = {
+    email       = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+    given_name  = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"
+    family_name = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"
+
+  }
+  provider_name = local.adfs_idp_provider_name
+  user_pool_id  = aws_cognito_user_pool.default.id
+  metadata_url  = "https://adfs-saml-metadata-dev.s3.amazonaws.com/adfs_test.xml"
 
 }
 
