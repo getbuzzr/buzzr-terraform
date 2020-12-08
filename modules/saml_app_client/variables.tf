@@ -26,4 +26,6 @@ variable "app_client_name" {
   description = "This is the app client name"
 }
 
-
+variable "supported_identity_providers" {
+  type = list(string)
+}
