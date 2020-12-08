@@ -74,7 +74,7 @@ jobs:
         if: steps.edited_files.outputs.staging == 'true'
         run: |
           cd staging/us-east-1
-          terraform init TF_LOG=DEBUG
+          terraform init 
           terraform plan
     
     # install aws with configure on env vars
