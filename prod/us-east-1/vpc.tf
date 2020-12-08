@@ -116,7 +116,7 @@ resource "aws_route_table_association" "private_sub_associate_4" {
 
 # Route Table Definitions
 resource "aws_default_route_table" "default_route_table" {
-  default_route_table_id = "rtb-de97c9a0"
+  default_route_table_id = "rtb-6420781a"
 
   #default igw out
   route {
