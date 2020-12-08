@@ -17,6 +17,9 @@ jobs:
   # terraform apply job
   apply:
     runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.TERRAFORM_AWS_SECRET }}
     steps:
       # Checks-out repo
       - uses: actions/checkout@v2
