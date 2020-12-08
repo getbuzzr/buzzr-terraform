@@ -17,6 +17,10 @@ resource "aws_cognito_user_pool" "default" {
     minimum_length  = 8
     require_symbols = false
   }
+
+  lambda_config {
+    pre_sign_up = aws_lambda_function.cognito_presignup_trigger.arn
+  }
 }
 resource "aws_cognito_user_pool_domain" "default" {
   user_pool_id = aws_cognito_user_pool.default.id
