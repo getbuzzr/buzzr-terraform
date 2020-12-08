@@ -13,7 +13,7 @@ resource "aws_subnet" "public1" {
   availability_zone = "us-east-1a"
 
   tags = {
-    Name = "elb1"
+    Name    = "elb1"
     Service = "ELB"
     type    = "public"
   }
@@ -26,7 +26,7 @@ resource "aws_subnet" "public2" {
 
 
   tags = {
-    Name = "elb2"
+    Name    = "elb2"
     Service = "ELB"
     type    = "public"
   }
@@ -38,7 +38,7 @@ resource "aws_subnet" "private1" {
 
 
   tags = {
-    Name = "webserver1"
+    Name    = "webserver1"
     type    = "private"
     Service = "webserver"
   }
@@ -50,7 +50,7 @@ resource "aws_subnet" "private2" {
 
 
   tags = {
-    Name = "webserver2"
+    Name    = "webserver2"
     type    = "private"
     Service = "webserver"
   }
@@ -63,7 +63,7 @@ resource "aws_subnet" "private3" {
 
 
   tags = {
-    Name = "db1"
+    Name    = "db1"
     type    = "private"
     Service = "db"
   }
@@ -76,7 +76,7 @@ resource "aws_subnet" "private4" {
 
 
   tags = {
-    Name = "db2"
+    Name    = "db2"
     type    = "private"
     Service = "db"
   }
@@ -117,7 +117,11 @@ resource "aws_route_table_association" "private_sub_associate_4" {
 # Route Table Definitions
 resource "aws_default_route_table" "default_route_table" {
   default_route_table_id = "rtb-72adf30c"
-
+  #default igw out
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "igw-03eaec78"
+  }
   tags = {
     Name = "default table"
     type = "public"

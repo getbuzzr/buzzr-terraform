@@ -117,6 +117,11 @@ resource "aws_route_table_association" "private_sub_associate_4" {
 # Route Table Definitions
 resource "aws_default_route_table" "default_route_table" {
   default_route_table_id = "rtb-de97c9a0"
+  #default igw out
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "igw-98c8cee3"
+  }
 
   tags = {
     Name = "default table"
