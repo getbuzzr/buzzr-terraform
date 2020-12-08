@@ -13,6 +13,7 @@ resource "aws_subnet" "public1" {
   availability_zone = "us-east-1a"
 
   tags = {
+    Name = "elb1"
     Service = "ELB"
     type    = "public"
   }
@@ -25,6 +26,7 @@ resource "aws_subnet" "public2" {
 
 
   tags = {
+    Name = "elb2"
     Service = "ELB"
     type    = "public"
   }
@@ -36,6 +38,7 @@ resource "aws_subnet" "private1" {
 
 
   tags = {
+    Name = "webserver1"
     type    = "private"
     Service = "webserver"
   }
@@ -47,6 +50,7 @@ resource "aws_subnet" "private2" {
 
 
   tags = {
+    Name = "webserver2"
     type    = "private"
     Service = "webserver"
   }
@@ -59,6 +63,7 @@ resource "aws_subnet" "private3" {
 
 
   tags = {
+    Name = "db1"
     type    = "private"
     Service = "db"
   }
@@ -71,6 +76,7 @@ resource "aws_subnet" "private4" {
 
 
   tags = {
+    Name = "db2"
     type    = "private"
     Service = "db"
   }
