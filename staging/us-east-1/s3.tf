@@ -1,10 +1,10 @@
-resource "aws_s3_bucket" "adfs_saml_configurations_staging" {
+resource "aws_s3_bucket" "adfs_saml_metadata_staging" {
 
-  bucket = "adfs-saml-configurations-staging"
+  bucket = "adfs-saml-metadata-staging"
   acl    = "public-read"
 
   tags = {
-    Name        = "adfs configurations"
+    Name        = "adfs metadata"
     Environment = "dev"
   }
 }
