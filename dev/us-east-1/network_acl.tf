@@ -3,7 +3,7 @@ resource "aws_network_acl" "webserver" {
   vpc_id = aws_default_vpc.default.id
 }
 # This is the nacl tcp rule for http traffic
-module "nacl_tcp_rule" "webserver" {
+module "nacl_tcp_rule" "webserver_http" {
   network_acl_id = aws_network_acl.webserver.id
   port_number    = 80
   rule_number    = 100
@@ -11,7 +11,7 @@ module "nacl_tcp_rule" "webserver" {
 }
 
 # This is the nacl tcp rule for https traffic
-module "nacl_tcp_rule" "webserver" {
+module "nacl_tcp_rule" "webserver_https" {
   network_acl_id = aws_network_acl.webserver.id
   port_number    = 443
   rule_number    = 200
