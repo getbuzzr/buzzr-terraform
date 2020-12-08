@@ -1,7 +1,7 @@
 data "aws_iam_policy_document" "presignup_lambda_policy" {
 
   statement {
-    sid = "presignup_cloudwatch_logs"
+    sid = "PresignupCloudwatchLogs"
 
     actions = [
       "logs:CreateLogGroup",
@@ -15,7 +15,7 @@ data "aws_iam_policy_document" "presignup_lambda_policy" {
   }
 
   statement {
-    sid = "presignup_invoke_permissions"
+    sid = "PresignupInvokePermissions"
 
     actions = [
       "lambda:InvokeFunction"
