@@ -29,10 +29,10 @@ module "okta_app_client" {
   user_pool_id                 = aws_cognito_user_pool.default.id
   app_client_name              = "okta_app_client"
   supported_identity_providers = [local.okta_idp_provider_name]
-  #default_redirect_uri
-  default_redirect_uri = ""
+  #TODO: replace test URL
+  default_redirect_uri = "https://authtest.oglw.io/auth/callback"
   # add callback urls here
-  callback_urls = ["https://google.ca"]
+  callback_urls = ["https://authtest.oglw.io/auth/callback"]
   # signout urls
   logout_urls = []
   depends_on = [module.okta_dev_identity_provider]
