@@ -45,7 +45,7 @@ data "aws_iam_policy_document" "presignup_lambda_arp" {
 
 module "presignup_lambda_role" {
   source             = "../../modules/generic_role"
-  name               = "presignup_lambda"
+  role_name          = "presignup_lambda"
   description        = "This is the role that the cognito presignup lambda function assumes."
   assume_role_policy = data.aws_iam_policy_document.presignup_lambda_arp.json
   policy_document    = data.aws_iam_policy_document.presignup_lambda_policy.json
