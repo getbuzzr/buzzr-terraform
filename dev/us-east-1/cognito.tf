@@ -19,7 +19,7 @@ resource "aws_cognito_user_pool" "default" {
   }
 
   lambda_config {
-    pre_sign_up = aws_lambda_function.cognito_presignup_trigger.arn
+    pre_sign_up = module.cognito_presignup_trigger.arn
   }
 }
 resource "aws_cognito_user_pool_domain" "default" {
