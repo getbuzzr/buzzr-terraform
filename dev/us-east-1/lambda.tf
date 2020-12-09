@@ -8,9 +8,4 @@ module "cognito_presignup_trigger" {
 
   runtime = "python3.8"
 
-  environment {
-    variables = {
-      service = "login"
-    }
-  }
 }
