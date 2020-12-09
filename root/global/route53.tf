@@ -7,7 +7,9 @@ resource "aws_route53_record" "root" {
   name    = "onguard.co"
   type    = "A"
   ttl     = "300"
+
   records = ["35.206.71.68"]
+
 }
 
 resource "aws_route53_record" "www" {
@@ -15,7 +17,9 @@ resource "aws_route53_record" "www" {
   name    = "www.onguard.co"
   type    = "cname"
   ttl     = "300"
+
   records = ["onguard.co"]
+
 }
 
 resource "aws_route53_record" "staging1" {
@@ -23,7 +27,9 @@ resource "aws_route53_record" "staging1" {
   name    = "staging1.onguard.co"
   type    = "cname"
   ttl     = "300"
+
   records = ["onguard.co"]
+
 }
 
 resource "aws_route53_record" "www_staging1" {
@@ -31,7 +37,9 @@ resource "aws_route53_record" "www_staging1" {
   name    = "www.staging1.onguard.co"
   type    = "cname"
   ttl     = "300"
+
   records = ["onguard.co"]
+
 }
 
 resource "aws_route53_record" "blog" {
@@ -39,7 +47,9 @@ resource "aws_route53_record" "blog" {
   name    = "blog.onguard.co"
   type    = "cname"
   ttl     = "300"
+
   records = ["6145128.group28.sites.hubspot.net"]
+
 }
 
 resource "aws_route53_record" "demo" {
@@ -47,7 +57,9 @@ resource "aws_route53_record" "demo" {
   name    = "demo.onguard.co"
   type    = "cname"
   ttl     = "300"
+
   records = ["demo.onguard.co.s3-website-us-west-2.amazonaws.com"]
+
 }
 
 resource "aws_route53_record" "info" {
@@ -55,7 +67,9 @@ resource "aws_route53_record" "info" {
   name    = "info.onguard.co"
   type    = "cname"
   ttl     = "300"
+
   records = ["6145128.group28.sites.hubspot.net"]
+
 }
 
 resource "aws_route53_record" "mail" {
@@ -63,7 +77,9 @@ resource "aws_route53_record" "mail" {
   name    = "mail.onguard.co"
   type    = "cname"
   ttl     = "300"
+
   records = ["6145128.group28.sites.hubspot.net"]
+
 }
 
 resource "aws_route53_record" "mx" {
@@ -71,6 +87,7 @@ resource "aws_route53_record" "mx" {
   name    = "onguard.co"
   type    = "mx"
   ttl     = "300"
+
   records = [
     "1 aspmx.l.google.com",
     "5 alt2.aspmx.l.google.com",
@@ -78,6 +95,7 @@ resource "aws_route53_record" "mx" {
     "10 alt3.aspmx.l.google.com",
     "10 alt4.aspmx.l.google.com",
   ]
+
 }
 
 resource "aws_route53_record" "txt" {
@@ -85,6 +103,8 @@ resource "aws_route53_record" "txt" {
   name    = "onguard.co"
   type    = "txt"
   ttl     = "300"
+
   records = ["google-site-verification=B-6oDsjQFX3IJJMF13set-Lwo4ceq19h7qHxt7mrCa4"]
+
 }
 
