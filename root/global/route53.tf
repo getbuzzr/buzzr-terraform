@@ -15,7 +15,7 @@ resource "aws_route53_record" "root" {
 resource "aws_route53_record" "www" {
   zone_id = aws_route53_zone.onguard_co.zone_id
   name    = "www.onguard.co"
-  type    = "cname"
+  type    = "CNAME"
   ttl     = "300"
 
   records = ["onguard.co"]
@@ -25,7 +25,7 @@ resource "aws_route53_record" "www" {
 resource "aws_route53_record" "staging1" {
   zone_id = aws_route53_zone.onguard_co.zone_id
   name    = "staging1.onguard.co"
-  type    = "cname"
+  type    = "CNAME"
   ttl     = "300"
 
   records = ["onguard.co"]
@@ -35,7 +35,7 @@ resource "aws_route53_record" "staging1" {
 resource "aws_route53_record" "www_staging1" {
   zone_id = aws_route53_zone.onguard_co.zone_id
   name    = "www.staging1.onguard.co"
-  type    = "cname"
+  type    = "CNAME"
   ttl     = "300"
 
   records = ["onguard.co"]
@@ -45,7 +45,7 @@ resource "aws_route53_record" "www_staging1" {
 resource "aws_route53_record" "blog" {
   zone_id = aws_route53_zone.onguard_co.zone_id
   name    = "blog.onguard.co"
-  type    = "cname"
+  type    = "CNAME"
   ttl     = "300"
 
   records = ["6145128.group28.sites.hubspot.net"]
@@ -55,7 +55,7 @@ resource "aws_route53_record" "blog" {
 resource "aws_route53_record" "demo" {
   zone_id = aws_route53_zone.onguard_co.zone_id
   name    = "demo.onguard.co"
-  type    = "cname"
+  type    = "CNAME"
   ttl     = "300"
 
   records = ["demo.onguard.co.s3-website-us-west-2.amazonaws.com"]
@@ -65,7 +65,7 @@ resource "aws_route53_record" "demo" {
 resource "aws_route53_record" "info" {
   zone_id = aws_route53_zone.onguard_co.zone_id
   name    = "info.onguard.co"
-  type    = "cname"
+  type    = "CNAME"
   ttl     = "300"
 
   records = ["6145128.group28.sites.hubspot.net"]
@@ -75,7 +75,7 @@ resource "aws_route53_record" "info" {
 resource "aws_route53_record" "mail" {
   zone_id = aws_route53_zone.onguard_co.zone_id
   name    = "mail.onguard.co"
-  type    = "cname"
+  type    = "CNAME"
   ttl     = "300"
 
   records = ["6145128.group28.sites.hubspot.net"]
@@ -85,7 +85,7 @@ resource "aws_route53_record" "mail" {
 resource "aws_route53_record" "mx" {
   zone_id = aws_route53_zone.onguard_co.zone_id
   name    = "onguard.co"
-  type    = "mx"
+  type    = "MX"
   ttl     = "300"
 
   records = [
@@ -101,7 +101,7 @@ resource "aws_route53_record" "mx" {
 resource "aws_route53_record" "txt" {
   zone_id = aws_route53_zone.onguard_co.zone_id
   name    = "onguard.co"
-  type    = "txt"
+  type    = "TXT"
   ttl     = "300"
 
   records = ["google-site-verification=B-6oDsjQFX3IJJMF13set-Lwo4ceq19h7qHxt7mrCa4"]
