@@ -9,6 +9,7 @@ on:
       - 'dev/**'
       - 'prod/**'
       - 'staging/**'
+      - 'root/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -38,6 +39,8 @@ jobs:
               - 'staging/**'
             prod:
               - 'prod/**'
+            root:
+              - 'root/**'
       
       # install aws with configure on env vars
       - name: Configure AWS Dev
@@ -52,7 +55,7 @@ jobs:
           role-duration-seconds: 1200
 
       # check if dev edited
-      - name: Terraform plan dev us-east-1
+      - name: Terraform apply dev us-east-1
         if: steps.edited_files.outputs.dev == 'true'
         run: |
           cd dev/us-east-1
@@ -74,7 +77,7 @@ jobs:
           role-duration-seconds: 1200
 
     # check if staging edited
-      - name: Terraform plan staging us-east-1
+      - name: Terraform apply staging us-east-1
         if: steps.edited_files.outputs.staging == 'true'
         run: |
           cd staging/us-east-1
@@ -95,8 +98,28 @@ jobs:
           role-duration-seconds: 1200
     
     # check if prod edited
-      - name: Terraform plan prod us-east-1
+      - name: Terraform apply prod us-east-1
         if: steps.edited_files.outputs.prod == 'true'
+        run: |
+          cd prod/us-east-1
+          terraform init
+          terraform plan
+          terraform apply -auto-approve
+    
+    # install aws with configure on env vars
+      - name: Configure AWS root
+        if: steps.edited_files.outputs.root == 'true'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
+          role-session-name: terraform-root
+          aws-region: us-east-1
+          role-duration-seconds: 1200
+    
+    # check if prod edited
+      - name: Terraform apply root global
+        if: steps.edited_files.outputs.root == 'true'
         run: |
           cd prod/us-east-1
           terraform init
