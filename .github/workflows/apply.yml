@@ -121,7 +121,7 @@ jobs:
       - name: Terraform apply root global
         if: steps.edited_files.outputs.root == 'true'
         run: |
-          cd prod/us-east-1
+          cd root/global
           terraform init
           terraform plan
           terraform apply -auto-approve
