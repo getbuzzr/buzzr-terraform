@@ -105,6 +105,7 @@ jobs:
           terraform init
           terraform plan
           terraform apply -auto-approve
+    
     # install aws with configure on env vars
       - name: Configure AWS root
         if: steps.edited_files.outputs.root == 'true'
@@ -112,7 +113,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
-          role-session-name: terraform-prod
+          role-session-name: terraform-root
           aws-region: us-east-1
           role-duration-seconds: 1200
     
