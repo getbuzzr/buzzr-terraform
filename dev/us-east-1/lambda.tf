@@ -1,15 +1,11 @@
-resource "aws_lambda_function" "cognito_presignup_trigger" {
+module "cognito_presignup_trigger" {
+  source = "../../modules/lambda_function"
+
   function_name = "cognito_presignup_trigger"
-  role          = module.presignup_lambda_role.role_arn
-  handler       = "lambda_function.lambda_handler"
-  filename      = "../../assets/lambda/empty.zip"
+  role_arn      = module.presignup_lambda_role.role_arn
+  handler       = "main.lambda_handler"
 
 
   runtime = "python3.8"
 
-  environment {
-    variables = {
-      service = "login"
-    }
-  }
 }
