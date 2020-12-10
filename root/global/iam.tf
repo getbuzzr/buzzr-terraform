@@ -15,7 +15,7 @@ resource "aws_iam_user_policy" "lb_ro" {
   user = aws_iam_user.cicd_deploy.name
 
   policy = <<EOF
-{
+    {
     "Version": "2012-10-17",
     "Statement": [
         {
@@ -28,9 +28,8 @@ resource "aws_iam_user_policy" "lb_ro" {
                 "arn:aws:iam::732983264044:role/cicd_role",
             ]
         }
-    ]
-}
-EOF
+    }
+    EOF
 }
 
 output "secret" {
