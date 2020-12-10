@@ -1,6 +1,5 @@
 resource "aws_iam_user" "cicd_deploy" {
   name = "cicd_deploy"
-  path = "/system/"
 
   tags = {
     role = "ci/cd deploy"
