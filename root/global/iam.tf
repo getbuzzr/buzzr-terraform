@@ -15,22 +15,22 @@ resource "aws_iam_user_policy" "lb_ro" {
   user = aws_iam_user.cicd_deploy.name
 
   policy = <<EOF
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "AllowAssumeRole",
-                "Effect": "Allow",
-                "Action": "sts:*",
-                "Resource": [
-                    "arn:aws:iam::073157105290:role/cicd_role",
-                    "arn:aws:iam::995213493585:role/cicd_role",
-                    "arn:aws:iam::732983264044:role/cicd_role"
-                ]
-            }
-        ]
-    }
-    EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAssumeRole",
+            "Effect": "Allow",
+            "Action": "sts:*",
+            "Resource": [
+                "arn:aws:iam::073157105290:role/cicd_role",
+                "arn:aws:iam::995213493585:role/cicd_role",
+                "arn:aws:iam::732983264044:role/cicd_role"
+            ]
+        }
+    ]
+}
+EOF
 }
 
 output "secret" {
