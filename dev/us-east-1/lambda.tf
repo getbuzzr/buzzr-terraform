@@ -9,3 +9,11 @@ module "cognito_presignup_trigger" {
   runtime = "python3.8"
 
 }
+
+resource "aws_lambda_permission" "cognito_permission" {
+  statement_id  = "AllowExecutionCognito"
+  action        = "lambda:InvokeFunction"
+  function_name = module.cognito_presignup_trigger.arn
+  principal     = "cognito-idp.amazonaws.com"
+  source_arn    = aws_cognito_user_pool.default.arn
+}
