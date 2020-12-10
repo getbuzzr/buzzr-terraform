@@ -10,6 +10,7 @@ on:
       - 'prod/**'
       - 'staging/**'
       - 'root/**'
+      - 'modules/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -41,10 +42,12 @@ jobs:
               - 'prod/**'
             root:
               - 'root/**'
+            modules:
+              - 'modules/**'
       
       # install aws with configure on env vars
       - name: Configure AWS Dev
-        if: steps.edited_files.outputs.dev == 'true'
+        if: steps.edited_files.outputs.dev == 'true' || steps.edited_files.outputs.modules == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
@@ -56,9 +59,17 @@ jobs:
 
       # check if dev edited
       - name: Terraform apply dev us-east-1
-        if: steps.edited_files.outputs.dev == 'true'
+        if: steps.edited_files.outputs.dev == 'true' || steps.edited_files.outputs.modules == 'true'
         run: |
           cd dev/us-east-1
+          terraform init
+          terraform plan
+          terraform apply -auto-approve
+      
+      - name: Terraform apply dev global
+        if: steps.edited_files.outputs.dev == 'true' || steps.edited_files.outputs.modules == 'true'
+        run: |
+          cd dev/global
           terraform init
           terraform plan
           terraform apply -auto-approve
@@ -66,7 +77,7 @@ jobs:
       
     # install aws with configure on env vars
       - name: Configure AWS Staging
-        if: steps.edited_files.outputs.staging == 'true'
+        if: steps.edited_files.outputs.staging == 'true' || steps.edited_files.outputs.modules == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
@@ -78,16 +89,24 @@ jobs:
 
     # check if staging edited
       - name: Terraform apply staging us-east-1
-        if: steps.edited_files.outputs.staging == 'true'
+        if: steps.edited_files.outputs.staging == 'true' || steps.edited_files.outputs.modules == 'true'
         run: |
           cd staging/us-east-1
+          terraform init 
+          terraform plan
+          terraform apply -auto-approve
+      
+      - name: Terraform apply staging global
+        if: steps.edited_files.outputs.staging == 'true' || steps.edited_files.outputs.modules == 'true'
+        run: |
+          cd staging/global
           terraform init 
           terraform plan
           terraform apply -auto-approve
     
     # install aws with configure on env vars
       - name: Configure AWS Prod
-        if: steps.edited_files.outputs.prod == 'true'
+        if: steps.edited_files.outputs.prod == 'true' || steps.edited_files.outputs.modules == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
@@ -99,16 +118,24 @@ jobs:
     
     # check if prod edited
       - name: Terraform apply prod us-east-1
-        if: steps.edited_files.outputs.prod == 'true'
+        if: steps.edited_files.outputs.prod == 'true' || steps.edited_files.outputs.modules == 'true'
         run: |
           cd prod/us-east-1
+          terraform init
+          terraform plan
+          terraform apply -auto-approve
+
+      - name: Terraform apply prod global
+        if: steps.edited_files.outputs.prod == 'true' || steps.edited_files.outputs.modules == 'true'
+        run: |
+          cd prod/global
           terraform init
           terraform plan
           terraform apply -auto-approve
     
     # install aws with configure on env vars
       - name: Configure AWS root
-        if: steps.edited_files.outputs.root == 'true'
+        if: steps.edited_files.outputs.root == 'true' || steps.edited_files.outputs.modules == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
@@ -119,7 +146,7 @@ jobs:
     
     # check if prod edited
       - name: Terraform apply root global
-        if: steps.edited_files.outputs.root == 'true'
+        if: steps.edited_files.outputs.root == 'true' || steps.edited_files.outputs.modules == 'true'
         run: |
           cd root/global
           terraform init
