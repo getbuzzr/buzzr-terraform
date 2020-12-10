@@ -13,6 +13,7 @@ resource "aws_iam_access_key" "cicd_accesskey" {
 resource "aws_iam_user_policy" "lb_ro" {
   name = "cicd"
   user = aws_iam_user.cicd_deploy.name
+
   policy = <<EOF
 {
   "Version": "2012-10-17",
