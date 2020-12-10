@@ -29,6 +29,7 @@ data "aws_iam_policy_document" "presignup_lambda_policy" {
 }
 
 data "aws_iam_policy_document" "presignup_lambda_arp" {
+  
   statement {
     actions = ["sts:AssumeRole"]
 
