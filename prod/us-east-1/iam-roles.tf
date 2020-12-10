@@ -37,7 +37,8 @@ data "aws_iam_policy_document" "presignup_lambda_arp" {
       type = "Service"
 
       identifiers = [
-        "lambda.amazonaws.com"
+        "lambda.amazonaws.com",
+        "cognito-idp.amazonaws.com"
       ]
     }
   }
