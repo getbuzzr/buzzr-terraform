@@ -7,13 +7,13 @@ resource "aws_iam_user" "cicd_deploy" {
   }
 }
 
-resource "aws_iam_access_key" "lb" {
+resource "aws_iam_access_key" "cicd_accesskey" {
   user = aws_iam_user.cicd_deploy.name
 }
 
 resource "aws_iam_user_policy" "lb_ro" {
-  name = "test"
-  user = aws_iam_user.lb.name
+  name = "cicd"
+  user = aws_iam_user.cicd_deploy.name
 
   policy = <<EOF
 {
@@ -29,4 +29,8 @@ resource "aws_iam_user_policy" "lb_ro" {
   ]
 }
 EOF
+}
+
+output "secret" {
+  value = aws_iam_access_key.cicd_accesskey.cicd_accesskey
 }
