@@ -15,6 +15,7 @@ data "aws_iam_policy_document" "cicd_policy" {
 }
 
 data "aws_iam_policy_document" "cicd_arp" {
+  
   statement {
     actions = ["sts:AssumeRole"]
 
@@ -26,6 +27,7 @@ data "aws_iam_policy_document" "cicd_arp" {
       ]
     }
   }
+
 }
 
 module "cicd_role" {
