@@ -32,5 +32,5 @@ EOF
 }
 
 output "secret" {
-  value = aws_iam_access_key.cicd_accesskey.cicd_accesskey
+  value = aws_iam_access_key.cicd_accesskey.secret
 }
