@@ -16,7 +16,7 @@ data "aws_iam_policy_document" "cicd_policy" {
 
 data "aws_iam_policy_document" "cicd_arp" {
   statement {
-    actions = ["sts:AssumeRole"]
+    actions = ["sts:*"]
 
     principals {
       type = "AWS"
