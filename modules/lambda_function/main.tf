@@ -7,9 +7,4 @@ resource "aws_lambda_function" "default" {
 
   runtime = var.runtime
 
-  environment {
-    variables = {
-      service = "login"
-    }
-  }
 }
