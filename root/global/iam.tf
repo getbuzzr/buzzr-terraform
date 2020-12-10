@@ -16,16 +16,19 @@ resource "aws_iam_user_policy" "lb_ro" {
 
   policy = <<EOF
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "ec2:Describe*"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAssumeRole",
+            "Effect": "Allow",
+            "Action": "sts:*",
+            "Resource": [
+                "arn:aws:iam::073157105290:role/cicd_role",
+                "arn:aws:iam::995213493585:role/cicd_role",
+                "arn:aws:iam::732983264044:role/cicd_role",
+            ]
+        }
+    ]
 }
 EOF
 }
