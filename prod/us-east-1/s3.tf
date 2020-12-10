@@ -1,5 +1,7 @@
-module "saml_mobile_callback" {
-  source    = "git::https://github.com/cloudposse/terraform-aws-s3-website.git?ref=tags/0.12.0"
-  name      = "saml_mobile_callback"
-  hostname  = "oauth.onguard.co"
+module "oauth_onguard_co" {
+  source = "../../modules/s3_static_website_cloudfront"
+
+aws_region = "us-east-1"
+domain_name = "oauth.onguard.co"
+acm_certificate_arn = aws_acm_certificate.oauth_onguard_co.arn
 }
