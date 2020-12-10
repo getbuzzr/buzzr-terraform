@@ -27,12 +27,12 @@ data "aws_iam_policy_document" "cicd_arp" {
       ]
     }
   }
-  
+
 }
 
 module "cicd_role" {
   source             = "../../modules/generic_role"
-  role_name          = "cicd_role"
+  role_name          = "cicd"
   description        = "This is the role that allows root cicd user to deploy code to dev"
   assume_role_policy = data.aws_iam_policy_document.cicd_arp.json
   policy_document    = data.aws_iam_policy_document.cicd_policy.json
