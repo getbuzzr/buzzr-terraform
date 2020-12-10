@@ -62,6 +62,14 @@ jobs:
           terraform init
           terraform plan
           terraform apply -auto-approve
+      
+      - name: Terraform apply dev global
+        if: steps.edited_files.outputs.dev == 'true'
+        run: |
+          cd dev/global
+          terraform init
+          terraform plan
+          terraform apply -auto-approve
 
       
     # install aws with configure on env vars
@@ -84,6 +92,14 @@ jobs:
           terraform init 
           terraform plan
           terraform apply -auto-approve
+      
+      - name: Terraform apply staging global
+        if: steps.edited_files.outputs.staging == 'true'
+        run: |
+          cd staging/global
+          terraform init 
+          terraform plan
+          terraform apply -auto-approve
     
     # install aws with configure on env vars
       - name: Configure AWS Prod
@@ -102,6 +118,14 @@ jobs:
         if: steps.edited_files.outputs.prod == 'true'
         run: |
           cd prod/us-east-1
+          terraform init
+          terraform plan
+          terraform apply -auto-approve
+
+      - name: Terraform apply prod global
+        if: steps.edited_files.outputs.prod == 'true'
+        run: |
+          cd prod/global
           terraform init
           terraform plan
           terraform apply -auto-approve
