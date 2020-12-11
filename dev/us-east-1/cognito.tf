@@ -34,9 +34,9 @@ module "mobile_app_client" {
   app_client_name              = "mobile_app_client"
   supported_identity_providers = [local.okta_idp_provider_name, local.adfs_idp_provider_name]
   #TODO: replace test URL
-  default_redirect_uri = "https://authtest.oglw.io/auth/callback/"
+  default_redirect_uri = "https://oauth.onguard.co/"
   # add callback urls here
-  callback_urls = ["https://authtest.oglw.io/auth/callback/"]
+  callback_urls = ["https://oauth.onguard.co/"]
   # signout urls
   logout_urls = []
   depends_on  = [module.okta_dev_identity_provider, local.adfs_idp_provider_name]
