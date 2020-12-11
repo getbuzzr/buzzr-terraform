@@ -9,3 +9,7 @@ variable "domain_name" {
 variable "acm_certificate_arn"{
     description = "The acm arn"
 }
+
+variable "cicd_role_arn"{
+    description = "cicd role arn to allow writes to bucket"
+}
