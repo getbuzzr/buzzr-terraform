@@ -11,5 +11,5 @@ variable "acm_certificate_arn"{
 }
 
 variable "cicd_role_arn"{
-    descrption = "cicd role arn to allow writes to bucket"
+    description = "cicd role arn to allow writes to bucket"
 }
