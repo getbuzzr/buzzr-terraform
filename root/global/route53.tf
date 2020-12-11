@@ -108,3 +108,13 @@ resource "aws_route53_record" "txt" {
 
 }
 
+resource "aws_route53_record" "_d22fbc1b11c72e165b73d29468da79c0" {
+  zone_id = aws_route53_zone.onguard_co.zone_id
+  name    = "_d22fbc1b11c72e165b73d29468da79c0.oauth.onguard.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["_45d5fd035b7ff160e4a78c730371e8a0.rlltrpyzyf.acm-validations.aws"]
+
+}
+
