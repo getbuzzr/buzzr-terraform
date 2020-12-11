@@ -118,3 +118,14 @@ resource "aws_route53_record" "_d22fbc1b11c72e165b73d29468da79c0" {
 
 }
 
+resource "aws_route53_record" "oauth_onguard_co" {
+  zone_id = aws_route53_zone.onguard_co.zone_id
+  name    = "oauth.onguard.co"
+  type    = "A"
+  
+  alias {
+    name                   = "d3lhv8oss31uqp.cloudfront.net"
+    zone_id                = "Z2FDTNDATAQYW2"
+    evaluate_target_health = true
+  }
+}
