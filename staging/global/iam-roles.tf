@@ -11,7 +11,6 @@ data "aws_iam_policy_document" "cicd_policy" {
       "arn:aws:lambda:us-east-1:*:function:*"
     ]
   }
-
 }
 
 data "aws_iam_policy_document" "cicd_arp" {

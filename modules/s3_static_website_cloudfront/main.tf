@@ -23,6 +23,15 @@ resource "aws_s3_bucket" "website" {
       },
       "Action": "s3:GetObject",
       "Resource": "arn:aws:s3:::${var.domain_name}/*"
+    },
+    {
+      "Sid": "FullAccessCICD",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "${var.cicd_role_arn}"
+      },
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::${var.domain_name}/*"
     }
   ]
 }
