@@ -35,7 +35,7 @@ module "expiry_trigger" {
   source = "../../modules/lambda_function"
 
   function_name = "expiry_trigger"
-  role_arn      = module.expiry_trigger.arn
+  role_arn      = module.expiry_trigger_lambda_role.arn
   handler       = "main.lambda_handler"
 
 
