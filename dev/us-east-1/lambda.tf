@@ -22,7 +22,7 @@ module "check_in_consumer" {
   source = "../../modules/lambda_function"
 
   function_name = "check_in_consumer"
-  role_arn      = module.checkin_consumer_lambda_role.role_arn
+  role_arn      = module.checkin_consumer_lambda_role.arn
   handler       = "main.lambda_handler"
 
 
@@ -35,7 +35,7 @@ module "expiry_trigger" {
   source = "../../modules/lambda_function"
 
   function_name = "expiry_trigger"
-  role_arn      = module.expiry_trigger.role_arn
+  role_arn      = module.expiry_trigger.arn
   handler       = "main.lambda_handler"
 
 
