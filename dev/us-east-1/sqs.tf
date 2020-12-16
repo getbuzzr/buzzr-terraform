@@ -7,5 +7,5 @@ resource "aws_sqs_queue" "checkin_queue" {
 
 resource "aws_lambda_event_source_mapping" "checkin_enqueue_trigger" {
     event_source_arn = aws_sqs_queue.checkin_queue.arn
-    function_name =  module.expiry_trigger.arn
+    function_name =  module.expiry_trigger.function_name
 }
