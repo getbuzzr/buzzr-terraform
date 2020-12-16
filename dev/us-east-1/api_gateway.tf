@@ -13,7 +13,7 @@ resource "aws_apigatewayv2_api" "checkin_api_gateway" {
 resource "aws_apigatewayv2_route" "checkin_api_route" {
   api_id    = aws_apigatewayv2_api.checkin_api_gateway.id
   route_key = "POST /checkin"
-  authorization_type = "CUSTOM"
+  authorization_type = "JWT"
   authorizer_id = aws_apigatewayv2_authorizer.checkin_gateway_authorizer.id
   target = "integrations/${aws_apigatewayv2_integration.checkin_api_gateway.id}"
 }
