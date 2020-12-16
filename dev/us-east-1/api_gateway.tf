@@ -8,16 +8,22 @@ resource "aws_apigatewayv2_api" "checkin_api_gateway" {
     allow_origins = ["*"]
   }
 
-  integrations  {
-    "POST /checkin" = {
-      lambda_arn             = module.check_in_consumer.arn
-      payload_format_version = "2.0"
-      timeout_milliseconds   = 12000
-    }
-  }
 
 }
+resource "aws_apigatewayv2_route" "checkin_api_route" {
+  api_id    = aws_apigatewayv2_api.checkin_api_gateway.id
+  route_key = "$default"
+  target = "integrations/${aws_apigatewayv2_integration.checkin_api_gateway.id}"
+}
+resource "aws_apigatewayv2_integration" "checkin_api_gateway" {
+  api_id           = aws_apigatewayv2_api.checkin_api_gateway.id
+  integration_type = "AWS"
 
+  connection_type           = "INTERNET"
+  content_handling_strategy = "CONVERT_TO_TEXT"
+  integration_method        = "POST"
+  integration_uri           = module.check_in_consumer.invoke_arn
+}
 resource "aws_apigatewayv2_authorizer" "checkin_gateway_authorizer" {
   api_id           = aws_apigatewayv2_api.checkin_api_gateway.id
   authorizer_type  = "JWT"
