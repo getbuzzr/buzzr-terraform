@@ -44,7 +44,8 @@ resource "aws_apigatewayv2_stage" "checkin_stage" {
 # # role to write to cloudwatch
 # resource "aws_api_gateway_account" "checkin_account" {
 #   cloudwatch_role_arn = module.checkin_gateway_role.role_arn
-}
+# }
+
 # Permission
 resource "aws_lambda_permission" "apigw" {
 	action        = "lambda:InvokeFunction"
