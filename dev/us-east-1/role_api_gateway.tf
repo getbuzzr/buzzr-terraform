@@ -38,7 +38,8 @@ data "aws_iam_policy_document" "checkin_gateway_arp" {
       type = "Service"
 
       identifiers = [
-        "apigateway.amazonaws.com"
+        "apigateway.amazonaws.com",
+        "lambda.amazonaws.com"
       ]
     }
   }
