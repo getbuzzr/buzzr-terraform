@@ -2,13 +2,13 @@ resource "aws_apigatewayv2_api" "checkin_api_gateway" {
   name                       = "checkin-gateway"
   protocol_type              = "HTTP"
 
-  cors_configuration = {
+  cors_configuration  {
     allow_headers = ["content-type", "x-amz-date", "authorization", "x-amz-security-token", "x-amz-user-agent"]
     allow_methods = ["*"]
     allow_origins = ["*"]
   }
 
-  integrations = {
+  integrations  {
     "POST /checkin" = {
       lambda_arn             = module.check_in_consumer.arn
       payload_format_version = "2.0"
@@ -17,7 +17,6 @@ resource "aws_apigatewayv2_api" "checkin_api_gateway" {
   }
 
 }
-
 
 resource "aws_apigatewayv2_authorizer" "checkin_gateway_authorizer" {
   api_id           = aws_apigatewayv2_api.checkin_api_gateway.id
