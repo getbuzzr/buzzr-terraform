@@ -17,3 +17,28 @@ resource "aws_lambda_permission" "cognito_permission" {
   principal     = "cognito-idp.amazonaws.com"
   source_arn    = aws_cognito_user_pool.default.arn
 }
+
+module "check_in_consumer" {
+  source = "../../modules/lambda_function"
+
+  function_name = "check_in_consumer"
+  role_arn      = module.checkin_consumer_lambda_role.role_arn
+  handler       = "main.lambda_handler"
+
+
+  runtime = "python3.8"
+
+}
+
+
+module "expiry_trigger" {
+  source = "../../modules/lambda_function"
+
+  function_name = "expiry_trigger"
+  role_arn      = module.expiry_trigger_lambda_role.role_arn
+  handler       = "main.lambda_handler"
+
+
+  runtime = "python3.8"
+
+}

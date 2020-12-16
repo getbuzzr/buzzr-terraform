@@ -1,7 +1,7 @@
 data "aws_iam_policy_document" "presignup_lambda_policy" {
 
   statement {
-    sid = "PresignupCloudwatchLogs"
+    sid = "CloudwatchLogs"
 
     actions = [
       "logs:CreateLogGroup",
@@ -50,3 +50,4 @@ module "presignup_lambda_role" {
   assume_role_policy = data.aws_iam_policy_document.presignup_lambda_arp.json
   policy_document    = data.aws_iam_policy_document.presignup_lambda_policy.json
 }
+
