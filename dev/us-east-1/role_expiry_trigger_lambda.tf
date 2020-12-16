@@ -82,7 +82,7 @@ data "aws_iam_policy_document" "expiry_trigger_lambda_arp" {
   }
 }
 
-module "checkin_consumer_lambda_role" {
+module "expiry_trigger_lambda_role" {
   source             = "../../modules/generic_role"
   role_name          = "expiry_trigger_lambda"
   description        = "This is the role that the expiry trigger assumes"
