@@ -20,7 +20,6 @@ resource "aws_apigatewayv2_integration" "checkin_api_gateway" {
   integration_type = "AWS_PROXY"
 
   connection_type           = "INTERNET"
-  content_handling_strategy = "CONVERT_TO_TEXT"
   integration_method        = "POST"
   integration_uri           = module.check_in_consumer.invoke_arn
 }
@@ -42,11 +41,11 @@ resource "aws_apigatewayv2_stage" "checkin_stage" {
   api_id      = aws_apigatewayv2_api.checkin_api_gateway.id
   name        = "live"
 }
-# role to write to cloudwatch
-resource "aws_api_gateway_account" "checkin_account" {
-  cloudwatch_role_arn = module.checkin_gateway_role.role_arn
-  depends_on = [module.checkin_gateway_role ]
-}
+# # role to write to cloudwatch
+# resource "aws_api_gateway_account" "checkin_account" {
+#   cloudwatch_role_arn = module.checkin_gateway_role.role_arn
+# }
+
 # Permission
 resource "aws_lambda_permission" "apigw" {
 	action        = "lambda:InvokeFunction"
