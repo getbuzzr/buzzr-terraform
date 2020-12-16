@@ -41,10 +41,10 @@ resource "aws_apigatewayv2_stage" "checkin_stage" {
   api_id      = aws_apigatewayv2_api.checkin_api_gateway.id
   name        = "live"
 }
-# role to write to cloudwatch
-resource "aws_api_gateway_account" "checkin_account" {
-  cloudwatch_role_arn = module.checkin_gateway_role.role_arn
-}
+# # role to write to cloudwatch
+# resource "aws_api_gateway_account" "checkin_account" {
+#   cloudwatch_role_arn = module.checkin_gateway_role.role_arn
+# }
 
 # Permission
 resource "aws_lambda_permission" "apigw" {
