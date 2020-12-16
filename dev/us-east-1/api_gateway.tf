@@ -12,7 +12,9 @@ resource "aws_apigatewayv2_api" "checkin_api_gateway" {
 }
 resource "aws_apigatewayv2_route" "checkin_api_route" {
   api_id    = aws_apigatewayv2_api.checkin_api_gateway.id
-  route_key = "$default"
+  route_key = "POST /checkin"
+  authorization_type = "CUSTOM"
+  authorizer_id = aws_apigatewayv2_authorizer.checkin_gateway_authorizer.id
   target = "integrations/${aws_apigatewayv2_integration.checkin_api_gateway.id}"
 }
 resource "aws_apigatewayv2_integration" "checkin_api_gateway" {
@@ -40,11 +42,12 @@ resource "aws_apigatewayv2_authorizer" "checkin_gateway_authorizer" {
 resource "aws_apigatewayv2_stage" "checkin_stage" {
   api_id      = aws_apigatewayv2_api.checkin_api_gateway.id
   name        = "live"
+  auto_deploy = true
 }
-# role to write to cloudwatch
-resource "aws_api_gateway_account" "checkin_account" {
-  cloudwatch_role_arn = module.checkin_gateway_role.role_arn
-}
+# # role to write to cloudwatch
+# resource "aws_api_gateway_account" "checkin_account" {
+#   cloudwatch_role_arn = module.checkin_gateway_role.role_arn
+# }
 
 # Permission
 resource "aws_lambda_permission" "apigw" {
