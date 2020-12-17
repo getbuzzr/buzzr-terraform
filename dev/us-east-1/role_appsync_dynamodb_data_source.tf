@@ -7,11 +7,7 @@ data "aws_iam_policy_document" "appsync_dynamodb_data_source_policy" {
     ]
 
     resources = [
-<<<<<<< HEAD
-      "arn:aws:dynamodb:us-east-1:*:table/live_checkin"
-=======
       "arn:aws:dynamodb:us-east-1:*:table/CheckInStatus"
->>>>>>> master
     ]
   }
 }
