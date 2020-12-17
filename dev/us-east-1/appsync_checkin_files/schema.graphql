@@ -1,0 +1,143 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type CheckInStatus {
+  accuracy: Float!
+  altitude: Float!
+  checkInType: String!
+  expiresAt: AWSTimestamp!
+  groupId: Int!
+  heading: Float!
+  latitude: Float!
+  longitude: Float!
+  speed: Float!
+  timestamp: AWSTimestamp!
+  userId: Int!
+}
+
+type CheckInStatusConnection {
+  items: [CheckInStatus]
+  nextToken: String
+}
+
+type Mutation {
+  createCheckInStatus(input: CreateCheckInStatusInput!): CheckInStatus
+  deleteCheckInStatus(input: DeleteCheckInStatusInput!): CheckInStatus
+  updateCheckInStatus(input: UpdateCheckInStatusInput!): CheckInStatus
+}
+
+type Query {
+  getCheckInStatus(groupId: Int!, userId: Int!): CheckInStatus
+  listCheckInStatuses(filter: TableCheckInStatusFilterInput, limit: Int, nextToken: String): CheckInStatusConnection
+}
+
+type Subscription {
+  onCreateCheckInStatus(checkInType: String, groupId: Int, latitude: Float, longitude: Float, userId: Int): CheckInStatus @aws_subscribe(mutations : ["createCheckInStatus"])
+  onDeleteCheckInStatus(checkInType: String, groupId: Int, latitude: Float, longitude: Float, userId: Int): CheckInStatus @aws_subscribe(mutations : ["deleteCheckInStatus"])
+  onUpdateCheckInStatus(checkInType: String, groupId: Int, latitude: Float, longitude: Float, userId: Int): CheckInStatus @aws_subscribe(mutations : ["updateCheckInStatus"])
+}
+
+input CreateCheckInStatusInput {
+  accuracy: Float!
+  altitude: Float!
+  checkInType: String!
+  expiresAt: AWSTimestamp!
+  groupId: Int!
+  heading: Float!
+  latitude: Float!
+  longitude: Float!
+  speed: Float!
+  timestamp: AWSTimestamp!
+  userId: Int!
+}
+
+input DeleteCheckInStatusInput {
+  groupId: Int!
+  userId: Int!
+}
+
+input TableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input TableCheckInStatusFilterInput {
+  accuracy: TableFloatFilterInput
+  altitude: TableFloatFilterInput
+  checkInType: TableStringFilterInput
+  expiresAt: TableIntFilterInput
+  groupId: TableIntFilterInput
+  heading: TableFloatFilterInput
+  latitude: TableFloatFilterInput
+  longitude: TableFloatFilterInput
+  speed: TableFloatFilterInput
+  timestamp: TableIntFilterInput
+  userId: TableIntFilterInput
+}
+
+input TableFloatFilterInput {
+  between: [Float]
+  contains: Float
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+  notContains: Float
+}
+
+input TableIDFilterInput {
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+}
+
+input TableIntFilterInput {
+  between: [Int]
+  contains: Int
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+  notContains: Int
+}
+
+input TableStringFilterInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+}
+
+input UpdateCheckInStatusInput {
+  accuracy: Float
+  altitude: Float
+  checkInType: String
+  expiresAt: AWSTimestamp
+  groupId: Int!
+  heading: Float
+  latitude: Float
+  longitude: Float
+  speed: Float
+  timestamp: AWSTimestamp
+  userId: Int!
+}
