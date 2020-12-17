@@ -7,7 +7,7 @@ data "aws_iam_policy_document" "appsync_dynamodb_data_source_policy" {
     ]
 
     resources = [
-      aws_dynamodb_table.checkin.arn
+      "arn:aws:dynamodb:us-east-1:*:table/CheckInStatus"
     ]
   }
 }
