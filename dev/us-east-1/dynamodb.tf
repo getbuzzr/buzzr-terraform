@@ -1,8 +1,8 @@
-resource "aws_dynamodb_table" "live-checkin-table" {
-  name           = "live_checkin"
+resource "aws_dynamodb_table" "checkin" {
+  name           = "CheckInStatus"
   billing_mode   = "PAY_PER_REQUEST"
   hash_key       = "userId"
-  range_key = "groupId"
+  range_key      = "groupId"
   
   attribute {
     name = "groupId"
