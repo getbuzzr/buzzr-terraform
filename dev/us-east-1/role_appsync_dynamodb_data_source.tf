@@ -30,7 +30,7 @@ module "appsync_dynamodb_data_source_role" {
   source             = "../../modules/generic_role"
   role_name          = "appsync_dynamodb_data_source"
   description        = "The role that the AppSync DynamoDB data source assumes."
-  assume_role_policy = data.aws_iam_policy_document.appsync_dynamodb_data_source_policy.json
-  policy_document    = data.aws_iam_policy_document.appsync_dynamodb_data_source_arp.json
+  assume_role_policy = data.aws_iam_policy_document.appsync_dynamodb_data_source_arp.json
+  policy_document    = data.aws_iam_policy_document.appsync_dynamodb_data_source_policy.json
 }
 
