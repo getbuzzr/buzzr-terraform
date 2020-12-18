@@ -57,7 +57,7 @@ module "web_app_client" {
 
 
 module "okta_dev_identity_provider" {
-  source = "../../modules/identity_provider"
+  source = "../../modules/saml_identity_provider"
   # mapping attributes used to handle attributes returned by saml
   attribute_mapping = {
     email       = "email"
@@ -71,7 +71,7 @@ module "okta_dev_identity_provider" {
 }
 
 module "adfs_dev_identity_provider" {
-  source = "../../modules/identity_provider"
+  source = "../../modules/saml_identity_provider"
   # mapping attributes used to handle attributes returned by saml
   attribute_mapping = {
     email       = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
