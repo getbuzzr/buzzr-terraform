@@ -84,3 +84,22 @@ module "adfs_dev_identity_provider" {
   metadata_url  = "https://adfs-saml-metadata-dev.s3.amazonaws.com/adfs_test.xml"
 
 }
+
+resource "aws_cognito_identity_provider" "google" {
+  user_pool_id  = aws_cognito_user_pool.default.id
+  provider_name = "Google"
+  provider_type = "Google"
+
+  provider_details = {
+    authorize_scopes = "email profile openid"
+    client_id        = "834623945817-hnf8d5ttiaqsp87lcuc2pdpf1qm7sotb.apps.googleusercontent.com"
+    client_secret    = "GQsEeo8sacQG8Q4Oe0BwLC_t"
+  }
+
+  attribute_mapping = {
+    email       = "email"
+    given_name  = "given_name"
+    family_name = "family_name"
+  }
+}
+
