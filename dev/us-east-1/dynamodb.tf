@@ -1,16 +1,16 @@
 resource "aws_dynamodb_table" "checkin" {
   name           = "CheckInStatus"
   billing_mode   = "PAY_PER_REQUEST"
-  hash_key       = "userId"
-  range_key      = "groupId"
+  hash_key       = "user_id"
+  range_key      = "group_id"
   
   attribute {
-    name = "groupId"
+    name = "group_id"
     type = "N"
   }
 
   attribute {
-    name = "userId"
+    name = "user_id"
     type = "N"
   }
   
