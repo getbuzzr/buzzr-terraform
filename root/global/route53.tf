@@ -129,30 +129,3 @@ resource "aws_route53_record" "oauth_onguard_co" {
     evaluate_target_health = true
   }
 }
-
-resource "aws_route53_record" "_ae8abdb53943e12b9bf53e0f089c8980" {
-  zone_id  = aws_route53_zone.onguard_co.zone_id
-  name     = "_ae8abdb53943e12b9bf53e0f089c8980.auth.onguard.co"
-  type     = "CNAME"
-  ttl      = "300"
-
-  records = ["_107a15c2a4d65b0f854430b6bd700499.rlltrpyzyf.acm-validations.aws"]
-}
-
-resource "aws_route53_record" "_4c900915875458c78063480f9d33b222" {
-  zone_id  = aws_route53_zone.onguard_co.zone_id
-  name     = "_4c900915875458c78063480f9d33b222.auth.onguard.co"
-  type     = "CNAME"
-  ttl      = "300"
-
-  records = ["_2b81864e2fc91e1d29262e1a1e9d43f1.rlltrpyzyf.acm-validations.aws"]
-}
-
-resource "aws_route53_record" "_c716b082791e6ff24078ca860aeba8b2" {
-  zone_id  = aws_route53_zone.onguard_co.zone_id
-  name     = "_c716b082791e6ff24078ca860aeba8b2.auth.onguard.co"
-  type     = "CNAME"
-  ttl      = "300"
-
-  records = ["_11cefd25bf0664a9ef45e7dcc11efb31.rlltrpyzyf.acm-validations.aws"]
-}
