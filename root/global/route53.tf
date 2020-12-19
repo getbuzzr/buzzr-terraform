@@ -1,3 +1,7 @@
+locals {
+  cloudfront_distribution_hosted_zone_id = "Z2FDTNDATAQYW2"
+}
+
 resource "aws_route53_zone" "onguard_co" {
   name = "onguard.co"
 }
@@ -125,7 +129,7 @@ resource "aws_route53_record" "oauth_onguard_co" {
   
   alias {
     name                   = "d3lhv8oss31uqp.cloudfront.net"
-    zone_id                = "Z2FDTNDATAQYW2"
+    zone_id                = local.cloudfront_distribution_hosted_zone_id
     evaluate_target_health = true
   }
 }
@@ -155,4 +159,26 @@ resource "aws_route53_record" "_c716b082791e6ff24078ca860aeba8b2" {
   ttl      = "300"
 
   records = ["_11cefd25bf0664a9ef45e7dcc11efb31.rlltrpyzyf.acm-validations.aws"]
+}
+
+resource "aws_route53_record" "auth_onguard_co" {
+  zone_id = aws_route53_zone.onguard_co.zone_id
+  name    = "auth.onguard.co"
+  type    = "A"
+  ttl     = "300"
+
+  ## Placeholder
+  records = ["127.0.0.1"]
+}
+
+resource "aws_route53_record" "dev_auth_onguard_co" {
+  zone_id = aws_route53_zone.onguard_co.zone_id
+  name    = "dev.auth.onguard.co"
+  type    = "A"
+
+  alias {
+    name                   = "d3m6xdcuoc4m3d.cloudfront.net"
+    zone_id                = local.cloudfront_distribution_hosted_zone_id
+    evaluate_target_health = true
+  }
 }
