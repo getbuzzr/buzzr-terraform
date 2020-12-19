@@ -6,10 +6,10 @@ on:
   push:
     branches: [ master ]
     paths:
+      - 'root/**'
       - 'dev/**'
       - 'prod/**'
       - 'staging/**'
-      - 'root/**'
       - 'modules/**'
 
   # Allows you to run this workflow manually from the Actions tab
@@ -34,17 +34,37 @@ jobs:
         id: edited_files
         with:
           filters: |
-            dev:  
+            root:
+              - 'root/**'
+            dev:
               - 'dev/**'
             staging:
               - 'staging/**'
             prod:
               - 'prod/**'
-            root:
-              - 'root/**'
             modules:
               - 'modules/**'
       
+      # install aws with configure on env vars
+      - name: Configure AWS root
+        if: steps.edited_files.outputs.root == 'true' || steps.edited_files.outputs.modules == 'true'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
+          role-session-name: terraform-root
+          aws-region: us-east-1
+          role-duration-seconds: 1200
+
+      # check if root edited
+      - name: Terraform apply root global
+        if: steps.edited_files.outputs.root == 'true' || steps.edited_files.outputs.modules == 'true'
+        run: |
+          cd root/global
+          terraform init
+          terraform plan
+          terraform apply -auto-approve
+
       # install aws with configure on env vars
       - name: Configure AWS Dev
         if: steps.edited_files.outputs.dev == 'true' || steps.edited_files.outputs.modules == 'true'
@@ -74,7 +94,6 @@ jobs:
           terraform plan
           terraform apply -auto-approve
 
-      
     # install aws with configure on env vars
       - name: Configure AWS Staging
         if: steps.edited_files.outputs.staging == 'true' || steps.edited_files.outputs.modules == 'true'
@@ -129,26 +148,6 @@ jobs:
         if: steps.edited_files.outputs.prod == 'true' || steps.edited_files.outputs.modules == 'true'
         run: |
           cd prod/global
-          terraform init
-          terraform plan
-          terraform apply -auto-approve
-    
-    # install aws with configure on env vars
-      - name: Configure AWS root
-        if: steps.edited_files.outputs.root == 'true' || steps.edited_files.outputs.modules == 'true'
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
-          role-session-name: terraform-root
-          aws-region: us-east-1
-          role-duration-seconds: 1200
-    
-    # check if prod edited
-      - name: Terraform apply root global
-        if: steps.edited_files.outputs.root == 'true' || steps.edited_files.outputs.modules == 'true'
-        run: |
-          cd root/global
           terraform init
           terraform plan
           terraform apply -auto-approve
