@@ -23,17 +23,16 @@ resource "aws_cognito_user_pool" "default" {
   }
 }
 resource "aws_cognito_user_pool_domain" "default" {
-  user_pool_id = aws_cognito_user_pool.default.id
-  domain       = "onguard-auth-dev"
+  user_pool_id    = aws_cognito_user_pool.default.id
+  domain          = "dev.auth.onguard.co"
+  certificate_arn = aws_acm_certificate.dev_auth_onguard_co.arn
 }
-
 
 module "mobile_app_client" {
   source                       = "../../modules/saml_app_client"
   user_pool_id                 = aws_cognito_user_pool.default.id
   app_client_name              = "mobile_app_client"
   supported_identity_providers = [local.okta_idp_provider_name, local.adfs_idp_provider_name]
-  #TODO: replace test URL
   default_redirect_uri = "https://oauth.onguard.co/"
   # add callback urls here
   callback_urls = ["https://oauth.onguard.co/"]
@@ -85,5 +84,3 @@ module "adfs_dev_identity_provider" {
   metadata_url  = "https://adfs-saml-metadata-dev.s3.amazonaws.com/adfs_test.xml"
 
 }
-
-
