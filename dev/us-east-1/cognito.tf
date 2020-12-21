@@ -32,27 +32,43 @@ module "mobile_app_client" {
   source                       = "../../modules/saml_app_client"
   user_pool_id                 = aws_cognito_user_pool.default.id
   app_client_name              = "mobile_app_client"
-  supported_identity_providers = [local.okta_idp_provider_name, local.adfs_idp_provider_name]
+  supported_identity_providers = [
+    local.adfs_idp_provider_name,
+    local.okta_idp_provider_name,
+    aws_cognito_identity_provider.google.provider_name
+  ]
   default_redirect_uri = "https://oauth.onguard.co/"
   # add callback urls here
   callback_urls = ["https://oauth.onguard.co/"]
   # signout urls
   logout_urls = []
-  depends_on  = [module.okta_dev_identity_provider, local.adfs_idp_provider_name]
+  depends_on  = [
+    module.adfs_dev_identity_provider,
+    local.okta_idp_provider_name,
+    aws_cognito_identity_provider.google
+  ]
 }
 
 module "web_app_client" {
   source                       = "../../modules/saml_app_client"
   user_pool_id                 = aws_cognito_user_pool.default.id
   app_client_name              = "web_app_client"
-  supported_identity_providers = [local.adfs_idp_provider_name, local.okta_idp_provider_name]
+  supported_identity_providers = [
+    local.adfs_idp_provider_name,
+    local.okta_idp_provider_name,
+    aws_cognito_identity_provider.google.provider_name
+  ]
   #default_redirect_uri
   default_redirect_uri = ""
   # add callback urls here
   callback_urls = ["https://google.ca"]
   # signout urls
   logout_urls = []
-  depends_on  = [module.adfs_dev_identity_provider, local.okta_idp_provider_name]
+  depends_on  = [
+    module.adfs_dev_identity_provider,
+    local.okta_idp_provider_name,
+    aws_cognito_identity_provider.google
+  ]
 }
 
 
