@@ -93,7 +93,7 @@ resource "aws_cognito_identity_provider" "google" {
   provider_details = {
     authorize_scopes = "email profile openid"
     client_id        = "834623945817-hnf8d5ttiaqsp87lcuc2pdpf1qm7sotb.apps.googleusercontent.com"
-    client_secret    = "GQsEeo8sacQG8Q4Oe0BwLC_t"
+    client_secret    = aws_ssm_parameter.cognito_google_client_secret.value
   }
 
   attribute_mapping = {
