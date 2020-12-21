@@ -32,32 +32,48 @@ module "mobile_app_client" {
   source                       = "../../modules/saml_app_client"
   user_pool_id                 = aws_cognito_user_pool.default.id
   app_client_name              = "mobile_app_client"
-  supported_identity_providers = [local.okta_idp_provider_name, local.adfs_idp_provider_name]
+  supported_identity_providers = [
+    local.adfs_idp_provider_name,
+    local.okta_idp_provider_name,
+    aws_cognito_identity_provider.google.provider_name
+  ]
   default_redirect_uri = "https://oauth.onguard.co/"
   # add callback urls here
   callback_urls = ["https://oauth.onguard.co/"]
   # signout urls
   logout_urls = []
-  depends_on  = [module.okta_dev_identity_provider, local.adfs_idp_provider_name]
+  depends_on  = [
+    module.adfs_dev_identity_provider,
+    local.okta_idp_provider_name,
+    aws_cognito_identity_provider.google
+  ]
 }
 
 module "web_app_client" {
   source                       = "../../modules/saml_app_client"
   user_pool_id                 = aws_cognito_user_pool.default.id
   app_client_name              = "web_app_client"
-  supported_identity_providers = [local.adfs_idp_provider_name, local.okta_idp_provider_name]
+  supported_identity_providers = [
+    local.adfs_idp_provider_name,
+    local.okta_idp_provider_name,
+    aws_cognito_identity_provider.google.provider_name
+  ]
   #default_redirect_uri
   default_redirect_uri = ""
   # add callback urls here
   callback_urls = ["https://google.ca"]
   # signout urls
   logout_urls = []
-  depends_on  = [module.adfs_dev_identity_provider, local.okta_idp_provider_name]
+  depends_on  = [
+    module.adfs_dev_identity_provider,
+    local.okta_idp_provider_name,
+    aws_cognito_identity_provider.google
+  ]
 }
 
 
 module "okta_dev_identity_provider" {
-  source = "../../modules/identity_provider"
+  source = "../../modules/saml_identity_provider"
   # mapping attributes used to handle attributes returned by saml
   attribute_mapping = {
     email       = "email"
@@ -71,7 +87,7 @@ module "okta_dev_identity_provider" {
 }
 
 module "adfs_dev_identity_provider" {
-  source = "../../modules/identity_provider"
+  source = "../../modules/saml_identity_provider"
   # mapping attributes used to handle attributes returned by saml
   attribute_mapping = {
     email       = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
@@ -84,3 +100,22 @@ module "adfs_dev_identity_provider" {
   metadata_url  = "https://adfs-saml-metadata-dev.s3.amazonaws.com/adfs_test.xml"
 
 }
+
+resource "aws_cognito_identity_provider" "google" {
+  user_pool_id  = aws_cognito_user_pool.default.id
+  provider_name = "Google"
+  provider_type = "Google"
+
+  provider_details = {
+    authorize_scopes = "email profile openid"
+    client_id        = "834623945817-hnf8d5ttiaqsp87lcuc2pdpf1qm7sotb.apps.googleusercontent.com"
+    client_secret    = aws_ssm_parameter.cognito_google_client_secret.value
+  }
+
+  attribute_mapping = {
+    email       = "email"
+    given_name  = "given_name"
+    family_name = "family_name"
+  }
+}
+
