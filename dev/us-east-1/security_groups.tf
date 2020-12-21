@@ -42,7 +42,7 @@ resource "aws_security_group" "web_server" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = [aws_security_group.load_balancer.id]
+    security_groups = [aws_security_group.load_balancer.id]
   }
 
   egress {
