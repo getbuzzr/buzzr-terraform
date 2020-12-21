@@ -25,7 +25,7 @@ resource "aws_security_group" "load_balancer" {
   }
 }
 
-resource "aws_security_group" "webserver" {
+resource "aws_security_group" "web_server" {
   name        = "webservers"
   description = "Allow Internet Traffic from ALB"
   vpc_id      = aws_default_vpc.default.id
