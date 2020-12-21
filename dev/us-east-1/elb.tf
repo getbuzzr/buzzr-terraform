@@ -1,3 +1,8 @@
+resource "aws_iam_instance_profile" "ec2" {
+  name = "webserver-eb-ec2"
+  role = module.elb_webserver_role.name
+}
+
 resource "aws_elastic_beanstalk_application" "onguard_dev" {
   name        = "onguard-dev"
   description = "The elb environment hosting onguard api"
@@ -46,5 +51,10 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
     namespace = "aws:elbv2:loadbalancer"
     name      = "ManagedSecurityGroup"
     value     = aws_security_group.web_server.id
+  }
+  setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "IamInstanceProfile"
+    value     = aws_iam_instance_profile.ec2.name
   }
 }

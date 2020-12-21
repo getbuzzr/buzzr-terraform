@@ -84,7 +84,7 @@ data "aws_iam_policy_document" "elb_webserver_policy" {
       ]
 
       resources = [
-        "*.dkr.ecr.us-east-1.amazonaws.com/onguard_dev_api"
+        "*"
       ]
   }
 
