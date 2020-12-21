@@ -38,8 +38,13 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
   }
   setting {
     namespace = "aws:ec2:vpc"
+    name      = "ELBSubnets"
+    value     = "${aws_subnet.public1.id},${aws_subnet.public2.id}"
+  }
+  setting {
+    namespace = "aws:ec2:vpc"
     name      = "Subnets"
-    value     = "${aws_subnet.public1.id},${aws_subnet.public2.id},${aws_subnet.private1.id},${aws_subnet.private2.id}"
+    value     = "${aws_subnet.private1.id},${aws_subnet.private2.id}"
   }
 
   setting {
@@ -48,7 +53,7 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
     value     = aws_security_group.load_balancer.id
   }
   setting {
-    namespace = "aws:elbv2:loadbalancer"
+    namespace = "aws:elb:loadbalancer"
     name      = "ManagedSecurityGroup"
     value     = aws_security_group.web_server.id
   }
@@ -57,4 +62,18 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
     name      = "IamInstanceProfile"
     value     = aws_iam_instance_profile.ec2.name
   }
+    {
+      namespace = "aws:elasticbeanstalk:environment:process:default"
+      name      = "HealthCheckPath"
+      value     = "/ping"
+    },
+    {
+      namespace = "aws:elasticbeanstalk:environment:process:default"
+      name      = "Port"
+      value     = "80"
+    {
+      namespace = "aws:elasticbeanstalk:environment:process:default"
+      name      = "Protocol"
+      value     = "HTTP"
+    }
 }
