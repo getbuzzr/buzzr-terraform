@@ -62,18 +62,19 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
     name      = "IamInstanceProfile"
     value     = aws_iam_instance_profile.ec2.name
   }
-    {
+  setting {
       namespace = "aws:elasticbeanstalk:environment:process:default"
       name      = "HealthCheckPath"
-      value     = "/ping"
-    },
-    {
+      value     = "/"
+  }
+  setting {
       namespace = "aws:elasticbeanstalk:environment:process:default"
       name      = "Port"
       value     = "80"
-    {
+  }
+  setting {
       namespace = "aws:elasticbeanstalk:environment:process:default"
       name      = "Protocol"
       value     = "HTTP"
-    }
+  }
 }
