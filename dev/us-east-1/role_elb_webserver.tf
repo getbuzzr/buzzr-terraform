@@ -98,7 +98,8 @@ data "aws_iam_policy_document" "elb_webserver_arp" {
       type = "Service"
 
       identifiers = [
-        "elasticbeanstalk.amazonaws.com"
+        "elasticbeanstalk.amazonaws.com",
+        "ec2.amazonaws.com"
       ]
     }
   }
