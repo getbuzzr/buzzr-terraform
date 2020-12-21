@@ -2,6 +2,10 @@ data "aws_ssm_parameter" "google_client_secret" {
   name = aws_ssm_parameter.cognito_google_client_secret.name
 }
 
+data "aws_ssm_parameter" "apple_client_private_key" {
+  name = aws_ssm_parameter.cognito_apple_client_private_key.name
+}
+
 locals {
   okta_idp_provider_name = "Okta"
   adfs_idp_provider_name = "ADFS"
@@ -38,7 +42,8 @@ module "mobile_app_client" {
   supported_identity_providers = [
     local.adfs_idp_provider_name,
     local.okta_idp_provider_name,
-    aws_cognito_identity_provider.google.provider_name
+    aws_cognito_identity_provider.google.provider_name,
+    aws_cognito_identity_provider.apple.provider_name
   ]
   default_redirect_uri = "https://oauth.onguard.co/"
   # add callback urls here
@@ -48,7 +53,8 @@ module "mobile_app_client" {
   depends_on  = [
     module.adfs_dev_identity_provider,
     local.okta_idp_provider_name,
-    aws_cognito_identity_provider.google
+    aws_cognito_identity_provider.google,
+    aws_cognito_identity_provider.apple
   ]
 }
 
@@ -59,7 +65,8 @@ module "web_app_client" {
   supported_identity_providers = [
     local.adfs_idp_provider_name,
     local.okta_idp_provider_name,
-    aws_cognito_identity_provider.google.provider_name
+    aws_cognito_identity_provider.google.provider_name,
+    aws_cognito_identity_provider.apple.provider_name
   ]
   #default_redirect_uri
   default_redirect_uri = ""
@@ -70,7 +77,8 @@ module "web_app_client" {
   depends_on  = [
     module.adfs_dev_identity_provider,
     local.okta_idp_provider_name,
-    aws_cognito_identity_provider.google
+    aws_cognito_identity_provider.google,
+    aws_cognito_identity_provider.apple
   ]
 }
 
@@ -122,3 +130,22 @@ resource "aws_cognito_identity_provider" "google" {
   }
 }
 
+resource "aws_cognito_identity_provider" "apple" {
+  user_pool_id  = aws_cognito_user_pool.default.id
+  provider_name = "SignInWithApple"
+  provider_type = "SignInWithApple"
+
+  provider_details = {
+    client_id        = "com.sensnet.onguard.auth"
+    team_id          = "E4M7QG8VQK"
+    key_id           = "CGX5ZW85KD"
+    private_key      = data.aws_ssm_parameter.apple_client_private_key.value
+    authorize_scopes = "email name"
+  }
+
+  attribute_mapping = {
+    email       = "email"
+    given_name  = "name.firstName"
+    family_name = "name.lastName"
+  }
+}
