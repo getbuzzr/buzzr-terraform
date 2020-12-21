@@ -63,6 +63,11 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
     value     = aws_iam_instance_profile.ec2.name
   }
   setting {
+      namespace = "aws:elasticbeanstalk:environment"
+      name      = "LoadBalancerType"
+      value     = "application"
+  }
+  setting {
       namespace = "aws:elasticbeanstalk:environment:process:default"
       name      = "HealthCheckPath"
       value     = "/"
