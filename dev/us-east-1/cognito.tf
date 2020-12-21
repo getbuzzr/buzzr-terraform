@@ -1,3 +1,6 @@
+data "aws_ssm_parameter" "google_client_secret" {
+  name = aws_ssm_parameter.cognito_google_client_secret.name
+}
 
 locals {
   okta_idp_provider_name = "Okta"
@@ -109,7 +112,7 @@ resource "aws_cognito_identity_provider" "google" {
   provider_details = {
     authorize_scopes = "email profile openid"
     client_id        = "834623945817-hnf8d5ttiaqsp87lcuc2pdpf1qm7sotb.apps.googleusercontent.com"
-    client_secret    = aws_ssm_parameter.cognito_google_client_secret.value
+    client_secret    = data.aws_ssm_parameter.google_client_secret.value
   }
 
   attribute_mapping = {
