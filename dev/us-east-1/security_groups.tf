@@ -1,7 +1,7 @@
 resource "aws_security_group" "load_balancer" {
   name        = "load_balancer"
   description = "Allow Internet Traffic"
-  vpc_id      = aws_vpc.default.id
+  vpc_id      = aws_default_vpc.default.id
   ingress {
     description = "TLS from VPC"
     from_port   = 443
@@ -28,7 +28,7 @@ resource "aws_security_group" "load_balancer" {
 resource "aws_security_group" "webserver" {
   name        = "webservers"
   description = "Allow Internet Traffic from ALB"
-  vpc_id      = aws_vpc.default.id
+  vpc_id      = aws_default_vpc.default.id
   ingress {
     description = "TLS from VPC"
     from_port   = 443
