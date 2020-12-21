@@ -59,7 +59,7 @@ resource "aws_subnet" "private2" {
 resource "aws_subnet" "private3" {
   vpc_id            = aws_default_vpc.default.id
   cidr_block        = "172.31.4.0/24"
-  availability_zone = "us-east-1e"
+  availability_zone = "us-east-1c"
 
 
   tags = {
@@ -72,7 +72,7 @@ resource "aws_subnet" "private3" {
 resource "aws_subnet" "private4" {
   vpc_id            = aws_default_vpc.default.id
   cidr_block        = "172.31.5.0/24"
-  availability_zone = "us-east-1f"
+  availability_zone = "us-east-1d"
 
 
   tags = {
