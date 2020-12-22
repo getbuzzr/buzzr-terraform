@@ -44,7 +44,7 @@ resource "aws_s3_bucket_policy" "b" {
                 "arn:aws:s3:::${var.bucket_name}",
                 "arn:aws:s3:::${var.bucket_name}/*"
             ]
-        },
+        }
     ]
 }
 POLICY
