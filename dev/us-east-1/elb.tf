@@ -1,5 +1,5 @@
-resource "aws_iam_instance_profile" "ec2" {
-  name = "webserver-eb-ec2"
+resource "aws_iam_instance_profile" "ec2_ip" {
+  name = "webserver-eb-ec2-ip"
   role = module.elb_webserver_role.name
 }
 
@@ -60,7 +60,7 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "IamInstanceProfile"
-    value     = aws_iam_instance_profile.ec2.name
+    value     = aws_iam_instance_profile.ec2_ip.name
   }
   setting {
       namespace = "aws:elasticbeanstalk:environment"
