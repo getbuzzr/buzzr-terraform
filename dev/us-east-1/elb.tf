@@ -4,7 +4,7 @@ resource "aws_iam_instance_profile" "ec2" {
 }
 
 resource "aws_elastic_beanstalk_application" "onguard_dev" {
-  name        = "onguard-dev"
+  name        = "onguard-dev-app"
   description = "The elb environment hosting onguard api"
 
   appversion_lifecycle {
