@@ -15,7 +15,7 @@ resource "aws_elastic_beanstalk_application" "onguard_dev" {
 }
 
 resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
-  name                = "onguard-dev"
+  name                = "onguard-dev-env"
   application         = aws_elastic_beanstalk_application.onguard_dev.name
   solution_stack_name = "64bit Amazon Linux 2 v3.2.2 running Docker"
 
