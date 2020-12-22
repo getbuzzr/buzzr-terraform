@@ -11,13 +11,12 @@ resource "aws_s3_bucket" "default" {
 
 resource "aws_s3_bucket_policy" "b" {
   bucket = aws_s3_bucket.default.id
-
   policy = <<POLICY
 {
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "deploy cicd",
+            "Sid": "deploycicd",
             "Effect": "Allow",
             "Principal": {
                 "AWS": ["arn:aws:iam::732983264044:role/cicd_role",
@@ -34,7 +33,7 @@ resource "aws_s3_bucket_policy" "b" {
             "Sid": "AddCannedAcl",
             "Effect": "Allow",
             "Principal": {
-                "AWS": ${var.read_role_arn}
+                "AWS": "${var.read_role_arn}"
             },
             "Action": [
                 "s3:Get*",
