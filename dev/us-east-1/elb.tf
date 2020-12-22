@@ -48,12 +48,12 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
   }
 
   setting {
-    namespace = "aws:elb:loadbalancer"
+    namespace = "aws:elbv2:loadbalancer"
     name      = "SecurityGroups"
     value     = aws_security_group.load_balancer.id
   }
   setting {
-    namespace = "aws:elb:loadbalancer"
+    namespace = "aws:elbv2:loadbalancer"
     name      = "ManagedSecurityGroup"
     value     = aws_security_group.web_server.id
   }
@@ -66,20 +66,5 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
       namespace = "aws:elasticbeanstalk:environment"
       name      = "LoadBalancerType"
       value     = "application"
-  }
-  setting {
-      namespace = "aws:elasticbeanstalk:environment:process:default"
-      name      = "HealthCheckPath"
-      value     = "/"
-  }
-  setting {
-      namespace = "aws:elasticbeanstalk:environment:process:default"
-      name      = "Port"
-      value     = "80"
-  }
-  setting {
-      namespace = "aws:elasticbeanstalk:environment:process:default"
-      name      = "Protocol"
-      value     = "HTTP"
   }
 }
