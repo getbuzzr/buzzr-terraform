@@ -1,5 +1,5 @@
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
-  name = "webserver-eb-ec2-instance-profile"
+  name = "webserver-eb-ec2-instance-profile-dev"
   role = module.elb_webserver_role.name
 }
 
