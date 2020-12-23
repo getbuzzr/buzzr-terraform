@@ -23,6 +23,18 @@ data "aws_iam_policy_document" "cicd_policy" {
       "arn:aws:cloudfront::*:distribution/*"
     ]
   }
+  statement {
+    sid = "elasticbeanstalkfull"
+
+    actions = [
+      "elasticbeanstalk:*",
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
+
 
   statement {
     sid = "ssmfull"

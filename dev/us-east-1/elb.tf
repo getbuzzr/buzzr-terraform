@@ -42,6 +42,13 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
     name      = "VPCId"
     value     = aws_default_vpc.default.id
   }
+  
+  setting {
+    namespace = "aws:ec2:vpc"
+    name      = "AssociatePublicIpAddress"
+    value     = true
+  }
+
   setting {
     namespace = "aws:ec2:vpc"
     name      = "ELBSubnets"
@@ -62,7 +69,7 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
   setting {
     namespace = "aws:elbv2:loadbalancer"
     name      = "ManagedSecurityGroup"
-    value     = aws_security_group.web_server.id
+    value     = aws_security_group.load_balancer.id
   }
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
@@ -73,5 +80,17 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
       namespace = "aws:elasticbeanstalk:environment"
       name      = "LoadBalancerType"
       value     = "application"
+  }
+  # This destroys ec2 instances to make room for new docker deployments
+  setting {
+    namespace = "aws:elasticbeanstalk:command"
+    name      = "DeploymentPolicy"
+    value     =  "Immutable"
+  }
+  # This deploy to max one at a time
+  setting {
+    namespace = "aws:autoscaling:updatepolicy:rollingupdate"
+    name      = "MaxBatchSize"
+    value     = 1
   }
 }
