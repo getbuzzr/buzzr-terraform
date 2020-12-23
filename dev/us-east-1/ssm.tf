@@ -24,7 +24,15 @@ resource "aws_ssm_parameter" "cognito_google_client_secret" {
 resource "aws_ssm_parameter" "cognito_apple_client_private_key" {
   name = "cognito_apple_client_private_key"
   type = "SecureString"
-  value = " "
+  # Placeholder key for validation purposes
+  value = <<EOT
+  -----BEGIN PRIVATE KEY-----
+MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgqWAZw99VDTY11Q5v
+ZKEMKmmOnbmxaO0P/RnCOW0mcnqgCgYIKoZIzj0DAQehRANCAASvSCaRofuf9OUh
+CPgKyn5qcgEhpGa2w+ur7e+IgSur01ZLN7W+jAi1FdzV2wutz2u5qDyhIKUWhh1L
+wCxzxqX4
+-----END PRIVATE KEY-----
+  EOT
   lifecycle {
     ignore_changes = [
       value

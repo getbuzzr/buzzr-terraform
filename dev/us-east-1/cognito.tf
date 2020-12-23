@@ -127,6 +127,7 @@ resource "aws_cognito_identity_provider" "google" {
     email       = "email"
     given_name  = "given_name"
     family_name = "family_name"
+    username    = "sub"
   }
 }
 
@@ -145,7 +146,8 @@ resource "aws_cognito_identity_provider" "apple" {
 
   attribute_mapping = {
     email       = "email"
-    given_name  = "name.firstName"
-    family_name = "name.lastName"
+    given_name  = "firstName"
+    family_name = "lastName"
+    username    = "sub"
   }
 }
