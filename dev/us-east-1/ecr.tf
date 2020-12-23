@@ -17,10 +17,8 @@ resource "aws_ecr_lifecycle_policy" "onguard_dev_api_policy" {
             "rulePriority": 1,
             "description": "Keep last 30 images",
             "selection": {
-                "tagStatus": "tagged",
-                "tagPrefixList": ["v"],
                 "countType": "imageCountMoreThan",
-                "countNumber": 30
+                "countNumber": 8
             },
             "action": {
                 "type": "expire"

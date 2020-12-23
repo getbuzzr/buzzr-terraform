@@ -13,7 +13,13 @@ resource "aws_elastic_beanstalk_application" "onguard_dev" {
     delete_source_from_s3 = true
   }
 }
-
+resource "aws_elastic_beanstalk_application_version" "onguard_dev_application" {
+  name        = "application_verion"
+  application = aws_elastic_beanstalk_application.onguard_dev.name
+  description = "application version created by terraform"
+  bucket      = module.elb_deploy_bucket.id
+  key         = "docker_deploy.zip"
+}
 resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
   name                = "onguard-dev-env"
   application         = aws_elastic_beanstalk_application.onguard_dev.name

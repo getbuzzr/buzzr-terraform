@@ -24,6 +24,28 @@ data "aws_iam_policy_document" "cicd_policy" {
     ]
   }
 
+  statement {
+    sid = "ssmfull"
+
+    actions = [
+      "ssm:*",
+    ]
+
+    resources = [
+      "arn:aws:ssm:us-east-1:*:parameter/*"
+    ]
+  }
+  statement {
+    sid = "ecrfull"
+
+    actions = [
+      "ecr:*",
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
 }
 
 data "aws_iam_policy_document" "cicd_arp" {
