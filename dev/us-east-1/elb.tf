@@ -47,10 +47,11 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
     name      = "ELBSubnets"
     value     = "${aws_subnet.public1.id},${aws_subnet.public2.id}"
   }
+  # CHANGE THIS TO PRIVATE AND USE NAT GATEWAY IN PROD
   setting {
     namespace = "aws:ec2:vpc"
     name      = "Subnets"
-    value     = "${aws_subnet.private1.id},${aws_subnet.private2.id}"
+    value     = "${aws_subnet.public1.id},${aws_subnet.public2.id}"
   }
 
   setting {
