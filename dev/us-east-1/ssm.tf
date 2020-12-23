@@ -59,3 +59,9 @@ resource "aws_ssm_parameter" "checkin_queue_url" {
   type  = "SecureString"
   value = aws_sqs_queue.checkin_queue.id
 }
+
+resource "aws_ssm_parameter" "api_ecr_repo" {
+  name  = "api_ecr_repo"
+  type  = "SecureString"
+  value = aws_ecr_repository.onguard_dev_api.repository_url
+}
