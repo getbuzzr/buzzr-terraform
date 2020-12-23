@@ -57,5 +57,5 @@ resource "aws_ssm_parameter" "checkin_dynamo_table_name" {
 resource "aws_ssm_parameter" "checkin_queue_url" {
   name  = "checkin_queue_url"
   type  = "SecureString"
-  value = " "
+  value = aws_sqs_queue.checkin_queue.id
 }
