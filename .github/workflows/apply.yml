@@ -42,12 +42,13 @@ jobs:
               - 'staging/**'
             prod:
               - 'prod/**'
-            modules:
+            common:
               - 'modules/**'
+              - 'assets/**'
       
       # install aws with configure on env vars
       - name: Configure AWS root
-        if: steps.edited_files.outputs.root == 'true' || steps.edited_files.outputs.modules == 'true'
+        if: steps.edited_files.outputs.root == 'true' || steps.edited_files.outputs.common == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
@@ -58,7 +59,7 @@ jobs:
 
       # check if root edited
       - name: Terraform apply root global
-        if: steps.edited_files.outputs.root == 'true' || steps.edited_files.outputs.modules == 'true'
+        if: steps.edited_files.outputs.root == 'true' || steps.edited_files.outputs.common == 'true'
         run: |
           cd root/global
           terraform init
@@ -67,7 +68,7 @@ jobs:
 
       # install aws with configure on env vars
       - name: Configure AWS Dev
-        if: steps.edited_files.outputs.dev == 'true' || steps.edited_files.outputs.modules == 'true'
+        if: steps.edited_files.outputs.dev == 'true' || steps.edited_files.outputs.common == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
@@ -79,7 +80,7 @@ jobs:
 
       # check if dev edited
       - name: Terraform apply dev us-east-1
-        if: steps.edited_files.outputs.dev == 'true' || steps.edited_files.outputs.modules == 'true'
+        if: steps.edited_files.outputs.dev == 'true' || steps.edited_files.outputs.common == 'true'
         run: |
           cd dev/us-east-1
           terraform init
@@ -87,7 +88,7 @@ jobs:
           terraform apply -auto-approve
       
       - name: Terraform apply dev global
-        if: steps.edited_files.outputs.dev == 'true' || steps.edited_files.outputs.modules == 'true'
+        if: steps.edited_files.outputs.dev == 'true' || steps.edited_files.outputs.common == 'true'
         run: |
           cd dev/global
           terraform init
@@ -96,7 +97,7 @@ jobs:
 
     # install aws with configure on env vars
       - name: Configure AWS Staging
-        if: steps.edited_files.outputs.staging == 'true' || steps.edited_files.outputs.modules == 'true'
+        if: steps.edited_files.outputs.staging == 'true' || steps.edited_files.outputs.common == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
@@ -108,7 +109,7 @@ jobs:
 
     # check if staging edited
       - name: Terraform apply staging us-east-1
-        if: steps.edited_files.outputs.staging == 'true' || steps.edited_files.outputs.modules == 'true'
+        if: steps.edited_files.outputs.staging == 'true' || steps.edited_files.outputs.common == 'true'
         run: |
           cd staging/us-east-1
           terraform init 
@@ -116,7 +117,7 @@ jobs:
           terraform apply -auto-approve
       
       - name: Terraform apply staging global
-        if: steps.edited_files.outputs.staging == 'true' || steps.edited_files.outputs.modules == 'true'
+        if: steps.edited_files.outputs.staging == 'true' || steps.edited_files.outputs.common == 'true'
         run: |
           cd staging/global
           terraform init 
@@ -125,7 +126,7 @@ jobs:
     
     # install aws with configure on env vars
       - name: Configure AWS Prod
-        if: steps.edited_files.outputs.prod == 'true' || steps.edited_files.outputs.modules == 'true'
+        if: steps.edited_files.outputs.prod == 'true' || steps.edited_files.outputs.common == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
@@ -137,7 +138,7 @@ jobs:
     
     # check if prod edited
       - name: Terraform apply prod us-east-1
-        if: steps.edited_files.outputs.prod == 'true' || steps.edited_files.outputs.modules == 'true'
+        if: steps.edited_files.outputs.prod == 'true' || steps.edited_files.outputs.common == 'true'
         run: |
           cd prod/us-east-1
           terraform init
@@ -145,7 +146,7 @@ jobs:
           terraform apply -auto-approve
 
       - name: Terraform apply prod global
-        if: steps.edited_files.outputs.prod == 'true' || steps.edited_files.outputs.modules == 'true'
+        if: steps.edited_files.outputs.prod == 'true' || steps.edited_files.outputs.common == 'true'
         run: |
           cd prod/global
           terraform init
