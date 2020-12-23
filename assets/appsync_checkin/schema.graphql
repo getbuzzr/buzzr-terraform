@@ -5,17 +5,17 @@
 }
 
 type CheckInStatus {
-  accuracy: Float!
-  altitude: Float!
-  checkInType: String!
-  expiresAt: AWSTimestamp!
-  groupId: Int!
-  heading: Float!
-  latitude: Float!
-  longitude: Float!
-  speed: Float!
-  timestamp: AWSTimestamp!
-  userId: Int!
+  user_id: Int!
+  group_id: Int!
+  latitude: Float
+  longitude: Float
+  accuracy: Float
+  altitude: Float
+  heading: Float
+  speed: Float
+  timestamp: AWSTimestamp
+  expires_at: AWSTimestamp
+  status: String
 }
 
 type CheckInStatusConnection {
@@ -23,121 +23,124 @@ type CheckInStatusConnection {
   nextToken: String
 }
 
-type Mutation {
-  createCheckInStatus(input: CreateCheckInStatusInput!): CheckInStatus
-  deleteCheckInStatus(input: DeleteCheckInStatusInput!): CheckInStatus
-  updateCheckInStatus(input: UpdateCheckInStatusInput!): CheckInStatus
-}
-
-type Query {
-  getCheckInStatus(groupId: Int!, userId: Int!): CheckInStatus
-  listCheckInStatuses(filter: TableCheckInStatusFilterInput, limit: Int, nextToken: String): CheckInStatusConnection
-}
-
-type Subscription {
-  onCreateCheckInStatus(checkInType: String, groupId: Int, latitude: Float, longitude: Float, userId: Int): CheckInStatus @aws_subscribe(mutations : ["createCheckInStatus"])
-  onDeleteCheckInStatus(checkInType: String, groupId: Int, latitude: Float, longitude: Float, userId: Int): CheckInStatus @aws_subscribe(mutations : ["deleteCheckInStatus"])
-  onUpdateCheckInStatus(checkInType: String, groupId: Int, latitude: Float, longitude: Float, userId: Int): CheckInStatus @aws_subscribe(mutations : ["updateCheckInStatus"])
-}
-
 input CreateCheckInStatusInput {
-  accuracy: Float!
-  altitude: Float!
-  checkInType: String!
-  expiresAt: AWSTimestamp!
-  groupId: Int!
-  heading: Float!
-  latitude: Float!
-  longitude: Float!
-  speed: Float!
-  timestamp: AWSTimestamp!
-  userId: Int!
+  user_id: Int!
+  group_id: Int!
+  latitude: Float
+  longitude: Float
+  accuracy: Float
+  altitude: Float
+  heading: Float
+  speed: Float
+  timestamp: AWSTimestamp
+  expires_at: AWSTimestamp
+  status: String
 }
 
 input DeleteCheckInStatusInput {
-  groupId: Int!
-  userId: Int!
+  user_id: Int!
+  group_id: Int!
+}
+
+type Mutation {
+  createCheckInStatus(input: CreateCheckInStatusInput!): CheckInStatus
+  updateCheckInStatus(input: UpdateCheckInStatusInput!): CheckInStatus
+  deleteCheckInStatus(input: DeleteCheckInStatusInput!): CheckInStatus
+}
+
+type Query {
+  getCheckInStatus(user_id: Int!, groupId: Int!): CheckInStatus
+  listCheckInStatus(filter: TableCheckInStatusFilterInput, limit: Int, nextToken: String): CheckInStatusConnection
+}
+
+type Subscription {
+  onCreateCheckInStatus(user_id: Int, group_id: Int, latitude: Float, longitude: Float, accuracy: Float): CheckInStatus
+  @aws_subscribe(mutations: ["createCheckInStatus"])
+  onUpdateCheckInStatus(user_id: Int, group_id: Int, latitude: Float, longitude: Float, accuracy: Float): CheckInStatus
+  @aws_subscribe(mutations: ["updateCheckInStatus"])
+  onDeleteCheckInStatus(user_id: Int, group_id: Int, latitude: Float, longitude: Float, accuracy: Float): CheckInStatus
+  @aws_subscribe(mutations: ["deleteCheckInStatus"])
 }
 
 input TableBooleanFilterInput {
-  eq: Boolean
   ne: Boolean
+  eq: Boolean
 }
 
 input TableCheckInStatusFilterInput {
-  accuracy: TableFloatFilterInput
-  altitude: TableFloatFilterInput
-  checkInType: TableStringFilterInput
-  expiresAt: TableIntFilterInput
-  groupId: TableIntFilterInput
-  heading: TableFloatFilterInput
+  user_id: TableIntFilterInput
+  group_id: TableIntFilterInput
   latitude: TableFloatFilterInput
   longitude: TableFloatFilterInput
+  accuracy: TableFloatFilterInput
+  altitude: TableFloatFilterInput
+  heading: TableFloatFilterInput
   speed: TableFloatFilterInput
   timestamp: TableIntFilterInput
-  userId: TableIntFilterInput
+  expires_at: TableIntFilterInput
+  status: TableStringFilterInput
 }
 
 input TableFloatFilterInput {
-  between: [Float]
-  contains: Float
+  ne: Float
   eq: Float
-  ge: Float
-  gt: Float
   le: Float
   lt: Float
-  ne: Float
+  ge: Float
+  gt: Float
+  contains: Float
   notContains: Float
+  between: [Float]
 }
 
 input TableIDFilterInput {
-  beginsWith: ID
-  between: [ID]
-  contains: ID
+  ne: ID
   eq: ID
-  ge: ID
-  gt: ID
   le: ID
   lt: ID
-  ne: ID
+  ge: ID
+  gt: ID
+  contains: ID
   notContains: ID
+  between: [ID]
+  beginsWith: ID
 }
 
 input TableIntFilterInput {
-  between: [Int]
-  contains: Int
+  ne: Int
   eq: Int
-  ge: Int
-  gt: Int
   le: Int
   lt: Int
-  ne: Int
+  ge: Int
+  gt: Int
+  contains: Int
   notContains: Int
+  between: [Int]
 }
 
 input TableStringFilterInput {
-  beginsWith: String
-  between: [String]
-  contains: String
+  ne: String
   eq: String
-  ge: String
-  gt: String
   le: String
   lt: String
-  ne: String
+  ge: String
+  gt: String
+  contains: String
   notContains: String
+  between: [String]
+  beginsWith: String
 }
 
 input UpdateCheckInStatusInput {
-  accuracy: Float
-  altitude: Float
-  checkInType: String
-  expiresAt: AWSTimestamp
-  groupId: Int!
-  heading: Float
+  user_id: Int!
+  group_id: Int!
   latitude: Float
   longitude: Float
+  accuracy: Float
+  altitude: Float
+  heading: Float
   speed: Float
   timestamp: AWSTimestamp
-  userId: Int!
+  expires_at: AWSTimestamp
+  status: String
 }
