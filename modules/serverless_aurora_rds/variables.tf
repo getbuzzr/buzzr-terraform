@@ -9,7 +9,9 @@ variable "db_name" {
 variable "db_password_ssm_path" {
   description = "The path to the ssm parameter that houses the db password"
 }
-
+variable "allowed_security_groups" {
+  description = "list of security groups allowed"
+}
 variable "max_capacity_unit" {
   description= "Max capacity unit for db scaling. Max 256"
 }

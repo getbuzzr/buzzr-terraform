@@ -14,5 +14,6 @@ module "api_db_server" {
   db_name              = "onguardapi"
   db_subnet_group      = aws_db_subnet_group.db_subnet_group.name
   db_password_ssm_path = "api_db_server_password"
+  allowed_security_groups = [aws_security_group.load_balancer.id]
   max_capacity_unit    = 1
 }

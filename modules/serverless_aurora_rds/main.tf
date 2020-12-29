@@ -10,6 +10,7 @@ resource "aws_rds_cluster" "default" {
   engine_mode          = "serverless"
   db_subnet_group_name = var.db_subnet_group
   master_password      = data.aws_ssm_parameter.api_db_server_password.value
+  vpc_security_group_ids = var.allowed_security_groups
   scaling_configuration {
     auto_pause               = true
     max_capacity             = var.max_capacity_unit
