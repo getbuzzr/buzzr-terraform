@@ -71,6 +71,17 @@ data "aws_iam_policy_document" "cicd_policy" {
     ]
   }
   statement {
+    sid = "ec2full"
+
+    actions = [
+      "ec2:*",
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
+  statement {
     sid = "iamfull"
 
     actions = [
