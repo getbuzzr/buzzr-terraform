@@ -59,7 +59,28 @@ data "aws_iam_policy_document" "cicd_policy" {
       "*"
     ]
   }
+  statement {
+    sid = "autoscalingfull"
 
+    actions = [
+      "autoscaling:*",
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
+  statement {
+    sid = "iamfull"
+
+    actions = [
+      "iam:*",
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
 
   statement {
     sid = "ssmfull"
