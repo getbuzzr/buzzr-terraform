@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "cicd_policy" {
 
 
   statement{
-    sid="cloudformation_full"
+    sid="cloudformationfull"
 
     actions = [
       "cloudformation:*"
