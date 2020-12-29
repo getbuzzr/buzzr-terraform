@@ -24,6 +24,19 @@ data "aws_iam_policy_document" "cicd_policy" {
     ]
   }
 
+
+  statement{
+    sid="cloudformation_full"
+
+    actions = [
+      "cloudformation:*"
+    ]
+
+    resources = [
+      "arn:aws:cloudformation:us-east-1:*:stack/*"
+    ]
+  }
+
   statement {
     sid = "CloudfrontFull"
 
