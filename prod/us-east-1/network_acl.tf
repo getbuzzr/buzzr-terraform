@@ -9,9 +9,10 @@ module "webserver_http" {
   source = "../../modules/nacl_tcp_rule"
 
   network_acl_id = aws_network_acl.webserver.id
-  port_number    = 80
+  from_port_number    = 80
+  to_port_number    = 80
+  cidr_block     = "0.0.0.0/0"
   rule_number    = 100
-  cidr_block     = "172.31.0.0/23"
 }
 
 # This is the nacl tcp rule for https traffic
@@ -19,9 +20,10 @@ module "webserver_https" {
   source = "../../modules/nacl_tcp_rule"
 
   network_acl_id = aws_network_acl.webserver.id
-  port_number    = 443
+  from_port_number    = 443
+  to_port_number    = 443
   rule_number    = 200
-  cidr_block     = "172.31.0.0/23"
+  cidr_block     = "0.0.0.0/0"
 }
 
 
@@ -36,7 +38,8 @@ module "db_aurora" {
   source = "../../modules/nacl_tcp_rule"
 
   network_acl_id = aws_network_acl.db.id
-  port_number    = 3306
+  from_port_number    = 3306
+  to_port_number    = 3306
   rule_number    = 100
-  cidr_block     = "172.31.2.0/23"
+  cidr_block     = "0.0.0.0/0"
 }

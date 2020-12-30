@@ -5,8 +5,8 @@ resource "aws_network_acl_rule" "default_egress" {
   protocol       = "tcp"
   rule_action    = "allow"
   cidr_block     = var.cidr_block
-  from_port      = var.port_number
-  to_port        = var.port_number
+  from_port      = var.from_port_number
+  to_port        = var.to_port_number
 }
 
 resource "aws_network_acl_rule" "default_ingress" {
@@ -16,6 +16,6 @@ resource "aws_network_acl_rule" "default_ingress" {
   protocol       = "tcp"
   rule_action    = "allow"
   cidr_block     = var.cidr_block
-  from_port      = var.port_number
-  to_port        = var.port_number
+  from_port      = var.from_port_number
+  to_port        = var.to_port_number
 }
