@@ -98,15 +98,13 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
   setting {
     namespace = "aws:elasticbeanstalk:hostmanager"
     name      = "LogPublicationControl"
-    value     = var.enable_log_publication_control ? "true" : "false"
-    resource  = ""
+    value     = "true"
   }
 
   setting {
     namespace = "aws:elasticbeanstalk:cloudwatch:logs"
     name      = "StreamLogs"
-    value     = var.enable_stream_logs ? "true" : "false"
-    resource  = ""
+    value     = "true"
   }
 
   setting {
