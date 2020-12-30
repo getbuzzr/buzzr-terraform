@@ -9,7 +9,7 @@ resource "aws_default_vpc" "default" {
 #  Subnet definitions
 resource "aws_subnet" "nat_gateway_subnet" {
   vpc_id            = aws_default_vpc.default.id
-  cidr_block        = "172.31.0.6/24"
+  cidr_block        = "172.31.6.0/24"
   availability_zone = "us-east-1a"
 
   tags = {
