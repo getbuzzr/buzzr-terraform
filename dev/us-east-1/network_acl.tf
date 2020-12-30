@@ -38,6 +38,5 @@ module "db_aurora" {
   network_acl_id = aws_network_acl.db.id
   port_number    = 3306
   rule_number    = 100
-  # this allows from public subnet. In staging and dev, make it accessible only on private
-  cidr_block     = "0.0.0.0/0"
+  cidr_block     = "172.31.2.0/23"
 }
