@@ -115,6 +115,13 @@ data "aws_iam_policy_document" "cicd_policy" {
       "*"
     ]
   }
+  statement{
+    sid = "logfull"
+    actions = [logs*]
+    resources = [
+      "*"
+    ]
+  }
 }
 
 data "aws_iam_policy_document" "cicd_arp" {
