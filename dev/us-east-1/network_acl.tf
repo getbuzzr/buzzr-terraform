@@ -11,7 +11,7 @@ module "webserver_http" {
   network_acl_id = aws_network_acl.webserver.id
   port_number    = 80
   rule_number    = 100
-  cidr_block     = "172.31.0.0/23"
+  cidr_block     = "0.0.0.0/0"
 }
 
 # This is the nacl tcp rule for https traffic
@@ -21,8 +21,27 @@ module "webserver_https" {
   network_acl_id = aws_network_acl.webserver.id
   port_number    = 443
   rule_number    = 200
-  cidr_block     = "172.31.0.0/23"
+  cidr_block     = "0.0.0.0/0"
 }
+# This is the nacl tcp rule for https traffic
+module "webserver_ssh" {
+  source = "../../modules/nacl_tcp_rule"
+
+  network_acl_id = aws_network_acl.webserver.id
+  port_number    = 22
+  rule_number    = 300
+  cidr_block     = "0.0.0.0/0"
+}
+# This is the nacl tcp rule for https traffic
+module "webserver_nat_gateway" {
+  source = "../../modules/nacl_tcp_rule"
+
+  network_acl_id = aws_network_acl.webserver.id
+  port_number    = 1024-65535
+  rule_number    = 400
+  cidr_block     = "0.0.0.0/0"
+}
+
 
 
 # network acl where the db will exists
@@ -38,5 +57,5 @@ module "db_aurora" {
   network_acl_id = aws_network_acl.db.id
   port_number    = 3306
   rule_number    = 100
-  cidr_block     = "172.31.2.0/23"
+  cidr_block     = "0.0.0.0/0"
 }
