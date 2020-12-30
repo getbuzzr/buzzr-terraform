@@ -93,4 +93,49 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
     name      = "MaxBatchSize"
     value     = 1
   }
+  ###=========================== Logging ========================== ###
+
+  setting {
+    namespace = "aws:elasticbeanstalk:hostmanager"
+    name      = "LogPublicationControl"
+    value     = var.enable_log_publication_control ? "true" : "false"
+    resource  = ""
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "StreamLogs"
+    value     = var.enable_stream_logs ? "true" : "false"
+    resource  = ""
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "DeleteOnTerminate"
+    value     = "true"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "RetentionInDays"
+    value     = 30
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs:health"
+    name      = "HealthStreamingEnabled"
+    value     = "true"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs:health"
+    name      = "DeleteOnTerminate"
+    value     = "true"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs:health"
+    name      = "RetentionInDays"
+    value     = 30
+  }
 }

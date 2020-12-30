@@ -13,14 +13,14 @@ data "aws_iam_policy_document" "cicd_policy" {
   }
 
   statement {
-    sid = "s3elbperms"
+    sid = "s3full"
 
     actions = [
       "s3:*",
     ]
 
     resources = [
-      "arn:aws:s3:::elasticbeanstalk-us-east-1*"
+      "*"
     ]
   }
 
