@@ -92,6 +92,12 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
     name      = "MaxBatchSize"
     value     = 1
   }
+  # This deploy to max one at a time
+  setting {
+    namespace = "aws:autoscaling:updatepolicy:rollingupdate"
+    name      = "RollingUpdateType"
+    value     = "Immutable"
+  }
   ###=========================== Logging ========================== ###
 
   setting {
