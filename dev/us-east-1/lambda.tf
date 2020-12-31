@@ -48,7 +48,7 @@ module "cognito_postsignup_trigger" {
   source = "../../modules/lambda_function"
 
   function_name = "cognito_postsignup_trigger"
-  role_arn      = module.presignup_lambda_role.role_arn
+  role_arn      = module.postsignup_lambda_role.role_arn
   handler       = "main.lambda_handler"
 
 

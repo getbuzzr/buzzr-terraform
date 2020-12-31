@@ -27,6 +27,7 @@ resource "aws_cognito_user_pool" "default" {
 
   lambda_config {
     pre_sign_up = module.cognito_presignup_trigger.arn
+    post_confirmation = module.cognito_postsignup_trigger.arn
   }
 }
 resource "aws_cognito_user_pool_domain" "default" {
