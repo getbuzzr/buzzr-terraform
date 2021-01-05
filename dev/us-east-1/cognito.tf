@@ -44,7 +44,8 @@ module "mobile_app_client" {
     local.adfs_idp_provider_name,
     local.okta_idp_provider_name,
     aws_cognito_identity_provider.google.provider_name,
-    aws_cognito_identity_provider.apple.provider_name
+    aws_cognito_identity_provider.apple.provider_name,
+    "COGNITO"
   ]
   default_redirect_uri = "https://oauth.onguard.co/"
   # add callback urls here
@@ -67,7 +68,8 @@ module "web_app_client" {
     local.adfs_idp_provider_name,
     local.okta_idp_provider_name,
     aws_cognito_identity_provider.google.provider_name,
-    aws_cognito_identity_provider.apple.provider_name
+    aws_cognito_identity_provider.apple.provider_name,
+    "COGNITO"
   ]
   #default_redirect_uri
   default_redirect_uri = ""
