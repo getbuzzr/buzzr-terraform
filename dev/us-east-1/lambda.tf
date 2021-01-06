@@ -4,7 +4,8 @@ module "cognito_presignup_trigger" {
   function_name = "cognito_presignup_trigger"
   role_arn      = module.presignup_lambda_role.role_arn
   handler       = "main.lambda_handler"
-
+  vpc_config = {}
+  
 
   runtime = "python3.8"
 
