@@ -40,8 +40,8 @@ module "expiry_trigger" {
   role_arn      = module.expiry_trigger_lambda_role.role_arn
   handler       = "main.lambda_handler"
   vpc_config = {
-    subnets = [aws_subnet.private1.id, aws_subnet.private2.id]
-    security_groups=[aws_security_group.web_server.id]
+    subnet_ids = [aws_subnet.private1.id, aws_subnet.private2.id]
+    security_group_ids=[aws_security_group.web_server.id]
   }
 
   runtime = "python3.8"
@@ -56,8 +56,8 @@ module "cognito_postsignup_trigger" {
   role_arn      = module.postsignup_lambda_role.role_arn
   handler       = "main.lambda_handler"
   vpc_config = {
-    subnets = [aws_subnet.private1.id, aws_subnet.private2.id]
-    security_groups=[aws_security_group.web_server.id]
+    subnet_ids = [aws_subnet.private1.id, aws_subnet.private2.id]
+    security_group_ids=[aws_security_group.web_server.id]
   }
 
   runtime = "python3.8"
