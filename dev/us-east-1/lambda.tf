@@ -4,7 +4,6 @@ module "cognito_presignup_trigger" {
   function_name = "cognito_presignup_trigger"
   role_arn      = module.presignup_lambda_role.role_arn
   handler       = "main.lambda_handler"
-  vpc_config = {}
   
 
   runtime = "python3.8"
@@ -25,7 +24,6 @@ module "check_in_consumer" {
   function_name = "check_in_consumer"
   role_arn      = module.checkin_consumer_lambda_role.role_arn
   handler       = "main.lambda_handler"
-  vpc_config = {}
 
 
   runtime = "python3.8"
@@ -39,10 +37,8 @@ module "expiry_trigger" {
   function_name = "expiry_trigger"
   role_arn      = module.expiry_trigger_lambda_role.role_arn
   handler       = "main.lambda_handler"
-  vpc_config = {
-    subnet_ids = [aws_subnet.private1.id, aws_subnet.private2.id]
-    security_group_ids=[aws_security_group.web_server.id]
-  }
+  vpc_subnet_ids         = [aws_subnet.private1.id, aws_subnet.private2.id]
+  vpc_security_group_ids = [aws_security_group.web_server.id]
 
   runtime = "python3.8"
 
@@ -55,10 +51,8 @@ module "cognito_postsignup_trigger" {
   function_name = "cognito_postsignup_trigger"
   role_arn      = module.postsignup_lambda_role.role_arn
   handler       = "main.lambda_handler"
-  vpc_config = {
-    subnet_ids = [aws_subnet.private1.id, aws_subnet.private2.id]
-    security_group_ids=[aws_security_group.web_server.id]
-  }
+  vpc_subnet_ids         = [aws_subnet.private1.id, aws_subnet.private2.id]
+  vpc_security_group_ids = [aws_security_group.web_server.id]
 
   runtime = "python3.8"
 

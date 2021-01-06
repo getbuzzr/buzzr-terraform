@@ -15,6 +15,11 @@ variable "runtime" {
 }
 
 
-variable "vpc_config"{
-  description = "(map) vpc config"
+variable "vpc_subnet_ids"{
+  description = "(list) subnet ids"
 }
+
+variable "vpc_security_group_ids"{
+  description = "(list) vpc security group= ids"
+}
+
