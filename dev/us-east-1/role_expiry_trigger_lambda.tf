@@ -64,6 +64,7 @@ data "aws_iam_policy_document" "expiry_trigger_lambda_policy" {
     resources = [
       "arn:aws:ssm:us-east-1:*:parameter/api_db_database_uri"
     ]
+  }
   statement {
      sid = "ExpirynGetAPIDbPassword"
 
