@@ -27,6 +27,7 @@ variable "vpc_security_group_ids"{
 
 variable "lambda_layer_arns"{
   description = "(list) arns of lambda layers"
+  type = list(string)
   default     = null
 }
 
