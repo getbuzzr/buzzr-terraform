@@ -9,6 +9,7 @@ data "aws_ssm_parameter" "apple_client_private_key" {
 locals {
   okta_idp_provider_name = "Okta"
   adfs_idp_provider_name = "ADFS"
+  cognito_idp_provider_name = "COGNITO"
 }
 
 resource "aws_cognito_user_pool" "default" {
@@ -43,6 +44,7 @@ module "mobile_app_client" {
   supported_identity_providers = [
     local.adfs_idp_provider_name,
     local.okta_idp_provider_name,
+    local.cognito_idp_provider_name,
     aws_cognito_identity_provider.google.provider_name,
     aws_cognito_identity_provider.apple.provider_name
   ]
@@ -66,6 +68,7 @@ module "web_app_client" {
   supported_identity_providers = [
     local.adfs_idp_provider_name,
     local.okta_idp_provider_name,
+    local.cognito_idp_provider_name,
     aws_cognito_identity_provider.google.provider_name,
     aws_cognito_identity_provider.apple.provider_name
   ]
