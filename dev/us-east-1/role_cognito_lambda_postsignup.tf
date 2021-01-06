@@ -15,6 +15,18 @@ data "aws_iam_policy_document" "postsignup_lambda_policy" {
   }
 
   statement {
+    sid = "ssm"
+
+    actions = [
+      "ssm:GetParameter",
+    ]
+
+    resources = [
+      "arn:aws:ssm:us-east-1:*:parameter/api_db_database_uri"
+    ]
+  }
+
+  statement {
     sid = "ec2deploy"
 
     actions = [
