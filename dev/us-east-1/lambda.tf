@@ -53,7 +53,7 @@ module "cognito_postsignup_trigger" {
   handler       = "main.lambda_handler"
   vpc_subnet_ids         = [aws_subnet.private1.id, aws_subnet.private2.id]
   vpc_security_group_ids = [aws_security_group.web_server.id]
-
+  lambda_layer_arns = [aws_lambda_layer_version.pymysql_layer.arn]
   runtime = "python3.8"
 
 }
