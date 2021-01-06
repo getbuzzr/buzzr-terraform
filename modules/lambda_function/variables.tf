@@ -13,3 +13,12 @@ variable "handler" {
 variable "runtime" {
   description = "The runtime"
 }
+
+
+variable "subnets"{
+  description = "(list)the subnets ids associated to this lambda"
+}
+
+variable "security_groups"{
+  description = "(list)The security group ids associated to this lambda"
+}
