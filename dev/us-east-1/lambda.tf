@@ -50,8 +50,10 @@ module "cognito_postsignup_trigger" {
   function_name = "cognito_postsignup_trigger"
   role_arn      = module.postsignup_lambda_role.role_arn
   handler       = "main.lambda_handler"
+  vpc_config = {
   subnets = [aws_subnet.private1.id, aws_subnet.private2.id]
   security_groups=[aws_security_group.web_server.id]
+  }
 
   runtime = "python3.8"
 

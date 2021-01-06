@@ -4,12 +4,11 @@ resource "aws_lambda_function" "default" {
   handler       = var.handler
   filename      = "${path.module}/files/empty.zip"
   
-  # if subnets present then vpc is also
   dynamic "vpc_config" {
-    for_each = var.subnets != null && var.security_groups != null ? [true] : []
+    for_each = var.vpc_config == null ? [] : [var.vpc_config]
     content {
-      security_group_ids = var.subnets
-      subnet_ids         = var.security_groups
+      security_group_ids = vpc_config.value.security_group_ids
+      subnet_ids         = vpc_config.value.subnet_ids
     }
   }
 
