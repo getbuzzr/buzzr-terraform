@@ -15,6 +15,22 @@ data "aws_iam_policy_document" "postsignup_lambda_policy" {
   }
 
   statement {
+    sid = "ec2deploy"
+
+    actions = [
+      "ec2:DescribeNetworkInterfaces",
+        "ec2:CreateNetworkInterface",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DescribeInstances",
+        "ec2:AttachNetworkInterface"
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
+
+  statement {
     sid = "PostsignupInvokePermissions"
 
     actions = [
