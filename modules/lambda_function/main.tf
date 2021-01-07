@@ -13,5 +13,5 @@ resource "aws_lambda_function" "default" {
   }
 
   runtime = var.runtime
-
+  timeout = var.timeout
 }
