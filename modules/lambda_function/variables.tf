@@ -31,3 +31,7 @@ variable "lambda_layer_arns"{
   default     = null
 }
 
+variable "timeout"{
+  description = "timeout of function"
+  default     = 5
+}
