@@ -200,5 +200,6 @@ resource "aws_route53_record" "dev_api_onguard_co" {
   alias {
     name                   = "onguard-dev-env.eba-2qhpgzjy.us-east-1.elasticbeanstalk.com"
     evaluate_target_health = true
+    zone_id = "Z35SXDOTRQ7X7K"
   }
 }
