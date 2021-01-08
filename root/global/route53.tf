@@ -182,3 +182,24 @@ resource "aws_route53_record" "dev_auth_onguard_co" {
     evaluate_target_health = true
   }
 }
+
+resource "aws_route53_record" "_6a3d953604e3c871511825d55c5afe99" {
+  zone_id  = aws_route53_zone.onguard_co.zone_id
+  name     = "_6a3d953604e3c871511825d55c5afe99.dev.api.onguard.co"
+  type     = "CNAME"
+  ttl      = "300"
+
+  records = ["_f2fe44e5e3f18df21511f1172b58f199.rlltrpyzyf.acm-validations.aws"]
+}
+
+resource "aws_route53_record" "dev_api_onguard_co" {
+  zone_id = aws_route53_zone.onguard_co.zone_id
+  name    = "dev.api.onguard.co"
+  type    = "A"
+
+  alias {
+    name                   = "onguard-dev-env.eba-2qhpgzjy.us-east-1.elasticbeanstalk.com"
+    evaluate_target_health = true
+    zone_id = "Z35SXDOTRQ7X7K"
+  }
+}
