@@ -141,4 +141,25 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
     name      = "RetentionInDays"
     value     = 30
   }
+# =========== SSL
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "ListenerEnabled"
+    value     = true
+  }
+  setting {
+      namespace = "aws:elbv2:listener:443"
+      name      = "Protocol"
+      value     = "HTTPS"
+    }
+  setting {
+      namespace = "aws:elbv2:listener:443"
+      name      = "SSLCertificateArns"
+      value     = aws_acm_certificate.dev_api_onguard_co.arn
+    }
+  setting {
+      namespace = "aws:elbv2:listener:443"
+      name      = "SSLPolicy"
+      value     = "ELBSecurityPolicy-2016-08"
+    }
 }
