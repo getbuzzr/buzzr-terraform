@@ -192,7 +192,7 @@ resource "aws_route53_record" "_6a3d953604e3c871511825d55c5afe99" {
   records = ["_f2fe44e5e3f18df21511f1172b58f199.rlltrpyzyf.acm-validations.aws"]
 }
 
-esource "aws_route53_record" "dev_api_onguard_co" {
+resource "aws_route53_record" "dev_api_onguard_co" {
   zone_id = aws_route53_zone.onguard_co.zone_id
   name    = "dev.api.onguard.co"
   type    = "A"
