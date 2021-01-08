@@ -59,6 +59,18 @@ data "aws_iam_policy_document" "cicd_policy" {
       "*"
     ]
   }
+
+  statement {
+    sid = "elasticloadbalancingfull"
+    
+    actions = [
+      "elasticloadbalancing:*"
+    ]
+    
+    resources = [
+      "*"
+    ]
+  }
   statement {
     sid = "autoscalingfull"
 
