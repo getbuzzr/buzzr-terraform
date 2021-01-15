@@ -3,6 +3,11 @@ resource "aws_appsync_graphql_api" "default" {
   name                = var.graphql_api_name
   schema              = var.graphql_schema
 
+  log_config {
+    cloudwatch_logs_role_arn = var.cloudwatch_logs_role_arn
+    field_log_level = "ERROR"
+  }
+
   user_pool_config {
     default_action = "DENY"
     user_pool_id   = var.cognito_user_pool_id
