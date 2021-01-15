@@ -22,3 +22,8 @@ variable "graphql_schema" {
   type        = string
   description = "The GraphQL schema definition."
 }
+
+variable "cloudwatch_logs_role_arn" {
+  type        = string
+  description = "The ARN of the CloudWatch logs role."
+}

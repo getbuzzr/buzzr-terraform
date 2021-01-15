@@ -5,6 +5,7 @@ module "appsync_checkin" {
   dynamodb_service_role_arn = module.appsync_dynamodb_data_source_role.role_arn
   graphql_schema            = file("../../assets/appsync_checkin/schema.graphql")
   graphql_api_name          = aws_dynamodb_table.checkin.name
+  cloudwatch_logs_role_arn  = module.appsync_cloudwatch_logs_role.role_arn
 }
 
 resource "aws_appsync_resolver" "mutation_create_checkin" {
