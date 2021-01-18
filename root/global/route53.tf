@@ -203,3 +203,12 @@ resource "aws_route53_record" "dev_api_onguard_co" {
     zone_id = "Z117KPS5GTRQ2G"
   }
 }
+
+resource "aws_route53_record" "_513b79e890dc4a68f59d4960276dd6d5" {
+  zone_id  = aws_route53_zone.onguard_co.zone_id
+  name     = "_513b79e890dc4a68f59d4960276dd6d5.dev.admin.onguard.co"
+  type     = "CNAME"
+  ttl      = "300"
+
+  records = ["_1ec04b5dcd2ebc7bad4216353ec6b361.vtqfhvjlcp.acm-validations.aws"]
+}
