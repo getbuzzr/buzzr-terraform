@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "adfs_saml_metadata_dev" {
   }
 }
 
-module "dev_admin_onguard_co" {
+module "dev_admin_onguard_website" {
   source = "../../modules/s3_static_website_cloudfront"
 
 aws_region = "us-east-1"
