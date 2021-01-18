@@ -9,6 +9,17 @@ resource "aws_s3_bucket" "adfs_saml_metadata_dev" {
   }
 }
 
+resource "aws_s3_bucket" "admin_panel_assets" {
+
+  bucket = "onguard-admin-panel-dev"
+  acl    = "public-read"
+
+  tags = {
+    Name        = "admin_panel"
+    Environment = "dev"
+  }
+}
+
 module "elb_deploy_bucket" {
   source             = "../../modules/s3_private_read"
   bucket_name          = "onguard-elb-deploy-dev"
