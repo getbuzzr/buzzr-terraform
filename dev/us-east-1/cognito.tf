@@ -75,7 +75,7 @@ module "web_app_client" {
   #default_redirect_uri
   default_redirect_uri = ""
   # add callback urls here
-  callback_urls = ["https://google.ca"]
+  callback_urls = ["https://dev.admin.onguard.co/oauthcallback"]
   # signout urls
   logout_urls = []
   depends_on  = [
