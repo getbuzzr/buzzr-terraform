@@ -1,146 +1,102 @@
 ﻿schema {
   query: Query
-  mutation: Mutation
   subscription: Subscription
 }
 
-type CheckInStatus {
-  user_id: Int!
+type CheckinStatus {
+  checkin_type: CheckinType!
+  date_created: AWSDateTime!
   group_id: Int!
-  latitude: Float
-  longitude: Float
-  accuracy: Float
-  altitude: Float
-  heading: Float
-  speed: Float
-  timestamp: AWSTimestamp
-  expires_at: AWSTimestamp
-  status: String
+  latitude: Float!
+  longitude: Float!
+  ttl: Int!
+  user_id: Int!
 }
 
-type CheckInStatusConnection {
-  items: [CheckInStatus]
+type CheckinStatusConnection {
+  items: [CheckinStatus]
   nextToken: String
 }
 
-input CreateCheckInStatusInput {
-  user_id: Int!
-  group_id: Int!
-  latitude: Float
-  longitude: Float
-  accuracy: Float
-  altitude: Float
-  heading: Float
-  speed: Float
-  timestamp: AWSTimestamp
-  expires_at: AWSTimestamp
-  status: String
-}
-
-input DeleteCheckInStatusInput {
-  user_id: Int!
-  group_id: Int!
-}
-
-type Mutation {
-  createCheckInStatus(input: CreateCheckInStatusInput!): CheckInStatus
-  updateCheckInStatus(input: UpdateCheckInStatusInput!): CheckInStatus
-  deleteCheckInStatus(input: DeleteCheckInStatusInput!): CheckInStatus
-}
-
 type Query {
-  getCheckInStatus(user_id: Int!, groupId: Int!): CheckInStatus
-  listCheckInStatus(filter: TableCheckInStatusFilterInput, limit: Int, nextToken: String): CheckInStatusConnection
+  getCheckinStatus(group_id: Int!, user_id: Int!): CheckinStatus
+  getCheckinStatusesForGroup(group_id: Int!): [CheckinStatus]
 }
 
 type Subscription {
-  onCreateCheckInStatus(user_id: Int, group_id: Int, latitude: Float, longitude: Float, accuracy: Float): CheckInStatus
-  @aws_subscribe(mutations: ["createCheckInStatus"])
-  onUpdateCheckInStatus(user_id: Int, group_id: Int, latitude: Float, longitude: Float, accuracy: Float): CheckInStatus
-  @aws_subscribe(mutations: ["updateCheckInStatus"])
-  onDeleteCheckInStatus(user_id: Int, group_id: Int, latitude: Float, longitude: Float, accuracy: Float): CheckInStatus
-  @aws_subscribe(mutations: ["deleteCheckInStatus"])
+  onCreateCheckinStatus(group_id: Int, latitude: Float, longitude: Float, user_id: Int): CheckinStatus @aws_subscribe(mutations : ["createCheckinStatus"])
+  onDeleteCheckinStatus(group_id: Int, latitude: Float, longitude: Float, user_id: Int): CheckinStatus @aws_subscribe(mutations : ["deleteCheckinStatus"])
+  onUpdateCheckinStatus(group_id: Int, latitude: Float, longitude: Float, user_id: Int): CheckinStatus @aws_subscribe(mutations : ["updateCheckinStatus"])
+}
+
+enum CheckinType {
+  emergency
+  life_check
+  off
+  safe
 }
 
 input TableBooleanFilterInput {
-  ne: Boolean
   eq: Boolean
+  ne: Boolean
 }
 
 input TableCheckInStatusFilterInput {
-  user_id: TableIntFilterInput
+  checkin_type: TableStringFilterInput
+  date_created: TableIntFilterInput
   group_id: TableIntFilterInput
   latitude: TableFloatFilterInput
   longitude: TableFloatFilterInput
-  accuracy: TableFloatFilterInput
-  altitude: TableFloatFilterInput
-  heading: TableFloatFilterInput
-  speed: TableFloatFilterInput
-  timestamp: TableIntFilterInput
-  expires_at: TableIntFilterInput
-  status: TableStringFilterInput
+  ttl: TableIntFilterInput
+  user_id: TableIntFilterInput
 }
 
 input TableFloatFilterInput {
-  ne: Float
+  between: [Float]
+  contains: Float
   eq: Float
-  le: Float
-  lt: Float
   ge: Float
   gt: Float
-  contains: Float
+  le: Float
+  lt: Float
+  ne: Float
   notContains: Float
-  between: [Float]
 }
 
 input TableIDFilterInput {
-  ne: ID
+  beginsWith: ID
+  between: [ID]
+  contains: ID
   eq: ID
-  le: ID
-  lt: ID
   ge: ID
   gt: ID
-  contains: ID
+  le: ID
+  lt: ID
+  ne: ID
   notContains: ID
-  between: [ID]
-  beginsWith: ID
 }
 
 input TableIntFilterInput {
-  ne: Int
+  between: [Int]
+  contains: Int
   eq: Int
-  le: Int
-  lt: Int
   ge: Int
   gt: Int
-  contains: Int
+  le: Int
+  lt: Int
+  ne: Int
   notContains: Int
-  between: [Int]
 }
 
 input TableStringFilterInput {
-  ne: String
+  beginsWith: String
+  between: [String]
+  contains: String
   eq: String
-  le: String
-  lt: String
   ge: String
   gt: String
-  contains: String
+  le: String
+  lt: String
+  ne: String
   notContains: String
-  between: [String]
-  beginsWith: String
-}
-
-input UpdateCheckInStatusInput {
-  user_id: Int!
-  group_id: Int!
-  latitude: Float
-  longitude: Float
-  accuracy: Float
-  altitude: Float
-  heading: Float
-  speed: Float
-  timestamp: AWSTimestamp
-  expires_at: AWSTimestamp
-  status: String
 }
