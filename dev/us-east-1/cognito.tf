@@ -60,6 +60,30 @@ module "mobile_app_client" {
     aws_cognito_identity_provider.apple
   ]
 }
+module "dev_web_client" {
+  source                       = "../../modules/saml_app_client"
+  user_pool_id                 = aws_cognito_user_pool.default.id
+  app_client_name              = "dev_web_client"
+  supported_identity_providers = [
+    local.adfs_idp_provider_name,
+    local.okta_idp_provider_name,
+    local.cognito_idp_provider_name,
+    aws_cognito_identity_provider.google.provider_name,
+    aws_cognito_identity_provider.apple.provider_name
+  ]
+  #default_redirect_uri
+  default_redirect_uri = "http://localhost:3000/login"
+  # add callback urls here
+  callback_urls = ["http://localhost:3000/login"]
+  # signout urls
+  logout_urls = []
+  depends_on  = [
+    module.adfs_dev_identity_provider,
+    local.okta_idp_provider_name,
+    aws_cognito_identity_provider.google,
+    aws_cognito_identity_provider.apple
+  ]
+}
 
 module "web_app_client" {
   source                       = "../../modules/saml_app_client"
@@ -73,9 +97,9 @@ module "web_app_client" {
     aws_cognito_identity_provider.apple.provider_name
   ]
   #default_redirect_uri
-  default_redirect_uri = ""
+  default_redirect_uri = "https://dev.admin.onguard.co/login"
   # add callback urls here
-  callback_urls = ["https://google.ca"]
+  callback_urls = ["https://dev.admin.onguard.co/login"]
   # signout urls
   logout_urls = []
   depends_on  = [
