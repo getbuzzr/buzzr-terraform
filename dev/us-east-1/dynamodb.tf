@@ -13,5 +13,12 @@ resource "aws_dynamodb_table" "checkin" {
     name = "user_id"
     type = "N"
   }
+
+  global_secondary_index {
+    hash_key = "group_id"
+    range_key = "user_id"
+    name = "GroupIdIndex"
+    projection_type = "ALL"
+  }
   
 }
