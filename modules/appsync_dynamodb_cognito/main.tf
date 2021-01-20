@@ -9,7 +9,7 @@ resource "aws_appsync_graphql_api" "default" {
   }
 
   user_pool_config {
-    default_action = "DENY"
+    default_action = "ALLOW"
     user_pool_id   = var.cognito_user_pool_id
   }
 }
