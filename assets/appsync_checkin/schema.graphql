@@ -1,4 +1,4 @@
-﻿schema {
+﻿schema @aws_api_key {
   query: Query
   subscription: Subscription
 }
