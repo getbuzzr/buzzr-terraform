@@ -25,3 +25,30 @@ resource "aws_appsync_resolver" "query_get_checkin_statuses_for_group" {
   request_template  = file("../../assets/appsync_checkin/get_checkin_statuses_for_group_resolver_request_template.vm")
   response_template = "$util.toJson($context.result.items)"
 }
+
+resource "aws_appsync_resolver" "mutation_create_checkin" {
+  type              = "Mutation"
+  field             = "createCheckinStatus"
+  api_id            = module.appsync_checkin.graphql_api_id
+  data_source       = module.appsync_checkin.dynamodb_data_source.name
+  request_template  = file("../../assets/appsync_checkin/create_checkin_resolver_request_template.vm")
+  response_template = "$util.toJson($context.result)"
+}
+
+resource "aws_appsync_resolver" "mutation_update_checkin" {
+  type              = "Mutation"
+  field             = "updateCheckinStatus"
+  api_id            = module.appsync_checkin.graphql_api_id
+  data_source       = module.appsync_checkin.dynamodb_data_source.name
+  request_template  = file("../../assets/appsync_checkin/update_checkin_resolver_request_template.vm")
+  response_template = "$util.tojson($context.result)"
+}
+
+resource "aws_appsync_resolver" "mutation_delete_checkin" {
+  type              = "Mutation"
+  field             = "deleteCheckinStatus"
+  api_id            = module.appsync_checkin.graphql_api_id
+  data_source       = module.appsync_checkin.dynamodb_data_source.name
+  request_template  = file("../../assets/appsync_checkin/delete_checkin_resolver_request_template.vm")
+  response_template = "$util.tojson($context.result)"
+}
