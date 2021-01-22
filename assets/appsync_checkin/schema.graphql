@@ -1,5 +1,6 @@
 ﻿schema @aws_api_key {
   query: Query
+  mutation: Mutation
   subscription: Subscription
 }
 
@@ -13,14 +14,15 @@ type CheckinStatus {
   user_id: Int!
 }
 
-type CheckinStatusConnection {
-  items: [CheckinStatus]
-  nextToken: String
-}
-
 type Query {
   getCheckinStatus(group_id: Int!, user_id: Int!): CheckinStatus
   getCheckinStatusesForGroup(group_id: Int!): [CheckinStatus]
+}
+
+type Mutation {
+  createCheckinStatus(input: CreateCheckinStatusInput!): CheckinStatus
+  updateCheckinStatus(input: UpdateCheckinStatusInput!): CheckinStatus
+  deleteCheckinStatus(input: DeleteCheckInStatusInput!): CheckinStatus
 }
 
 type Subscription {
@@ -34,6 +36,31 @@ enum CheckinType {
   life_check
   off
   safe
+}
+
+input CreateCheckinStatusInput {
+  checkin_type: CheckinType!
+  date_created: AWSDateTime!
+  group_id: Int!
+  latitude: Float!
+  longitude: Float!
+  ttl: Int!
+  user_id: Int!
+}
+
+input UpdateCheckinStatusInput {
+  user_id: Int!
+  group_id: Int!
+  checkin_type: CheckinType
+  date_created: AWSDateTime
+  latitude: Float
+  longitude: Float
+  ttl: Int
+}
+
+input DeleteCheckInStatusInput {
+  user_id: Int!
+  group_id: Int!
 }
 
 input TableBooleanFilterInput {
