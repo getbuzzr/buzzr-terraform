@@ -41,7 +41,7 @@ resource "aws_appsync_resolver" "mutation_update_checkin" {
   api_id            = module.appsync_checkin.graphql_api_id
   data_source       = module.appsync_checkin.dynamodb_data_source.name
   request_template  = file("../../assets/appsync_checkin/update_checkin_resolver_request_template.vm")
-  response_template = "$util.tojson($context.result)"
+  response_template = "$util.toJson($context.result)"
 }
 
 resource "aws_appsync_resolver" "mutation_delete_checkin" {
@@ -50,5 +50,5 @@ resource "aws_appsync_resolver" "mutation_delete_checkin" {
   api_id            = module.appsync_checkin.graphql_api_id
   data_source       = module.appsync_checkin.dynamodb_data_source.name
   request_template  = file("../../assets/appsync_checkin/delete_checkin_resolver_request_template.vm")
-  response_template = "$util.tojson($context.result)"
+  response_template = "$util.toJson($context.result)"
 }
