@@ -1,10 +1,10 @@
-﻿schema @aws_api_key @aws_iam {
+﻿schema @aws_api_key @aws_iam @aws_cognito_user_pools {
   query: Query
   mutation: Mutation
   subscription: Subscription
 }
 
-type CheckinStatus @aws_iam {
+type CheckinStatus @aws_iam @aws_cognito_user_pools {
   checkin_type: CheckinType!
   date_created: AWSDateTime!
   group_id: Int!
@@ -14,7 +14,7 @@ type CheckinStatus @aws_iam {
   user_id: Int!
 }
 
-type Query {
+type Query @aws_cognito_user_pools {
   getCheckinStatus(group_id: Int!, user_id: Int!): CheckinStatus
   getCheckinStatusesForGroup(group_id: Int!): [CheckinStatus]
 }
@@ -25,7 +25,7 @@ type Mutation @aws_iam {
   deleteCheckinStatus(input: DeleteCheckInStatusInput!): CheckinStatus
 }
 
-type Subscription {
+type Subscription @aws_cognito_user_pools {
   onCreateCheckinStatus(
     group_id: Int
     latitude: Float
