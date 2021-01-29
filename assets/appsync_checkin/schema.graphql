@@ -1,10 +1,10 @@
-﻿schema @aws_api_key {
+﻿schema @aws_api_key @aws_iam {
   query: Query
   mutation: Mutation
   subscription: Subscription
 }
 
-type CheckinStatus {
+type CheckinStatus @aws_iam {
   checkin_type: CheckinType!
   date_created: AWSDateTime!
   group_id: Int!
@@ -19,16 +19,31 @@ type Query {
   getCheckinStatusesForGroup(group_id: Int!): [CheckinStatus]
 }
 
-type Mutation {
+type Mutation @aws_iam {
   createCheckinStatus(input: CreateCheckinStatusInput!): CheckinStatus
   updateCheckinStatus(input: UpdateCheckinStatusInput!): CheckinStatus
   deleteCheckinStatus(input: DeleteCheckInStatusInput!): CheckinStatus
 }
 
 type Subscription {
-  onCreateCheckinStatus(group_id: Int, latitude: Float, longitude: Float, user_id: Int): CheckinStatus @aws_subscribe(mutations : ["createCheckinStatus"])
-  onDeleteCheckinStatus(group_id: Int, latitude: Float, longitude: Float, user_id: Int): CheckinStatus @aws_subscribe(mutations : ["deleteCheckinStatus"])
-  onUpdateCheckinStatus(group_id: Int, latitude: Float, longitude: Float, user_id: Int): CheckinStatus @aws_subscribe(mutations : ["updateCheckinStatus"])
+  onCreateCheckinStatus(
+    group_id: Int
+    latitude: Float
+    longitude: Float
+    user_id: Int
+  ): CheckinStatus @aws_subscribe(mutations: ["createCheckinStatus"])
+  onDeleteCheckinStatus(
+    group_id: Int
+    latitude: Float
+    longitude: Float
+    user_id: Int
+  ): CheckinStatus @aws_subscribe(mutations: ["deleteCheckinStatus"])
+  onUpdateCheckinStatus(
+    group_id: Int
+    latitude: Float
+    longitude: Float
+    user_id: Int
+  ): CheckinStatus @aws_subscribe(mutations: ["updateCheckinStatus"])
 }
 
 enum CheckinType {

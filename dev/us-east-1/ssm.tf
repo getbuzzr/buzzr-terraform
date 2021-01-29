@@ -73,3 +73,9 @@ resource "aws_ssm_parameter" "api_ecr_repo" {
   type  = "SecureString"
   value = aws_ecr_repository.onguard_dev_api.repository_url
 }
+
+resource "aws_ssm_parameter" "appsync_client_url" {
+  name  = "appsync_client_url"
+  type  = "SecureString"
+  value = module.appsync_checkin.graphql_api_uri
+}

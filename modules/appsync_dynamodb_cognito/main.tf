@@ -16,6 +16,9 @@ resource "aws_appsync_graphql_api" "default" {
   additional_authentication_provider {
     authentication_type = "API_KEY"
   }
+  additional_authentication_provider {
+    authentication_type = "AWS_IAM"
+  }
 }
 
 resource "aws_appsync_api_key" "default" {
