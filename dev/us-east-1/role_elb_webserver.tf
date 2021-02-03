@@ -97,7 +97,7 @@ data "aws_iam_policy_document" "elb_webserver_policy" {
     sid = "AllowAppsync"
 
     actions = [
-      "appsync:GraphQLs"
+      "appsync:GraphQL"
     ]
 
     resources = [
