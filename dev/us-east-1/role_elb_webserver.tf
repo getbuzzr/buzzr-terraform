@@ -93,7 +93,17 @@ data "aws_iam_policy_document" "elb_webserver_policy" {
       "*"
     ]
   }
+  statement {
+    sid = "AllowAppsync"
 
+    actions = [
+      "appsync:GraphQLs"
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
 }
 
 data "aws_iam_policy_document" "elb_webserver_arp" {
