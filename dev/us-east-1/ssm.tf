@@ -79,3 +79,36 @@ resource "aws_ssm_parameter" "appsync_client_url" {
   type  = "SecureString"
   value = module.appsync_checkin.graphql_api_uri
 }
+
+resource "aws_ssm_parameter" "gcm_api_key" {
+  name  = "gcm_api_key"
+  type  = "SecureString"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
+
+resource "aws_ssm_parameter" "apns_private_key" {
+  name  = "apns_private_key"
+  type  = "SecureString"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
+
+resource "aws_ssm_parameter" "apns_certificate" {
+  name  = "apns_certificate"
+  type  = "SecureString"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
