@@ -242,14 +242,3 @@ resource "aws_route53_record" "_7af5e38c9d8e633d7c6de20ccbcc5d3f" {
   records = ["_da2c6800be3154bfdf013187f51ccc60.hkmpvcwbzw.acm-validations.aws"]
 }
 
-resource "aws_route53_record" "dev_static_onguard_co" {
-  zone_id = aws_route53_zone.onguard_co.zone_id
-  name    = "dev.static.onguard.co"
-  type    = "A"
-
-  alias {
-    name                   = "d1eds4s76v281t.cloudfront.net"
-    zone_id                = local.cloudfront_distribution_hosted_zone_id
-    evaluate_target_health = true
-  }
-}
