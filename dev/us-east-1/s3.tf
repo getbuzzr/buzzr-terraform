@@ -12,14 +12,23 @@ resource "aws_s3_bucket" "adfs_saml_metadata_dev" {
 module "dev_admin_onguard_co" {
   source = "../../modules/s3_static_website_cloudfront"
 
-aws_region = "us-east-1"
-domain_name = "dev.admin.onguard.co"
-acm_certificate_arn = aws_acm_certificate.dev_admin_onguard_co.arn
-cicd_role_arn="arn:aws:iam::073157105290:role/cicd_role"
+  aws_region          = "us-east-1"
+  domain_name         = "dev.admin.onguard.co"
+  acm_certificate_arn = aws_acm_certificate.dev_admin_onguard_co.arn
+  admin_role_arn      = "arn:aws:iam::073157105290:role/cicd_role"
 }
 
 module "elb_deploy_bucket" {
-  source             = "../../modules/s3_private_read"
-  bucket_name          = "onguard-elb-deploy-dev"
+  source        = "../../modules/s3_private_read"
+  bucket_name   = "onguard-elb-deploy-dev"
   read_role_arn = module.elb_webserver_role.role_arn
+}
+
+module "static_dev_onguard_co" {
+  source = "../../modules/s3_static_website_cloudfront"
+
+  aws_region          = "us-east-1"
+  domain_name         = "static.dev.onguard.co"
+  acm_certificate_arn = aws_acm_certificate.dev_static_onguard_co.arn
+  admin_role_arn      = module.elb_webserver_role.role_arn
 }
