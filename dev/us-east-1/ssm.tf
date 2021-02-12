@@ -114,13 +114,3 @@ resource "aws_ssm_parameter" "apns_certificate" {
 }
 
 
-resource "aws_ssm_parameter" "static_s3_bucket_name" {
-  name  = "s3_static_bucket_name"
-  type  = "SecureString"
-  value = module.static_dev_onguard_co.s3_bucket_name
-  lifecycle {
-    ignore_changes = [
-      value
-    ]
-  }
-}
