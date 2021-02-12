@@ -233,6 +233,7 @@ resource "aws_route53_record" "ses_domain_txt_verification" {
   records = ["RacrCOYpnCIZzKm4QgokTHO0CsW1PTPu39Rs6ja3Bnw="]
 }
 
+# ACM DNS Validation
 resource "aws_route53_record" "_7af5e38c9d8e633d7c6de20ccbcc5d3f" {
   zone_id = aws_route53_zone.onguard_co.zone_id
   name    = "_7af5e38c9d8e633d7c6de20ccbcc5d3f.static.dev.onguard.co."
@@ -241,4 +242,3 @@ resource "aws_route53_record" "_7af5e38c9d8e633d7c6de20ccbcc5d3f" {
 
   records = ["_da2c6800be3154bfdf013187f51ccc60.hkmpvcwbzw.acm-validations.aws"]
 }
-
