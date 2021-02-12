@@ -1,13 +1,13 @@
 # AWS S3 bucket for static hosting
 resource "aws_s3_bucket" "website" {
-  bucket = "${var.domain_name}"
-  acl = "public-read"
+  bucket = var.domain_name
+  acl    = "public-read"
 
   cors_rule {
     allowed_headers = ["*"]
-    allowed_methods = ["PUT","POST"]
+    allowed_methods = ["PUT", "POST"]
     allowed_origins = ["*"]
-    expose_headers = ["ETag"]
+    expose_headers  = ["ETag"]
     max_age_seconds = 3000
   }
 
@@ -28,7 +28,7 @@ resource "aws_s3_bucket" "website" {
       "Sid": "FullAccessCICD",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "${var.cicd_role_arn}"
+        "AWS": "${var.admin_role_arn}"
       },
       "Action": "s3:*",
       "Resource": "arn:aws:s3:::${var.domain_name}/*"
@@ -85,6 +85,6 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   viewer_certificate {
     acm_certificate_arn = var.acm_certificate_arn
-    ssl_support_method = "sni-only"
+    ssl_support_method  = "sni-only"
   }
 }
