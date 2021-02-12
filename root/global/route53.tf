@@ -242,3 +242,15 @@ resource "aws_route53_record" "_5c686d375c93d0cc7bfb9ba28bb60f6f" {
 
   records = ["_e0a998f2809a4216f9f27a6d225e29ea.hkmpvcwbzw.acm-validations.aws"]
 }
+
+resource "aws_route53_record" "dev_static_onguard_co" {
+  zone_id = aws_route53_zone.onguard_co.zone_id
+  name    = "dev.static.onguard.co"
+  type    = "A"
+
+  alias {
+    name                   = "d2632llm00dy33.cloudfront.net"
+    zone_id                = local.cloudfront_distribution_hosted_zone_id
+    evaluate_target_health = true
+  }
+}
