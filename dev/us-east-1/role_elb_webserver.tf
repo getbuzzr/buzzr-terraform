@@ -54,7 +54,8 @@ data "aws_iam_policy_document" "elb_webserver_policy" {
       "arn:aws:ssm:us-east-1:*:parameter/checkin_queue_url",
       "arn:aws:ssm:us-east-1:*:parameter/cognito_client_pool",
       "arn:aws:ssm:us-east-1:*:parameter/api_db_database_uri",
-      "arn:aws:ssm:us-east-1:*:parameter/appsync_client_url"
+      "arn:aws:ssm:us-east-1:*:parameter/appsync_client_url",
+      "arn:aws:ssm:us-east-1:*:parameter/s3_static_bucket_name"
     ]
   }
   statement {
