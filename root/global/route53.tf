@@ -234,11 +234,11 @@ resource "aws_route53_record" "ses_domain_txt_verification" {
 }
 
 # ACM DNS Validation
-resource "aws_route53_record" "_7af5e38c9d8e633d7c6de20ccbcc5d3f" {
+resource "aws_route53_record" "_5c686d375c93d0cc7bfb9ba28bb60f6f" {
   zone_id = aws_route53_zone.onguard_co.zone_id
-  name    = "_7af5e38c9d8e633d7c6de20ccbcc5d3f.static.dev.onguard.co."
+  name    = "_5c686d375c93d0cc7bfb9ba28bb60f6f.dev.static.onguard.co"
   type    = "CNAME"
   ttl     = "300"
 
-  records = ["_da2c6800be3154bfdf013187f51ccc60.hkmpvcwbzw.acm-validations.aws"]
+  records = ["_e0a998f2809a4216f9f27a6d225e29ea.hkmpvcwbzw.acm-validations.aws"]
 }
