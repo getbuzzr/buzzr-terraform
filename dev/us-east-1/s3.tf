@@ -10,7 +10,7 @@ resource "aws_s3_bucket" "adfs_saml_metadata_dev" {
 }
 
 module "dev_admin_onguard_co" {
-  source = "../../modules/s3_static_website_cloudfront"
+  source = "../../modules/react_frontend_app_s3_cloudfront"
 
   aws_region          = "us-east-1"
   domain_name         = "dev.admin.onguard.co"
