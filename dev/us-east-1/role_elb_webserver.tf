@@ -104,7 +104,8 @@ data "aws_iam_policy_document" "elb_webserver_policy" {
     resources = [
       "*"
     ]
-  
+  }
+
   statement {
     sid = "AllowSES"
 
@@ -115,7 +116,7 @@ data "aws_iam_policy_document" "elb_webserver_policy" {
     resources = [
       "*"
     ]
-  }}
+  }
 
 }
 
