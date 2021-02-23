@@ -104,7 +104,19 @@ data "aws_iam_policy_document" "elb_webserver_policy" {
     resources = [
       "*"
     ]
-  }
+  
+  statement {
+    sid = "AllowSES"
+
+    actions = [
+      "ses:SendEmail"
+    ]
+
+    resources = [
+      "*"
+    ]
+  }}
+
 }
 
 data "aws_iam_policy_document" "elb_webserver_arp" {
