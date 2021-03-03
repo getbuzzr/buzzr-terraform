@@ -1,49 +1,13 @@
-﻿schema @aws_api_key @aws_iam @aws_cognito_user_pools {
-  query: Query
-  mutation: Mutation
-  subscription: Subscription
-}
-
-type CheckinStatus @aws_iam @aws_cognito_user_pools {
+﻿type CheckinStatus @aws_iam
+@aws_cognito_user_pools {
   checkin_type: CheckinType!
   date_created: AWSDateTime!
+  last_updated:AWSDateTime!
   group_id: Int!
   latitude: Float!
   longitude: Float!
   ttl: Int!
   user_id: Int!
-}
-
-type Query @aws_cognito_user_pools {
-  getCheckinStatus(group_id: Int!, user_id: Int!): CheckinStatus
-  getCheckinStatusesForGroup(group_id: Int!): [CheckinStatus]
-}
-
-type Mutation @aws_iam {
-  createCheckinStatus(input: CreateCheckinStatusInput!): CheckinStatus
-  updateCheckinStatus(input: UpdateCheckinStatusInput!): CheckinStatus
-  deleteCheckinStatus(input: DeleteCheckInStatusInput!): CheckinStatus
-}
-
-type Subscription @aws_cognito_user_pools {
-  onCreateCheckinStatus(
-    group_id: Int
-    latitude: Float
-    longitude: Float
-    user_id: Int
-  ): CheckinStatus @aws_subscribe(mutations: ["createCheckinStatus"])
-  onDeleteCheckinStatus(
-    group_id: Int
-    latitude: Float
-    longitude: Float
-    user_id: Int
-  ): CheckinStatus @aws_subscribe(mutations: ["deleteCheckinStatus"])
-  onUpdateCheckinStatus(
-    group_id: Int
-    latitude: Float
-    longitude: Float
-    user_id: Int
-  ): CheckinStatus @aws_subscribe(mutations: ["updateCheckinStatus"])
 }
 
 enum CheckinType {
@@ -56,6 +20,7 @@ enum CheckinType {
 input CreateCheckinStatusInput {
   checkin_type: CheckinType!
   date_created: AWSDateTime!
+  last_updated:AWSDateTime!
   group_id: Int!
   latitude: Float!
   longitude: Float!
@@ -66,6 +31,7 @@ input CreateCheckinStatusInput {
 input UpdateCheckinStatusInput {
   user_id: Int!
   group_id: Int!
+  last_updated:AWSDateTime!
   checkin_type: CheckinType
   date_created: AWSDateTime
   latitude: Float
@@ -76,6 +42,35 @@ input UpdateCheckinStatusInput {
 input DeleteCheckInStatusInput {
   user_id: Int!
   group_id: Int!
+}
+
+type Mutation @aws_iam {
+  createCheckinStatus(input: CreateCheckinStatusInput!): CheckinStatus
+  updateCheckinStatus(input: UpdateCheckinStatusInput!): CheckinStatus
+  deleteCheckinStatus(input: DeleteCheckInStatusInput!): CheckinStatus
+}
+
+type Query @aws_cognito_user_pools {
+  getCheckinStatus(group_id: Int!, user_id: Int!): CheckinStatus
+  getCheckinStatusesForGroup(group_id: Int!): [CheckinStatus]
+}
+
+type Subscription @aws_cognito_user_pools {
+  onCreateCheckinStatus(
+    group_id: Int,
+    user_id: Int
+  ): CheckinStatus
+  @aws_subscribe(mutations: ["createCheckinStatus"])
+  onDeleteCheckinStatus(
+    group_id: Int,
+    user_id: Int
+  ): CheckinStatus
+  @aws_subscribe(mutations: ["deleteCheckinStatus"])
+  onUpdateCheckinStatus(
+    group_id: Int,
+    user_id: Int
+  ): CheckinStatus
+  @aws_subscribe(mutations: ["updateCheckinStatus"])
 }
 
 input TableBooleanFilterInput {
@@ -141,4 +136,10 @@ input TableStringFilterInput {
   lt: String
   ne: String
   notContains: String
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
 }
