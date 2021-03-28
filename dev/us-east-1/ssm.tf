@@ -47,7 +47,9 @@ data "aws_ssm_parameter" "api_db_server_password" {
 resource "aws_ssm_parameter" "api_db_database_uri" {
   name  = "api_db_database_uri"
   type  = "SecureString"
-  value = "mysql://${module.api_db_server.master_username}:${data.aws_ssm_parameter.api_db_server_password.value}@${module.api_db_server.endpoint}/${module.api_db_server.database_name}"
+  value = ""
+
+  # value = "mysql://${module.api_db_server.master_username}:${data.aws_ssm_parameter.api_db_server_password.value}@${module.api_db_server.endpoint}/${module.api_db_server.database_name}"
 }
 
 resource "aws_ssm_parameter" "cognito_client_pool" {
