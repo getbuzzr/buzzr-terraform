@@ -11,7 +11,7 @@ resource "aws_db_subnet_group" "db_subnet_group" {
 
 module "api_db_server" {
   source               = "../../modules/serverless_aurora_rds"
-  db_name              = "onguardapi"
+  db_name              = "buzzrdev"
   db_subnet_group      = aws_db_subnet_group.db_subnet_group.name
   db_password_ssm_path = "api_db_server_password"
   allowed_security_groups = [aws_security_group.db_server.id]

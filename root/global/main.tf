@@ -6,9 +6,8 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "onguard-root-terraform-state"
+    bucket = "buzzr-terraform-state-root"
     key    = "us-east-1/terraform.state"
     region = "us-east-1"
   }
 }
-

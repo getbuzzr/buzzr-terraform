@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "onguard-dev-terraform-state"
+    bucket = "buzzr-terraform-state-dev"
     key    = "us-east-1/terraform.state"
     region = "us-east-1"
   }

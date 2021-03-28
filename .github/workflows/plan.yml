@@ -1,17 +1,17 @@
 # workflow only runs on pull request
 name: Terraform plan
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   pull_request:
-    branches: [ master ]
+    branches: [master]
     paths:
-      - 'dev/**'
-      - 'prod/**'
-      - 'staging/**'
-      - 'root/**'
-      - 'modules/**'
-      - 'assets/**'
+      - "dev/**"
+      - "prod/**"
+      - "staging/**"
+      - "root/**"
+      - "modules/**"
+      - "assets/**"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -23,10 +23,10 @@ jobs:
     steps:
       # Checks-out repo
       - uses: actions/checkout@v2
-      
+
       # install terraform
       - uses: hashicorp/setup-terraform@v1
-      
+
       # get path changed
       - uses: dorny/paths-filter@v2
         id: edited_files
@@ -43,7 +43,7 @@ jobs:
             common:
               - 'modules/**'
               - 'assets/**'
-      
+
       # install aws with configure on env vars
       - name: Configure AWS Dev
         if: steps.edited_files.outputs.dev == 'true' || steps.edited_files.outputs.common == 'true'
@@ -51,7 +51,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
-          role-to-assume: arn:aws:iam::073157105290:role/dev_admin
+          role-to-assume: arn:aws:iam::824611589741:role/dev_admin
           role-session-name: terraform-dev
           aws-region: us-east-1
           role-duration-seconds: 1200
@@ -63,69 +63,69 @@ jobs:
           cd dev/us-east-1
           terraform init
           terraform plan
-      
+
       - name: Terraform plan dev global
         if: steps.edited_files.outputs.dev == 'true' || steps.edited_files.outputs.common == 'true'
         run: |
           cd dev/global
           terraform init
           terraform plan
-      
-    # install aws with configure on env vars
+
+      # install aws with configure on env vars
       - name: Configure AWS Staging
         if: steps.edited_files.outputs.staging == 'true' || steps.edited_files.outputs.common == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
-          role-to-assume: arn:aws:iam::732983264044:role/staging_admin
+          role-to-assume: arn:aws:iam::096377267832:role/stage_admin
           role-session-name: terraform-staging
           aws-region: us-east-1
           role-duration-seconds: 1200
 
-    # check if staging edited
+      # check if staging edited
       - name: Terraform plan staging us-east-1
         if: steps.edited_files.outputs.staging == 'true' || steps.edited_files.outputs.common == 'true'
         run: |
           cd staging/us-east-1
           terraform init 
           terraform plan
-      
+
       - name: Terraform plan staging global
         if: steps.edited_files.outputs.staging == 'true' || steps.edited_files.outputs.common == 'true'
         run: |
           cd staging/global
           terraform init 
           terraform plan
-    
-    # install aws with configure on env vars
+
+      # install aws with configure on env vars
       - name: Configure AWS Prod
         if: steps.edited_files.outputs.prod == 'true' || steps.edited_files.outputs.common == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET }}
-          role-to-assume: arn:aws:iam::995213493585:role/prod_admin
+          role-to-assume: arn:aws:iam::980636768267:role/prod_admin
           role-session-name: terraform-prod
           aws-region: us-east-1
           role-duration-seconds: 1200
-    
-    # check if prod edited
+
+      # check if prod edited
       - name: Terraform plan prod us-east-1
         if: steps.edited_files.outputs.prod == 'true' || steps.edited_files.outputs.common == 'true'
         run: |
           cd prod/us-east-1
           terraform init
           terraform plan
-     
+
       - name: Terraform plan prod global
         if: steps.edited_files.outputs.prod == 'true' || steps.edited_files.outputs.common == 'true'
         run: |
           cd prod/global
           terraform init
           terraform plan
-    
-    # install aws with configure on env vars
+
+      # install aws with configure on env vars
       - name: Configure AWS Root
         if: steps.edited_files.outputs.root == 'true' || steps.edited_files.outputs.common == 'true'
         uses: aws-actions/configure-aws-credentials@v1
@@ -135,8 +135,8 @@ jobs:
           role-session-name: terraform-root
           aws-region: us-east-1
           role-duration-seconds: 1200
-    
-    # check if root edited
+
+      # check if root edited
       - name: Terraform plan root
         if: steps.edited_files.outputs.root == 'true' || steps.edited_files.outputs.common == 'true'
         run: |

@@ -4,7 +4,7 @@ resource "aws_s3_bucket" "default" {
   acl    = "private"
 
   tags = {
-    Name        = "onguard api"
+    Name        = "buzzr api"
     Environment = "dev"
   }
 }

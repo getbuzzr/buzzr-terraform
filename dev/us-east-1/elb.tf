@@ -3,9 +3,9 @@ resource "aws_iam_instance_profile" "ec2_instance_profile" {
   role = module.elb_webserver_role.name
 }
 
-resource "aws_elastic_beanstalk_application" "onguard_dev" {
-  name        = "onguard-dev-app"
-  description = "The elb environment hosting onguard api"
+resource "aws_elastic_beanstalk_application" "buzzr_dev" {
+  name        = "buzzr-dev-app"
+  description = "The elb environment hosting buzzr api"
 
   appversion_lifecycle {
     service_role          = module.elb_webserver_role.role_arn
@@ -13,16 +13,16 @@ resource "aws_elastic_beanstalk_application" "onguard_dev" {
     delete_source_from_s3 = true
   }
 }
-resource "aws_elastic_beanstalk_application_version" "onguard_dev_application" {
+resource "aws_elastic_beanstalk_application_version" "buzzr_dev_application" {
   name        = "application_verion"
-  application = aws_elastic_beanstalk_application.onguard_dev.name
+  application = aws_elastic_beanstalk_application.buzzr_dev.name
   description = "application version created by terraform"
   bucket      = module.elb_deploy_bucket.id
   key         = "docker_deploy.zip"
 }
-resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
-  name                = "onguard-dev-env"
-  application         = aws_elastic_beanstalk_application.onguard_dev.name
+resource "aws_elastic_beanstalk_environment" "buzzr_dev_env" {
+  name                = "buzzr-dev-env"
+  application         = aws_elastic_beanstalk_application.buzzr_dev.name
   solution_stack_name = "64bit Amazon Linux 2 v3.2.3 running Docker"
 
   setting {
@@ -152,11 +152,11 @@ resource "aws_elastic_beanstalk_environment" "onguard_dev_env" {
       name      = "Protocol"
       value     = "HTTPS"
     }
-  setting {
-      namespace = "aws:elbv2:listener:443"
-      name      = "SSLCertificateArns"
-      value     = aws_acm_certificate.dev_api_onguard_co.arn
-    }
+  # setting {
+  #     namespace = "aws:elbv2:listener:443"
+  #     name      = "SSLCertificateArns"
+  #     value     = aws_acm_certificate.buzzr.arn
+  #   }
   setting {
       namespace = "aws:elbv2:listener:443"
       name      = "SSLPolicy"

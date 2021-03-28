@@ -71,7 +71,7 @@ resource "aws_ssm_parameter" "checkin_queue_url" {
 resource "aws_ssm_parameter" "api_ecr_repo" {
   name  = "api_ecr_repo"
   type  = "SecureString"
-  value = aws_ecr_repository.onguard_dev_api.repository_url
+  value = aws_ecr_repository.buzzr_dev_api.repository_url
 }
 
 resource "aws_ssm_parameter" "appsync_client_url" {
@@ -117,7 +117,7 @@ resource "aws_ssm_parameter" "apns_certificate" {
 resource "aws_ssm_parameter" "static_s3_bucket_name" {
   name  = "s3_static_bucket_name"
   type  = "SecureString"
-  value = module.dev_static_onguard_co.s3_bucket_name
+  value = module.dev_static_getbuzzr_co.s3_bucket_name
   lifecycle {
     ignore_changes = [
       value

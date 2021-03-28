@@ -1,5 +1,5 @@
-resource "aws_acm_certificate" "oauth_onguard_co" {
-  domain_name       = "oauth.onguard.co"
+resource "aws_acm_certificate" "oauth_getbuzzr_co" {
+  domain_name       = "oauth.getbuzzr.co"
   validation_method = "DNS"
 
   lifecycle {
@@ -7,8 +7,8 @@ resource "aws_acm_certificate" "oauth_onguard_co" {
   }
 }
 
-resource "aws_acm_certificate" "auth_onguard_co" {
-  domain_name       = "auth.onguard.co"
+resource "aws_acm_certificate" "auth_getbuzzr_co" {
+  domain_name       = "auth.getbuzzr.co"
   validation_method = "DNS"
 
   lifecycle {

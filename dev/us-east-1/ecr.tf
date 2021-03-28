@@ -1,5 +1,5 @@
-resource "aws_ecr_repository" "onguard_dev_api" {
-  name                 = "onguard_dev_api"
+resource "aws_ecr_repository" "buzzr_dev_api" {
+  name                 = "buzzr_dev_api"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -7,8 +7,8 @@ resource "aws_ecr_repository" "onguard_dev_api" {
   }
 }
 
-resource "aws_ecr_lifecycle_policy" "onguard_dev_api_policy" {
-  repository = aws_ecr_repository.onguard_dev_api.name
+resource "aws_ecr_lifecycle_policy" "buzzr_dev_api_policy" {
+  repository = aws_ecr_repository.buzzr_dev_api.name
 
   policy = <<EOF
 {

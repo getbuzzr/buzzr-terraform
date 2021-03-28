@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "onguard-prod-terraform-state"
+    bucket = "buzzr-terraform-state-prod"
     key    = "global/terraform.state"
     region = "us-east-1"
   }
@@ -16,7 +16,7 @@ provider "aws" {
   profile = "default"
 
   assume_role {
-    role_arn = "arn:aws:iam::995213493585:role/prod_admin"
+    role_arn = "arn:aws:iam::980636768267:role/prod_admin"
   }
 
 }
