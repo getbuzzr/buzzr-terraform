@@ -11,7 +11,7 @@ locals {
 }
 
 resource "aws_cognito_user_pool" "default" {
-  name                     = "getbuzze-user-pool"
+  name                     = "getbuzzer-user-pool"
   auto_verified_attributes = ["email"]
   username_attributes      = ["email"]
   mfa_configuration        = "OPTIONAL"
@@ -32,7 +32,6 @@ resource "aws_cognito_user_pool" "default" {
 resource "aws_cognito_user_pool_domain" "default" {
   user_pool_id    = aws_cognito_user_pool.default.id
   domain          = "dev.auth.getbuzzr.co"
-  # certificate_arn = aws_acm_certificate..arn
 }
 
 module "mobile_app_client" {
