@@ -47,7 +47,9 @@ data "aws_ssm_parameter" "api_db_server_password" {
 resource "aws_ssm_parameter" "api_db_database_uri" {
   name  = "api_db_database_uri"
   type  = "SecureString"
-  value = "mysql://${module.api_db_server.master_username}:${data.aws_ssm_parameter.api_db_server_password.value}@${module.api_db_server.endpoint}/${module.api_db_server.database_name}"
+  value = ""
+
+  # value = "mysql://${module.api_db_server.master_username}:${data.aws_ssm_parameter.api_db_server_password.value}@${module.api_db_server.endpoint}/${module.api_db_server.database_name}"
 }
 
 resource "aws_ssm_parameter" "cognito_client_pool" {
@@ -56,28 +58,11 @@ resource "aws_ssm_parameter" "cognito_client_pool" {
   value = aws_cognito_user_pool.default.id
 }
 
-resource "aws_ssm_parameter" "checkin_dynamo_table_name" {
-  name  = "checkin_dynamo_table_name"
-  type  = "SecureString"
-  value = aws_dynamodb_table.checkin.name
-}
-
-resource "aws_ssm_parameter" "checkin_queue_url" {
-  name  = "checkin_queue_url"
-  type  = "SecureString"
-  value = aws_sqs_queue.checkin_queue.id
-}
 
 resource "aws_ssm_parameter" "api_ecr_repo" {
   name  = "api_ecr_repo"
   type  = "SecureString"
   value = aws_ecr_repository.buzzr_dev_api.repository_url
-}
-
-resource "aws_ssm_parameter" "appsync_client_url" {
-  name  = "appsync_client_url"
-  type  = "SecureString"
-  value = module.appsync_checkin.graphql_api_uri
 }
 
 resource "aws_ssm_parameter" "gcm_api_key" {
@@ -114,13 +99,4 @@ resource "aws_ssm_parameter" "apns_certificate" {
 }
 
 
-resource "aws_ssm_parameter" "static_s3_bucket_name" {
-  name  = "s3_static_bucket_name"
-  type  = "SecureString"
-  value = module.dev_static_getbuzzr_co.s3_bucket_name
-  lifecycle {
-    ignore_changes = [
-      value
-    ]
-  }
-}
+
