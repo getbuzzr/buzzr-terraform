@@ -29,10 +29,11 @@ resource "aws_cognito_user_pool" "default" {
     post_confirmation = module.cognito_postsignup_trigger.arn
   }
 }
-resource "aws_cognito_user_pool_domain" "default" {
-  user_pool_id    = aws_cognito_user_pool.default.id
-  domain          = "dev.auth.getbuzzr.co"
-}
+# resource "aws_cognito_user_pool_domain" "default" {
+#   user_pool_id    = aws_cognito_user_pool.default.id
+#   domain          = "dev.auth.getbuzzr.co"
+# certificate_arn = aws_acm_certificate.dev_auth_getbuzzr_co.arn
+# }
 
 module "mobile_app_client" {
   source                       = "../../modules/saml_app_client"
