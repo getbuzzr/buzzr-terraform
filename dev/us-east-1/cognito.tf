@@ -55,19 +55,6 @@ module "mobile_app_client" {
   ]
 }
 
-module "okta_dev_identity_provider" {
-  source = "../../modules/saml_identity_provider"
-  # mapping attributes used to handle attributes returned by saml
-  attribute_mapping = {
-    email       = "email"
-    given_name  = "firstName"
-    family_name = "lastName"
-  }
-  provider_name = local.okta_idp_provider_name
-  user_pool_id  = aws_cognito_user_pool.default.id
-  metadata_url  = "https://dev-4181175.okta.com/app/exk1lkocfKhH8ytxx5d6/sso/saml/metadata"
-
-}
 
 resource "aws_cognito_identity_provider" "google" {
   user_pool_id  = aws_cognito_user_pool.default.id
