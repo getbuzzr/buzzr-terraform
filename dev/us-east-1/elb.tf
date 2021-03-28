@@ -142,16 +142,16 @@ resource "aws_elastic_beanstalk_environment" "buzzr_dev_env" {
     value     = 30
   }
 # =========== SSL
-  setting {
-    namespace = "aws:elbv2:listener:443"
-    name      = "ListenerEnabled"
-    value     = true
-  }
-  setting {
-      namespace = "aws:elbv2:listener:443"
-      name      = "Protocol"
-      value     = "HTTPS"
-    }
+  # setting {
+  #   namespace = "aws:elbv2:listener:443"
+  #   name      = "ListenerEnabled"
+  #   value     = true
+  # }
+  # setting {
+  #     namespace = "aws:elbv2:listener:443"
+  #     name      = "Protocol"
+  #     value     = "HTTPS"
+  #   }
   # setting {
   #     namespace = "aws:elbv2:listener:443"
   #     name      = "SSLCertificateArns"
