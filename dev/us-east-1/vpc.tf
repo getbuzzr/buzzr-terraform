@@ -7,17 +7,17 @@ resource "aws_default_vpc" "default" {
 }
 
 #  Subnet definitions
-resource "aws_subnet" "nat_gateway_subnet" {
-  vpc_id            = aws_default_vpc.default.id
-  cidr_block        = "172.31.6.0/24"
-  availability_zone = "us-east-1a"
+# resource "aws_subnet" "nat_gateway_subnet" {
+#   vpc_id            = aws_default_vpc.default.id
+#   cidr_block        = "172.31.6.0/24"
+#   availability_zone = "us-east-1a"
 
-  tags = {
-    Name    = "nat_gateway_subnet"
-    Service = "NAT Gateway"
-    type    = "public"
-  }
-}
+#   tags = {
+#     Name    = "nat_gateway_subnet"
+#     Service = "NAT Gateway"
+#     type    = "public"
+#   }
+# }
 resource "aws_subnet" "public1" {
   vpc_id            = aws_default_vpc.default.id
   cidr_block        = "172.31.0.0/24"
