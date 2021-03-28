@@ -7,13 +7,11 @@ data "aws_ssm_parameter" "apple_client_private_key" {
 }
 
 locals {
-  okta_idp_provider_name = "Okta"
-  adfs_idp_provider_name = "ADFS"
   cognito_idp_provider_name = "COGNITO"
 }
 
 resource "aws_cognito_user_pool" "default" {
-  name                     = "onguard-user-pool"
+  name                     = "getbuzze-user-pool"
   auto_verified_attributes = ["email"]
   username_attributes      = ["email"]
   mfa_configuration        = "OPTIONAL"
@@ -33,8 +31,8 @@ resource "aws_cognito_user_pool" "default" {
 }
 resource "aws_cognito_user_pool_domain" "default" {
   user_pool_id    = aws_cognito_user_pool.default.id
-  domain          = "dev.auth.onguard.co"
-  certificate_arn = aws_acm_certificate.dev_auth_onguard_co.arn
+  domain          = "dev.auth.getbuzzr.co"
+  # certificate_arn = aws_acm_certificate..arn
 }
 
 module "mobile_app_client" {
@@ -42,74 +40,20 @@ module "mobile_app_client" {
   user_pool_id                 = aws_cognito_user_pool.default.id
   app_client_name              = "mobile_app_client"
   supported_identity_providers = [
-    local.adfs_idp_provider_name,
-    local.okta_idp_provider_name,
     local.cognito_idp_provider_name,
     aws_cognito_identity_provider.google.provider_name,
     aws_cognito_identity_provider.apple.provider_name
   ]
-  default_redirect_uri = "https://oauth.onguard.co/"
+  default_redirect_uri = "https://oauth.getbuzzr.co/"
   # add callback urls here
-  callback_urls = ["https://oauth.onguard.co/"]
+  callback_urls = ["https://oauth.getbuzzr.co/"]
   # signout urls
   logout_urls = []
   depends_on  = [
-    module.adfs_dev_identity_provider,
-    local.okta_idp_provider_name,
     aws_cognito_identity_provider.google,
     aws_cognito_identity_provider.apple
   ]
 }
-module "dev_web_client" {
-  source                       = "../../modules/saml_app_client"
-  user_pool_id                 = aws_cognito_user_pool.default.id
-  app_client_name              = "dev_web_client"
-  supported_identity_providers = [
-    local.adfs_idp_provider_name,
-    local.okta_idp_provider_name,
-    local.cognito_idp_provider_name,
-    aws_cognito_identity_provider.google.provider_name,
-    aws_cognito_identity_provider.apple.provider_name
-  ]
-  #default_redirect_uri
-  default_redirect_uri = "http://localhost:3000/login"
-  # add callback urls here
-  callback_urls = ["http://localhost:3000/login"]
-  # signout urls
-  logout_urls = []
-  depends_on  = [
-    module.adfs_dev_identity_provider,
-    local.okta_idp_provider_name,
-    aws_cognito_identity_provider.google,
-    aws_cognito_identity_provider.apple
-  ]
-}
-
-module "web_app_client" {
-  source                       = "../../modules/saml_app_client"
-  user_pool_id                 = aws_cognito_user_pool.default.id
-  app_client_name              = "web_app_client"
-  supported_identity_providers = [
-    local.adfs_idp_provider_name,
-    local.okta_idp_provider_name,
-    local.cognito_idp_provider_name,
-    aws_cognito_identity_provider.google.provider_name,
-    aws_cognito_identity_provider.apple.provider_name
-  ]
-  #default_redirect_uri
-  default_redirect_uri = "https://dev.admin.onguard.co/login"
-  # add callback urls here
-  callback_urls = ["https://dev.admin.onguard.co/login"]
-  # signout urls
-  logout_urls = []
-  depends_on  = [
-    module.adfs_dev_identity_provider,
-    local.okta_idp_provider_name,
-    aws_cognito_identity_provider.google,
-    aws_cognito_identity_provider.apple
-  ]
-}
-
 
 module "okta_dev_identity_provider" {
   source = "../../modules/saml_identity_provider"
@@ -122,21 +66,6 @@ module "okta_dev_identity_provider" {
   provider_name = local.okta_idp_provider_name
   user_pool_id  = aws_cognito_user_pool.default.id
   metadata_url  = "https://dev-4181175.okta.com/app/exk1lkocfKhH8ytxx5d6/sso/saml/metadata"
-
-}
-
-module "adfs_dev_identity_provider" {
-  source = "../../modules/saml_identity_provider"
-  # mapping attributes used to handle attributes returned by saml
-  attribute_mapping = {
-    email       = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
-    given_name  = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"
-    family_name = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"
-
-  }
-  provider_name = local.adfs_idp_provider_name
-  user_pool_id  = aws_cognito_user_pool.default.id
-  metadata_url  = "https://adfs-saml-metadata-dev.s3.amazonaws.com/adfs_test.xml"
 
 }
 
@@ -165,7 +94,7 @@ resource "aws_cognito_identity_provider" "apple" {
   provider_type = "SignInWithApple"
 
   provider_details = {
-    client_id        = "com.sensnet.onguard.auth"
+    client_id        = "com.sensnet.buzzr.auth"
     team_id          = "E4M7QG8VQK"
     key_id           = "CGX5ZW85KD"
     private_key      = data.aws_ssm_parameter.apple_client_private_key.value
