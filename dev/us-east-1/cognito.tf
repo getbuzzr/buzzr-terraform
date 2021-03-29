@@ -42,7 +42,8 @@ module "mobile_app_client" {
   supported_identity_providers = [
     local.cognito_idp_provider_name,
     aws_cognito_identity_provider.google.provider_name,
-    aws_cognito_identity_provider.apple.provider_name
+    aws_cognito_identity_provider.apple.provider_name,
+    aws_cognito_identity_provider.facebook.provider_name
   ]
   default_redirect_uri = "https://oauth.getbuzzr.co/"
   # add callback urls here
