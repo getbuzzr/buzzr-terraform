@@ -6,6 +6,9 @@ data "aws_ssm_parameter" "apple_client_private_key" {
   name = aws_ssm_parameter.cognito_apple_client_private_key.name
 }
 
+data "aws_ssm_parameter" "facebook_client_secret" {
+  name = aws_ssm_parameter.cognito_facebook_client_secret.name
+}
 locals {
   cognito_idp_provider_name = "COGNITO"
 }
@@ -42,7 +45,8 @@ module "mobile_app_client" {
   supported_identity_providers = [
     local.cognito_idp_provider_name,
     aws_cognito_identity_provider.google.provider_name,
-    aws_cognito_identity_provider.apple.provider_name
+    aws_cognito_identity_provider.apple.provider_name,
+    aws_cognito_identity_provider.facebook.provider_name
   ]
   default_redirect_uri = "https://oauth.getbuzzr.co/"
   # add callback urls here
@@ -72,6 +76,28 @@ resource "aws_cognito_identity_provider" "google" {
     given_name  = "given_name"
     family_name = "family_name"
     username    = "sub"
+    picture    = "picture"
+  }
+}
+
+resource "aws_cognito_identity_provider" "facebook" {
+  user_pool_id  = aws_cognito_user_pool.default.id
+  provider_name = "Facebook"
+  provider_type = "Facebook"
+
+  provider_details = {
+    authorize_scopes = "public_profile,email"
+    client_id        = "761770857810778"
+    client_secret    = data.aws_ssm_parameter.facebook_client_secret.value
+    api_version = 6
+  }
+
+  attribute_mapping = {
+    email       = "email"
+    first_name  = "given_name"
+    last_name = "family_name"
+    picture    = "picture"
+    id = "sub"
   }
 }
 
