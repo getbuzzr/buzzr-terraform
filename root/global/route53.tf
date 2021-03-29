@@ -6,15 +6,15 @@ resource "aws_route53_zone" "getbuzzr_co" {
   name = "getbuzzr.co"
 }
 
-resource "aws_route53_record" "root" {
-  zone_id = aws_route53_zone.getbuzzr_co.zone_id
-  name    = "getbuzzr.co"
-  type    = "A"
-  ttl     = "300"
+# resource "aws_route53_record" "root" {
+#   zone_id = aws_route53_zone.getbuzzr_co.zone_id
+#   name    = "getbuzzr.co"
+#   type    = "A"
+#   ttl     = "300"
 
-  records = [""]
+#   records = [""]
 
-}
+# }
 
 resource "aws_route53_record" "www" {
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
