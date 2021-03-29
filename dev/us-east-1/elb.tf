@@ -46,7 +46,7 @@ resource "aws_elastic_beanstalk_environment" "buzzr_dev_env" {
   setting {
     namespace = "aws:ec2:vpc"
     name      = "AssociatePublicIpAddress"
-    value     = false
+    value     = true
   }
 
   setting {
