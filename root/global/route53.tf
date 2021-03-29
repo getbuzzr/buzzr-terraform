@@ -73,7 +73,7 @@ resource "aws_route53_record" "_a3cdea48dc60141142f994b54859a844_dev_admin_getbu
 
 }
 
-resource "aws_route53_record" "_2ff33e99df695acfb52ea328f2a3d50d_dev_static_getbuzzr.co" {
+resource "aws_route53_record" "_2ff33e99df695acfb52ea328f2a3d50d_dev_static_getbuzzr_co" {
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
   name    = "_2ff33e99df695acfb52ea328f2a3d50d.dev.static.getbuzzr.co."
   type    = "CNAME"
