@@ -21,6 +21,17 @@ resource "aws_ssm_parameter" "cognito_google_client_secret" {
   }
 }
 
+resource "aws_ssm_parameter" "cognito_facebook_client_secret" {
+  name  = "cognito_facebook_client_secret"
+  type  = "SecureString"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
+
 resource "aws_ssm_parameter" "cognito_apple_client_private_key" {
   name = "cognito_apple_client_private_key"
   type = "SecureString"
