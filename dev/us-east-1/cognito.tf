@@ -6,6 +6,9 @@ data "aws_ssm_parameter" "apple_client_private_key" {
   name = aws_ssm_parameter.cognito_apple_client_private_key.name
 }
 
+data "aws_ssm_parameter" "facebook_client_secret" {
+  name = aws_ssm_parameter.cognito_facebook_client_secret.name
+}
 locals {
   cognito_idp_provider_name = "COGNITO"
 }
@@ -65,7 +68,7 @@ resource "aws_cognito_identity_provider" "google" {
   provider_details = {
     authorize_scopes = "email profile openid"
     client_id        = "834623945817-hnf8d5ttiaqsp87lcuc2pdpf1qm7sotb.apps.googleusercontent.com"
-    client_secret    = data.aws_ssm_parameter.cognito_google_client_secret.value
+    client_secret    = data.aws_ssm_parameter.google_client_secret.value
   }
 
   attribute_mapping = {
@@ -85,7 +88,7 @@ resource "aws_cognito_identity_provider" "facebook" {
   provider_details = {
     authorize_scopes = "public_profile,email"
     client_id        = "761770857810778"
-    client_secret    = data.aws_ssm_parameter.cognito_facebook_client_secret.value
+    client_secret    = data.aws_ssm_parameter.facebook_client_secret.value
     api_version = 6
   }
 
