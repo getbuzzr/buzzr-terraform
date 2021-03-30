@@ -29,7 +29,7 @@ resource "aws_route53_record" "www" {
 resource "aws_route53_record" "ns" {
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
   name    = "getbuzzr.co"
-  type    = "ns"
+  type    = "NS"
   ttl     = "300"
 
   records = ["ns-794.awsdns-35.net",
