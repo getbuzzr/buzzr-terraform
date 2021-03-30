@@ -26,6 +26,19 @@ resource "aws_route53_record" "www" {
 
 }
 
+resource "aws_route53_record" "ns" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "getbuzzr.co"
+  type    = "ns"
+  ttl     = "300"
+
+  records = ["ns-794.awsdns-35.net",
+    "ns-65.awsdns-08.com",
+    "ns-1095.awsdns-08.org",
+    "ns-1909.awsdns-46.co.uk"
+  ]
+}
+
 
 resource "aws_route53_record" "mx" {
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
