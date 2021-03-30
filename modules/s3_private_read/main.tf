@@ -19,9 +19,8 @@ resource "aws_s3_bucket_policy" "b" {
             "Sid": "deploycicd",
             "Effect": "Allow",
             "Principal": {
-                "AWS": ["arn:aws:iam::732983264044:role/cicd_role",
-                        "arn:aws:iam::073157105290:role/cicd_role",
-                        "arn:aws:iam::995213493585:role/cicd_role"]
+                "AWS": ["arn:aws:iam::824611589741:role/cicd_role"
+                        ]
             },
             "Action": "s3:*",
             "Resource": [
