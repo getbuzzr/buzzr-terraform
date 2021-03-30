@@ -77,7 +77,7 @@ resource "aws_elastic_beanstalk_environment" "buzzr_dev_env" {
   }
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
-    name      = "SecurityGroup"
+    name      = "SecurityGroups"
     value     = aws_security_group.web_server.id
   }
   setting {
