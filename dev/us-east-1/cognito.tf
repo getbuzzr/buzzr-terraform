@@ -89,7 +89,7 @@ resource "aws_cognito_identity_provider" "facebook" {
     authorize_scopes = "public_profile,email"
     client_id        = "761770857810778"
     client_secret    = data.aws_ssm_parameter.facebook_client_secret.value
-    api_version = 6
+    api_version = "v6.0"
   }
 
   attribute_mapping = {
