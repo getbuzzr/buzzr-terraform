@@ -23,5 +23,4 @@ module "api_db_server" {
   db_password_ssm_path = "api_db_server_password"
   allowed_security_groups = [aws_security_group.db_server.id]
   max_capacity_unit    = 1
-  skip_final_snapshot = true
 }
