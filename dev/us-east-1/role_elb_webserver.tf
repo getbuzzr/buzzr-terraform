@@ -29,17 +29,7 @@ data "aws_iam_policy_document" "elb_webserver_policy" {
     ]
   }
 
-  statement {
-    sid = "ExpiryLiveCheckinReadWrite"
-
-    actions = [
-      "dynamodb:*"
-    ]
-
-    resources = [
-      "arn:aws:dynamodb:us-east-1:*:table/CheckInStatus"
-    ]
-  }
+  
   statement {
     sid = "ExpirynGetAPIDbPassword"
 
@@ -50,28 +40,12 @@ data "aws_iam_policy_document" "elb_webserver_policy" {
 
     resources = [
       "arn:aws:ssm:us-east-1:*:parameter/api_db_server_password",
-      "arn:aws:ssm:us-east-1:*:parameter/checkin_dynamo_table_name",
-      "arn:aws:ssm:us-east-1:*:parameter/checkin_queue_url",
       "arn:aws:ssm:us-east-1:*:parameter/cognito_client_pool",
       "arn:aws:ssm:us-east-1:*:parameter/api_db_database_uri",
-      "arn:aws:ssm:us-east-1:*:parameter/appsync_client_url",
       "arn:aws:ssm:us-east-1:*:parameter/s3_static_bucket_name"
     ]
   }
-  statement {
-    sid = "CheckinSQSEnqueue"
-
-    actions = [
-      "sqs:SendMessage",
-      "sqs:ReceiveMessage",
-      "sqs:DeleteMessage",
-      "sqs:GetQueueAttributes"
-    ]
-
-    resources = [
-      "arn:aws:sqs:us-east-1:*:checkin_queue"
-    ]
-  }
+  
   statement {
     sid = "GetECRImages"
 
@@ -94,17 +68,7 @@ data "aws_iam_policy_document" "elb_webserver_policy" {
       "*"
     ]
   }
-  statement {
-    sid = "AllowAppsync"
-
-    actions = [
-      "appsync:GraphQL"
-    ]
-
-    resources = [
-      "*"
-    ]
-  }
+  
 
   statement {
     sid = "AllowSES"
