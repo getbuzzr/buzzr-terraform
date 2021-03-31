@@ -8,7 +8,7 @@ resource "aws_db_subnet_group" "db_subnet_group" {
   }
 }
 resource "aws_db_subnet_group" "elb_subnet_group" {
-  name       = "db"
+  name       = "db_public"
   subnet_ids = [aws_subnet.public1.id, aws_subnet.public2.id]
 
   tags = {
