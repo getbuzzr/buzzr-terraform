@@ -1,10 +1,10 @@
 
-resource "aws_db_subnet_group" "db_subnet_group" {
+resource "aws_db_subnet_group" "elb_subnet_group" {
   name       = "db"
-  subnet_ids = [aws_subnet.private3.id, aws_subnet.private4.id]
+  subnet_ids = [aws_subnet.public1.id, aws_subnet.public2.id]
 
   tags = {
-    Name = "Private DB subnet"
+    Name = "Public DB subnet"
   }
 }
 
