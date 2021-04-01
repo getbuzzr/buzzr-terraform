@@ -35,3 +35,9 @@ variable "timeout"{
   description = "timeout of function"
   default     = 5
 }
+
+variable "variables" {
+  type        = map(any)
+  default     = {}
+  description = "A map that defines environment variables for the Lambda function."
+}
