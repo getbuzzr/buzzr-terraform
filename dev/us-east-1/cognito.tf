@@ -50,7 +50,6 @@ module "mobile_app_client" {
   ]
   default_redirect_uri = "https://oauth.getbuzzr.co/"
   callback_urls = ["https://oauth.getbuzzr.co/"]
-  # signout urls
   logout_urls = []
   depends_on  = [
     aws_cognito_identity_provider.google,
