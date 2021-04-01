@@ -92,10 +92,9 @@ resource "aws_cognito_identity_provider" "facebook" {
 
   attribute_mapping = {
     email       = "email"
-    first_name  = "given_name"
-    last_name = "family_name"
+    given_name  = "first_name"
+    family_name = "last_name"
     picture    = "picture"
-    id = "sub"
   }
 }
 
