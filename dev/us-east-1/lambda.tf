@@ -1,3 +1,7 @@
+data "aws_ssm_parameter" "api_db_server_uri" {
+  name = aws_ssm_parameter.api_db_database_uri.name
+}
+
 module "cognito_presignup_trigger" {
   source = "../../modules/lambda_function"
 
@@ -30,6 +34,10 @@ module "cognito_postsignup_trigger" {
   lambda_layer_arns = [aws_lambda_layer_version.pymysql_layer.arn]
   runtime = "python3.8"
   timeout = 30
+  variables     = {
+                      DATABASE_URI = data.aws_ssm_parameter.api_db_server.value
+                    }
+
 
 
 }
