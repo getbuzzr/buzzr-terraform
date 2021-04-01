@@ -95,8 +95,8 @@ resource "aws_cognito_identity_provider" "facebook" {
     email       = "email"
     given_name  = "first_name"
     family_name = "last_name"
-    picture    = "picture"
-    
+    picture    = "cover"
+
   }
 }
 
