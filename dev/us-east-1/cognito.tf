@@ -14,7 +14,7 @@ locals {
 }
 
 resource "aws_cognito_user_pool" "default" {
-  name                     = "getbuzzer-user-pool"
+  name                     = "getbuzzr-user-pool"
   auto_verified_attributes = ["email"]
   username_attributes      = ["email"]
   mfa_configuration        = "OPTIONAL"
