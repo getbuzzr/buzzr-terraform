@@ -11,8 +11,11 @@ resource "aws_lambda_function" "default" {
       subnet_ids         = var.vpc_subnet_ids
     }
   }
-  environment {
-    variables = var.variables
+  dynamic "environment" {
+    for_each = local.environment_map
+    content {
+      variables = environment.value
+    }
   }
   runtime = var.runtime
   timeout = var.timeout
