@@ -12,9 +12,9 @@ resource "aws_lambda_function" "default" {
     }
   }
   dynamic "environment" {
-    for_each = var.environment
+    for_each = var.variables
     content {
-      variables = var.environment.value
+      variables = var.variables.value
     }
   }
   runtime = var.runtime
