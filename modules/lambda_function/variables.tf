@@ -38,6 +38,6 @@ variable "timeout"{
 
 variable "variables" {
   type        = map(any)
-  default     = {}
+  default     = null
   description = "A map that defines environment variables for the Lambda function."
 }
