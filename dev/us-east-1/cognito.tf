@@ -75,6 +75,7 @@ resource "aws_cognito_identity_provider" "google" {
     family_name = "family_name"
     username    = "sub"
     picture    = "picture"
+    
   }
 }
 
