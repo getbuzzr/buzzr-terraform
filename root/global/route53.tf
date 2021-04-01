@@ -82,3 +82,24 @@ resource "aws_route53_record" "_2ff33e99df695acfb52ea328f2a3d50d_dev_static_getb
   records = ["_35a8e928dbe531b446217885e0730ae3.zjfbrrwmzc.acm-validations.aws"]
 
 }
+resource "aws_route53_record" "auth_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "auth.getbuzzr.co"
+  type    = "A"
+  ttl     = "300"
+
+  ## Placeholder
+  records = ["127.0.0.1"]
+}
+
+resource "aws_route53_record" "dev_auth_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "dev.auth.getbuzzr.co"
+  type    = "A"
+
+  alias {
+    name                   = "d3vj1yyciumcm9.cloudfront.net"
+    zone_id                = local.cloudfront_distribution_hosted_zone_id
+    evaluate_target_health = true
+  }
+}
