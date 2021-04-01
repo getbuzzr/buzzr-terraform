@@ -75,7 +75,7 @@ resource "aws_cognito_identity_provider" "google" {
     family_name = "family_name"
     username    = "sub"
     picture    = "picture"
-    
+
   }
 }
 
@@ -96,6 +96,7 @@ resource "aws_cognito_identity_provider" "facebook" {
     given_name  = "first_name"
     family_name = "last_name"
     picture    = "picture"
+    
   }
 }
 
