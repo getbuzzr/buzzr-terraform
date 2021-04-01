@@ -34,8 +34,9 @@ module "cognito_postsignup_trigger" {
   lambda_layer_arns = [aws_lambda_layer_version.pymysql_layer.arn]
   runtime = "python3.8"
   timeout = 30
+  # dont use in prod.. use ssm
   variables     = {
-                      DATABASE_URI = data.aws_ssm_parameter.api_db_server.value
+                      DATABASE_URI = data.aws_ssm_parameter.api_db_server_uri.value
                     }
 
 
