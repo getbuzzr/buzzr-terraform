@@ -12,7 +12,7 @@ resource "aws_lambda_function" "default" {
     }
   }
   dynamic "environment" {
-    for_each = local.environment_map
+    for_each = local.environment
     content {
       variables = environment.value
     }
