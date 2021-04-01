@@ -49,7 +49,6 @@ module "mobile_app_client" {
     aws_cognito_identity_provider.facebook.provider_name
   ]
   default_redirect_uri = "https://oauth.getbuzzr.co/"
-  # add callback urls here
   callback_urls = ["https://oauth.getbuzzr.co/"]
   # signout urls
   logout_urls = []
