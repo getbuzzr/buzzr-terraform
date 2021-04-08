@@ -2,6 +2,10 @@ data "aws_ssm_parameter" "api_db_server_uri" {
   name = aws_ssm_parameter.api_db_database_uri.name
 }
 
+data "aws_ssm_parameter" "stripe_secret_key" {
+  name = aws_ssm_parameter.stripe_secret_key.name
+}
+
 module "cognito_presignup_trigger" {
   source = "../../modules/lambda_function"
 
