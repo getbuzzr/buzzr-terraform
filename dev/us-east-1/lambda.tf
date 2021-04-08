@@ -36,7 +36,8 @@ module "cognito_postsignup_trigger" {
   timeout = 30
   # dont use in prod.. use ssm
   variables     = {
-                      DATABASE_URI = data.aws_ssm_parameter.api_db_server_uri.value
+                      DATABASE_URI = data.aws_ssm_parameter.api_db_server_uri.value,
+                      STRIPE_SECRET_KEY = data.aws_ssm_parameter.stripe_secret_key.value
                     }
 
 
