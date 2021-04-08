@@ -31,7 +31,7 @@ module "cognito_postsignup_trigger" {
   handler       = "main.lambda_handler"
   vpc_subnet_ids         = [aws_subnet.public1.id, aws_subnet.public2.id]
   vpc_security_group_ids = [aws_security_group.lambda.id]
-  lambda_layer_arns = [aws_lambda_layer_version.pymysql_layer.arn]
+  lambda_layer_arns = [aws_lambda_layer_version.pymysql_layer.arn, aws_lambda_layer_version.stripe_layer.arn]
   runtime = "python3.8"
   timeout = 30
   # dont use in prod.. use ssm
