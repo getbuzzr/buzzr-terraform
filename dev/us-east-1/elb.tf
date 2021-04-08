@@ -147,24 +147,24 @@ resource "aws_elastic_beanstalk_environment" "buzzr_dev_env" {
     value     = 30
   }
 # =========== SSL
-  # setting {
-  #   namespace = "aws:elbv2:listener:443"
-  #   name      = "ListenerEnabled"
-  #   value     = true
-  # }
-  # setting {
-  #     namespace = "aws:elbv2:listener:443"
-  #     name      = "Protocol"
-  #     value     = "HTTPS"
-  #   }
-  # setting {
-  #     namespace = "aws:elbv2:listener:443"
-  #     name      = "SSLCertificateArns"
-  #     value     = aws_acm_certificate.buzzr.arn
-  #   }
-  # setting {
-  #     namespace = "aws:elbv2:listener:443"
-  #     name      = "SSLPolicy"
-  #     value     = "ELBSecurityPolicy-2016-08"
-  #   }
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "ListenerEnabled"
+    value     = true
+  }
+  setting {
+      namespace = "aws:elbv2:listener:443"
+      name      = "Protocol"
+      value     = "HTTPS"
+    }
+  setting {
+      namespace = "aws:elbv2:listener:443"
+      name      = "SSLCertificateArns"
+      value     = aws_acm_certificate.dev_api_getbuzzr_co.arn
+    }
+  setting {
+      namespace = "aws:elbv2:listener:443"
+      name      = "SSLPolicy"
+      value     = "ELBSecurityPolicy-2016-08"
+    }
 }
