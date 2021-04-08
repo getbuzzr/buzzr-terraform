@@ -115,3 +115,11 @@ resource "aws_route53_record" "dev_api_getbuzzr_co" {
     zone_id                = "Z117KPS5GTRQ2G"
   }
 }
+
+resource "aws_route53_record" "ses_domain_txt_verification" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "_amazonses.getbuzzr.co"
+  type    = "TXT"
+  ttl     = "600"
+  records = ["kWV4Tp+f9TBPvK3DwwFzSAVHCm3vS7dUkXGTL2EvfNQ="]
+}
