@@ -107,5 +107,14 @@ resource "aws_ssm_parameter" "apns_certificate" {
   }
 }
 
-
+resource "aws_ssm_parameter" "stripe_secret_key" {
+  name  = "stripe_secret_key"
+  type  = "SecureString"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
 
