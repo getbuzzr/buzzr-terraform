@@ -117,7 +117,7 @@ resource "aws_route53_record" "dev_api_getbuzzr_co" {
 }
 
 resource "aws_route53_record" "ses_domain_txt_verification" {
-  zone_id = aws_route53_zone.onguard_co.zone_id
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
   name    = "_amazonses.getbuzzr.co"
   type    = "TXT"
   ttl     = "600"
