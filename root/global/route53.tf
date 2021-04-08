@@ -103,3 +103,15 @@ resource "aws_route53_record" "dev_auth_getbuzzr_co" {
     evaluate_target_health = true
   }
 }
+
+resource "aws_route53_record" "dev_api_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "dev.api.getbuzzr.co"
+  type    = "A"
+
+  alias {
+    name                   = "buzzr-dev-env.eba-pkqmcmcr.us-east-1.elasticbeanstalk.com"
+    evaluate_target_health = true
+    zone_id                = "Z117KPS5GTRQ2G"
+  }
+}
