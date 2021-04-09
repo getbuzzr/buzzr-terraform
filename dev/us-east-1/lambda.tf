@@ -41,7 +41,8 @@ module "cognito_postsignup_trigger" {
   # dont use in prod.. use ssm
   variables     = {
                       DATABASE_URI = data.aws_ssm_parameter.api_db_server_uri.value,
-                      STRIPE_SECRET_KEY = data.aws_ssm_parameter.stripe_secret_key.value
+                      STRIPE_SECRET_KEY = data.aws_ssm_parameter.stripe_secret_key.value,
+                      environment = "dev"
                     }
 
 
