@@ -94,3 +94,32 @@ resource "aws_security_group" "db_server" {
     security_groups = [aws_security_group.web_server.id,aws_security_group.lambda.id]
   }
 }
+
+
+resource "aws_security_group" "smtp_vpc_endpoint" {
+  name        = "smtp_vpc_endpoint"
+  description = "smtp vpc endpoint"
+  vpc_id      = aws_default_vpc.default.id
+  ingress {
+    description = "smtp"
+    from_port   = 25
+    to_port     = 25
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "smtps"
+    from_port   = 465
+    to_port     = 465
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
