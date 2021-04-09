@@ -82,6 +82,17 @@ resource "aws_route53_record" "_2ff33e99df695acfb52ea328f2a3d50d_dev_static_getb
   records = ["_35a8e928dbe531b446217885e0730ae3.zjfbrrwmzc.acm-validations.aws"]
 
 }
+
+resource "aws_route53_record" "_adf7195a5cea601cb865872423f5fc07_oauth_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "_adf7195a5cea601cb865872423f5fc07.oauth.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["_d3c0c91353082c967c1555a28f556d88.bbfvkzsszw.acm-validations.aws"]
+
+}
+
 resource "aws_route53_record" "auth_getbuzzr_co" {
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
   name    = "auth.getbuzzr.co"
