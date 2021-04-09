@@ -3,5 +3,5 @@ module "oauth_getbuzzr_co" {
   aws_region          = "us-east-1"
   domain_name         = "oauth.getbuzzr.co"
   acm_certificate_arn = aws_acm_certificate.oauth_getbuzzr_co.arn
-  admin_role_arn      = "arn:aws:iam::995213493585:role/cicd_role"
+  admin_role_arn      = "arn:aws:iam::980636768267:role/cicd_role"
 }
