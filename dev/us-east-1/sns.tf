@@ -9,4 +9,5 @@ resource "aws_sns_platform_application" "apns_application" {
   platform            = "APNS"
   platform_credential = aws_ssm_parameter.apns_private_key.value
   platform_principal  = aws_ssm_parameter.apns_certificate.value
+  success_feedback_sample_rate = 100
 }
