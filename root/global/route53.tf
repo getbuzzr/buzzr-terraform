@@ -89,7 +89,7 @@ resource "aws_route53_record" "_adf7195a5cea601cb865872423f5fc07_oauth_getbuzzr_
   type    = "CNAME"
   ttl     = "300"
 
-  records = ["_d3c0c91353082c967c1555a28f556d88.bbfvkzsszw.acm-validations.aws"]
+  records = ["_61ce4b20b33f8626f101fa4cae15d4ef.zjfbrrwmzc.acm-validations.aws"]
 
 }
 
