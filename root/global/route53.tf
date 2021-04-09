@@ -134,3 +134,15 @@ resource "aws_route53_record" "ses_domain_txt_verification" {
   ttl     = "600"
   records = ["kWV4Tp+f9TBPvK3DwwFzSAVHCm3vS7dUkXGTL2EvfNQ="]
 }
+
+resource "aws_route53_record" "oauth_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "oauth.getbuzzr.co"
+  type    = "A"
+
+  alias {
+    name                   = "d3g9kpkdr1ry52.cloudfront.net"
+    zone_id                = local.cloudfront_distribution_hosted_zone_id
+    evaluate_target_health = true
+  }
+}
