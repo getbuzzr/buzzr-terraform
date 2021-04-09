@@ -83,9 +83,9 @@ resource "aws_route53_record" "_2ff33e99df695acfb52ea328f2a3d50d_dev_static_getb
 
 }
 
-resource "aws_route53_record" "_adf7195a5cea601cb865872423f5fc07_oauth_getbuzzr_co" {
+resource "aws_route53_record" "_3a56e530db63ec02ce7dec53c210ac22_oauth_getbuzzr_co" {
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
-  name    = "_adf7195a5cea601cb865872423f5fc07.oauth.getbuzzr.co"
+  name    = "_3a56e530db63ec02ce7dec53c210ac22.oauth.getbuzzr.co"
   type    = "CNAME"
   ttl     = "300"
 
