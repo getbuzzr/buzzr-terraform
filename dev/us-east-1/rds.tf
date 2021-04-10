@@ -1,5 +1,5 @@
 
-data "aws_ssm_parameter" "api_db_server_password" {
+data "aws_ssm_parameter" "db_server_password" {
   name = aws_ssm_parameter.api_db_server_password.name
 }
 
@@ -38,7 +38,8 @@ resource "aws_db_instance" "buzzrdev" {
   instance_class       = "db.t3.micro"
   name                 = "buzzrdev"
   username             = "root"
-  password             = data.aws_ssm_parameter.api_db_server_password.value
+  password             = data.aws_ssm_parameter.db_server_password.value
   parameter_group_name = "default.mysql5.7"
   skip_final_snapshot  = true
+  multi_az = false
 }
