@@ -20,15 +20,15 @@ resource "aws_db_subnet_group" "elb_subnet_group" {
   }
 }
 
-module "api_db_server" {
-  source               = "../../modules/serverless_aurora_rds"
-  db_name              = "buzzrdev"
-  db_subnet_group      = aws_db_subnet_group.elb_subnet_group.name
-  db_password_ssm_path = "api_db_server_password"
-  allowed_security_groups = [aws_security_group.db_server.id]
-  max_capacity_unit    = 1
+# module "api_db_server" {
+#   source               = "../../modules/serverless_aurora_rds"
+#   db_name              = "buzzrdev"
+#   db_subnet_group      = aws_db_subnet_group.elb_subnet_group.name
+#   db_password_ssm_path = "api_db_server_password"
+#   allowed_security_groups = [aws_security_group.db_server.id]
+#   max_capacity_unit    = 1
   
-}
+# }
 
 
 resource "aws_db_instance" "buzzr_dev_db" {
@@ -45,4 +45,5 @@ resource "aws_db_instance" "buzzr_dev_db" {
   multi_az = false
   publicly_accessible = true
   db_subnet_group_name      = aws_db_subnet_group.elb_subnet_group.name
+  vpc_security_group_ids = [ aws_security_group.public_access.id ]
 }
