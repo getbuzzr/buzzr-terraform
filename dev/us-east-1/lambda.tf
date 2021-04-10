@@ -33,8 +33,6 @@ module "cognito_postsignup_trigger" {
   function_name = "cognito_postsignup_trigger"
   role_arn      = module.postsignup_lambda_role.role_arn
   handler       = "main.lambda_handler"
-  vpc_subnet_ids         = [aws_subnet.private1.id, aws_subnet.private2.id]
-  vpc_security_group_ids = [aws_security_group.lambda.id]
   lambda_layer_arns = [aws_lambda_layer_version.pymysql_layer.arn, aws_lambda_layer_version.stripe_layer.arn]
   runtime = "python3.8"
   timeout = 30
