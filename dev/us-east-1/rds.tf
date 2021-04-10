@@ -43,4 +43,5 @@ resource "aws_db_instance" "buzzrdev" {
   skip_final_snapshot  = true
   multi_az = false
   publicly_accessible = true
+  db_subnet_group_name      = aws_db_subnet_group.elb_subnet_group.name
 }
