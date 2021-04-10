@@ -31,8 +31,9 @@ module "api_db_server" {
 }
 
 
-resource "aws_db_instance" "buzzrdev" {
+resource "aws_db_instance" "buzzr_dev_db" {
   allocated_storage    = 10
+  identifier = "buzzrdev"
   engine               = "mysql"
   engine_version       = "5.7"
   instance_class       = "db.t3.micro"
