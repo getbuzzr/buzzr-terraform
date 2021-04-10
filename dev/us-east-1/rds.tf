@@ -42,4 +42,5 @@ resource "aws_db_instance" "buzzrdev" {
   parameter_group_name = "default.mysql5.7"
   skip_final_snapshot  = true
   multi_az = false
+  publicly_accessible = true
 }
