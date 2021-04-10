@@ -96,22 +96,14 @@ resource "aws_security_group" "db_server" {
 }
 
 
-resource "aws_security_group" "smtp_vpc_endpoint" {
-  name        = "smtp_vpc_endpoint"
-  description = "smtp vpc endpoint"
+resource "aws_security_group" "public_access" {
+  name        = "public_access_db"
+  description = "public_access_db"
   vpc_id      = aws_default_vpc.default.id
   ingress {
-    description = "smtp"
-    from_port   = 25
-    to_port     = 25
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "smtps"
-    from_port   = 465
-    to_port     = 465
+    description = "db"
+    from_port   = 3306
+    to_port     = 3306
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
