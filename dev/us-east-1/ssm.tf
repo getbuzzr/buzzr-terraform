@@ -129,3 +129,16 @@ resource "aws_ssm_parameter" "slack_delivery_webhook_endpoint" {
     ]
   }
 }
+
+resource "aws_ssm_parameter" "facebook_api_key" {
+  name  = "facebook_api_key"
+  type  = "SecureString"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
+
+
