@@ -27,23 +27,24 @@ resource "aws_db_subnet_group" "elb_subnet_group" {
 #   db_password_ssm_path = "api_db_server_password"
 #   allowed_security_groups = [aws_security_group.db_server.id]
 #   max_capacity_unit    = 1
-  
+
 # }
 
 
 resource "aws_db_instance" "buzzr_dev_db" {
-  allocated_storage    = 10
-  identifier = "buzzrdev"
-  engine               = "mysql"
-  engine_version       = "5.7"
-  instance_class       = "db.t3.micro"
-  name                 = "buzzrdev"
-  username             = "root"
-  password             = data.aws_ssm_parameter.db_server_password.value
-  parameter_group_name = "default.mysql5.7"
-  skip_final_snapshot  = true
-  multi_az = false
-  publicly_accessible = true
+  allocated_storage         = 10
+  identifier                = "buzzrdev"
+  engine                    = "mysql"
+  engine_version            = "5.7"
+  instance_class            = "db.t3.micro"
+  name                      = "buzzrdev"
+  username                  = "root"
+  password                  = data.aws_ssm_parameter.db_server_password.value
+  parameter_group_name      = "default.mysql5.7"
+  skip_final_snapshot       = true
+  multi_az                  = false
+  publicly_accessible       = true
   db_subnet_group_name      = aws_db_subnet_group.elb_subnet_group.name
-  vpc_security_group_ids = [ aws_security_group.public_access.id ]
+  vpc_security_group_ids    = [aws_security_group.public_access.id]
+  final_snapshot_identifier = "buzzrdevsnapshopfinal"
 }
