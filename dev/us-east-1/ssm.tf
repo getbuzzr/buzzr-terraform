@@ -118,3 +118,14 @@ resource "aws_ssm_parameter" "stripe_secret_key" {
   }
 }
 
+
+resource "aws_ssm_parameter" "slack_delivery_webhook_endpoint" {
+  name  = "slack_delivery_webhook_endpoint"
+  type  = "SecureString"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
