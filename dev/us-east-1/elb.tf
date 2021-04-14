@@ -196,7 +196,7 @@ resource "aws_elastic_beanstalk_application_version" "buzzr_dev_admin" {
   bucket      = module.admin_deploy_bucket.id
   key         = "docker_deploy.zip"
 }
-resource "aws_elastic_beanstalk_environment" "buzzr_dev_env" {
+resource "aws_elastic_beanstalk_environment" "buzzr_dev_admin_env" {
   name                = "buzzr-dev-admin-env"
   application         = aws_elastic_beanstalk_application.buzzr_admin_dev.name
   solution_stack_name = "64bit Amazon Linux 2 v3.2.5 running Docker"
