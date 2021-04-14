@@ -34,6 +34,6 @@ resource "aws_iam_user_policy" "lb_ro" {
 EOF
 }
 
-output "secret" {
-  value = aws_iam_access_key.cicd_accesskey.secret
-}
+# output "secret" {
+#   value = aws_iam_access_key.cicd_accesskey.secret
+# }
