@@ -42,7 +42,7 @@ resource "aws_elastic_beanstalk_environment" "buzzr_dev_env" {
     name      = "VPCId"
     value     = aws_default_vpc.default.id
   }
-  
+
   setting {
     namespace = "aws:ec2:vpc"
     name      = "AssociatePublicIpAddress"
@@ -81,15 +81,20 @@ resource "aws_elastic_beanstalk_environment" "buzzr_dev_env" {
     value     = aws_security_group.web_server.id
   }
   setting {
-      namespace = "aws:elasticbeanstalk:environment"
-      name      = "LoadBalancerType"
-      value     = "application"
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "LoadBalancerType"
+    value     = "application"
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "EnvironmentType"
+    value     = "SingleInstance"
   }
   # This destroys ec2 instances to make room for new docker deployments
   setting {
     namespace = "aws:elasticbeanstalk:command"
     name      = "DeploymentPolicy"
-    value     =  "Immutable"
+    value     = "Immutable"
   }
   # This deploy to max one at a time
   setting {
@@ -146,25 +151,25 @@ resource "aws_elastic_beanstalk_environment" "buzzr_dev_env" {
     name      = "RetentionInDays"
     value     = 30
   }
-# =========== SSL
+  # =========== SSL
   setting {
     namespace = "aws:elbv2:listener:443"
     name      = "ListenerEnabled"
     value     = true
   }
   setting {
-      namespace = "aws:elbv2:listener:443"
-      name      = "Protocol"
-      value     = "HTTPS"
-    }
+    namespace = "aws:elbv2:listener:443"
+    name      = "Protocol"
+    value     = "HTTPS"
+  }
   setting {
-      namespace = "aws:elbv2:listener:443"
-      name      = "SSLCertificateArns"
-      value     = aws_acm_certificate.dev_api_getbuzzr_co.arn
-    }
+    namespace = "aws:elbv2:listener:443"
+    name      = "SSLCertificateArns"
+    value     = aws_acm_certificate.dev_api_getbuzzr_co.arn
+  }
   setting {
-      namespace = "aws:elbv2:listener:443"
-      name      = "SSLPolicy"
-      value     = "ELBSecurityPolicy-2016-08"
-    }
+    namespace = "aws:elbv2:listener:443"
+    name      = "SSLPolicy"
+    value     = "ELBSecurityPolicy-2016-08"
+  }
 }
