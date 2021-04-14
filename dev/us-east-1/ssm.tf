@@ -142,3 +142,30 @@ resource "aws_ssm_parameter" "facebook_api_key" {
 }
 
 
+resource "aws_ssm_parameter" "admin_ecr_repo" {
+  name  = "admin_ecr_repo"
+  type  = "SecureString"
+  value = aws_ecr_repository.buzzr_dev_admin.repository_url
+}
+resource "aws_ssm_parameter" "forest_env_secret" {
+  name  = "forest_env_secret"
+  type  = "SecureString"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
+
+resource "aws_ssm_parameter" "forest_auth_secret" {
+  name  = "forest_auth_secret"
+  type  = "SecureString"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
+
