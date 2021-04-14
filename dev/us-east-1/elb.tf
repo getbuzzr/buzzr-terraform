@@ -1,3 +1,10 @@
+data "aws_ssm_parameter" "forest_env_secret" {
+  name = aws_ssm_parameter.forest_env_secret.name
+}
+data "aws_ssm_parameter" "forest_auth_secret" {
+  name = aws_ssm_parameter.forest_auth_secret.name
+}
+
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
   name = "webserver-eb-ec2-instance-profile-dev"
   role = module.elb_webserver_role.name
@@ -348,5 +355,32 @@ resource "aws_elastic_beanstalk_environment" "buzzr_dev_admin_env" {
     namespace = "aws:elbv2:listener:443"
     name      = "SSLPolicy"
     value     = "ELBSecurityPolicy-2016-08"
+  }
+  # ==== ENV vars
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "FOREST_ENV_SECRET"
+    value     = data.aws_ssm_parameter.forest_env_secret.value
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "FOREST_AUTH_SECRET"
+    value     = data.aws_ssm_parameter.forest_auth_secret.value
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "DATABASE_URL"
+    value     = data.aws_ssm_parameter.api_db_server_uri.value
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "NODE_ENV"
+    value     = "production"
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "APPLICATION_URL"
+    value     = "https://dev.admin.getbuzzr.co"
   }
 }
