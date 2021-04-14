@@ -126,6 +126,17 @@ resource "aws_route53_record" "dev_api_getbuzzr_co" {
     zone_id                = "Z117KPS5GTRQ2G"
   }
 }
+resource "aws_route53_record" "dev_admin_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "dev.admin.getbuzzr.co"
+  type    = "A"
+
+  alias {
+    name                   = "buzzr-dev-admin-env.eba-77ibtgrb.us-east-1.elasticbeanstalk.com"
+    evaluate_target_health = true
+    zone_id                = "Z117KPS5GTRQ2G"
+  }
+}
 
 resource "aws_route53_record" "ses_domain_txt_verification" {
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
