@@ -87,12 +87,7 @@ resource "aws_elastic_beanstalk_environment" "buzzr_dev_env" {
     name      = "LoadBalancerType"
     value     = "application"
   }
-  # remove this for prod
-  setting {
-    namespace = "aws:elasticbeanstalk:environment"
-    name      = "EnvironmentType"
-    value     = "SingleInstance"
-  }
+
   # This destroys ec2 instances to make room for new docker deployments
   setting {
     namespace = "aws:elasticbeanstalk:command"
