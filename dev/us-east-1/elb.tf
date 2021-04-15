@@ -1,9 +1,4 @@
-data "aws_ssm_parameter" "forest_env_secret" {
-  name = aws_ssm_parameter.forest_env_secret.name
-}
-data "aws_ssm_parameter" "forest_auth_secret" {
-  name = aws_ssm_parameter.forest_auth_secret.name
-}
+
 
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
   name = "webserver-eb-ec2-instance-profile-dev"
