@@ -140,7 +140,28 @@ resource "aws_ssm_parameter" "facebook_api_key" {
     ]
   }
 }
+resource "aws_ssm_parameter" "stripe_webhook_token" {
+  name  = "stripe_webhook_token"
+  type  = "SecureString"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
 
+resource "aws_ssm_parameter" "ios_sns_platform_arn" {
+  name  = "ios_sns_platform_arn"
+  type  = "SecureString"
+  value = aws_sns_platform_application.apns_application.arn
+}
+
+resource "aws_ssm_parameter" "gcm_sns_platform_arn" {
+  name  = "gcm_sns_platform_arn"
+  type  = "SecureString"
+  value = aws_sns_platform_application.gcm_application.arn
+}
 
 # resource "aws_ssm_parameter" "admin_ecr_repo" {
 #   name  = "admin_ecr_repo"
