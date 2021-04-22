@@ -39,12 +39,7 @@ data "aws_iam_policy_document" "elb_webserver_policy" {
     ]
 
     resources = [
-      "arn:aws:ssm:us-east-1:*:parameter/api_db_server_password",
-      "arn:aws:ssm:us-east-1:*:parameter/cognito_client_pool",
-      "arn:aws:ssm:us-east-1:*:parameter/api_db_database_uri",
-      "arn:aws:ssm:us-east-1:*:parameter/s3_static_bucket_name",
-      "arn:aws:ssm:us-east-1:*:parameter/stripe_secret_key",
-      "arn:aws:ssm:us-east-1:*:parameter/slack_delivery_webhook_endpoint"
+      "arn:aws:ssm:us-east-1:*:parameter/*",
     ]
   }
 
