@@ -150,6 +150,16 @@ resource "aws_ssm_parameter" "stripe_webhook_token" {
     ]
   }
 }
+resource "aws_ssm_parameter" "retool_auth_key" {
+  name  = "retool_auth_key"
+  type  = "SecureString"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
 
 resource "aws_ssm_parameter" "ios_sns_platform_arn" {
   name  = "ios_sns_platform_arn"
