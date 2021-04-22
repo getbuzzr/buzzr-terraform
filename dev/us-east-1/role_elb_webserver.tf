@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "elb_webserver_policy" {
   }
 
   statement {
-    sid = "allow_sns"
+    sid = "allowsns"
 
     actions = [
       "sns:*"
