@@ -160,7 +160,16 @@ resource "aws_ssm_parameter" "retool_auth_key" {
     ]
   }
 }
-
+resource "aws_ssm_parameter" "google_maps_api_key" {
+  name  = "retool_auth_key"
+  type  = "SecureString"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
 resource "aws_ssm_parameter" "ios_sns_platform_arn" {
   name  = "ios_sns_platform_arn"
   type  = "SecureString"
