@@ -161,7 +161,7 @@ resource "aws_ssm_parameter" "retool_auth_key" {
   }
 }
 resource "aws_ssm_parameter" "google_maps_api_key" {
-  name  = "retool_auth_key"
+  name  = "google_maps_api_key"
   type  = "SecureString"
   value = " "
   lifecycle {
