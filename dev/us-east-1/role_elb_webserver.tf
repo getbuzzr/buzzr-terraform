@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "elb_webserver_policy" {
     sid = "allow_sns"
 
     actions = [
-      "sns:*",
+      "sns:*"
     ]
 
     resources = [
