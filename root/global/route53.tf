@@ -157,3 +157,12 @@ resource "aws_route53_record" "oauth_getbuzzr_co" {
     evaluate_target_health = true
   }
 }
+
+resource "aws_route53_record" "google_search_domain_ownership_verification" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  type = "TXT"
+  ttl = "600"
+
+  name = "getbuzzr.co"
+  records = ["google-site-verification=dRox-FtNK1rv1m4_ajopE72MvL3ykID6yNAEnGigJjI"]
+}
