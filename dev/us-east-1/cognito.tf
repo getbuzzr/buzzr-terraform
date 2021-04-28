@@ -28,7 +28,7 @@ resource "aws_cognito_user_pool" "default" {
   }
 
   lambda_config {
-    pre_sign_up = module.cognito_presignup_trigger.arn
+    pre_sign_up       = module.cognito_presignup_trigger.arn
     post_confirmation = module.cognito_postsignup_trigger.arn
   }
 }
@@ -39,9 +39,9 @@ resource "aws_cognito_user_pool_domain" "default" {
 }
 
 module "mobile_app_client" {
-  source                       = "../../modules/saml_app_client"
-  user_pool_id                 = aws_cognito_user_pool.default.id
-  app_client_name              = "mobile_app_client"
+  source          = "../../modules/saml_app_client"
+  user_pool_id    = aws_cognito_user_pool.default.id
+  app_client_name = "mobile_app_client"
   supported_identity_providers = [
     local.cognito_idp_provider_name,
     aws_cognito_identity_provider.google.provider_name,
@@ -49,9 +49,9 @@ module "mobile_app_client" {
     aws_cognito_identity_provider.facebook.provider_name
   ]
   default_redirect_uri = "https://oauth.getbuzzr.co/"
-  callback_urls = ["https://oauth.getbuzzr.co/"]
-  logout_urls = []
-  depends_on  = [
+  callback_urls        = ["https://oauth.getbuzzr.co/"]
+  logout_urls          = []
+  depends_on = [
     aws_cognito_identity_provider.google,
     aws_cognito_identity_provider.apple
   ]
@@ -65,7 +65,7 @@ resource "aws_cognito_identity_provider" "google" {
 
   provider_details = {
     authorize_scopes = "email profile openid"
-    client_id        = "834623945817-hnf8d5ttiaqsp87lcuc2pdpf1qm7sotb.apps.googleusercontent.com"
+    client_id        = "528145652504-drk23p55f345sol253edv6fel703d22i.apps.googleusercontent.com"
     client_secret    = data.aws_ssm_parameter.google_client_secret.value
   }
 
@@ -74,7 +74,7 @@ resource "aws_cognito_identity_provider" "google" {
     given_name  = "given_name"
     family_name = "family_name"
     username    = "sub"
-    picture    = "picture"
+    picture     = "picture"
 
   }
 }
@@ -88,14 +88,14 @@ resource "aws_cognito_identity_provider" "facebook" {
     authorize_scopes = "public_profile,email"
     client_id        = "761770857810778"
     client_secret    = data.aws_ssm_parameter.facebook_client_secret.value
-    api_version = "v6.0"
+    api_version      = "v6.0"
   }
 
   attribute_mapping = {
     email       = "email"
     given_name  = "first_name"
     family_name = "last_name"
-    picture    = "cover"
+    picture     = "cover"
 
   }
 }
