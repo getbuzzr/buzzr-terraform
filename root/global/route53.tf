@@ -160,9 +160,37 @@ resource "aws_route53_record" "oauth_getbuzzr_co" {
 
 resource "aws_route53_record" "google_search_domain_ownership_verification" {
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
-  type = "TXT"
-  ttl = "600"
+  type    = "TXT"
+  ttl     = "600"
 
-  name = "getbuzzr.co"
+  name    = "getbuzzr.co"
   records = ["google-site-verification=dRox-FtNK1rv1m4_ajopE72MvL3ykID6yNAEnGigJjI"]
+}
+
+resource "aws_route53_record" "_aa1b956d1bae8b641350d6ea43a92e9d_staging_static_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "_aa1b956d1bae8b641350d6ea43a92e9d.staging.static.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["_60405d7dd6bb3e87e5c398d8dd5badd6.zzxlnyslwt.acm-validations.aws"]
+}
+
+resource "aws_route53_record" "_9e1ca50073e097390b5dafbaf8a2627e_staging_auth_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "_9e1ca50073e097390b5dafbaf8a2627e.staging.auth.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["_b6ddfcbab0a9204d4808a6d036ff478b.zzxlnyslwt.acm-validations.aws"]
+
+}
+
+resource "aws_route53_record" "_11ef41391f7bd06161f4168548fe37be_staging_api_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "_11ef41391f7bd06161f4168548fe37be.staging.api.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["_c01e04ea6fab852bc75e4d1f59bd70e0.zzxlnyslwt.acm-validations.aws"]
 }
