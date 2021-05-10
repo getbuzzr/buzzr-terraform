@@ -158,6 +158,14 @@ resource "aws_route53_record" "oauth_getbuzzr_co" {
   }
 }
 
+resource "aws_route53_record" "google_search_domain_ownership_verification" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  type    = "TXT"
+  ttl     = "600"
+
+  name    = "getbuzzr.co"
+  records = ["google-site-verification=dRox-FtNK1rv1m4_ajopE72MvL3ykID6yNAEnGigJjI"]
+}
 
 resource "aws_route53_record" "_aa1b956d1bae8b641350d6ea43a92e9d_staging_static_getbuzzr_co" {
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
@@ -185,5 +193,4 @@ resource "aws_route53_record" "_11ef41391f7bd06161f4168548fe37be_staging_api_get
   ttl     = "300"
 
   records = ["_c01e04ea6fab852bc75e4d1f59bd70e0.zzxlnyslwt.acm-validations.aws"]
-
 }
