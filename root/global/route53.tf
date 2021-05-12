@@ -12,7 +12,7 @@ resource "aws_route53_record" "root" {
   type    = "A"
   ttl     = "300"
 
-  records = ["192.168.0.0"]
+  records = ["75.2.70.75", "99.83.190.102"]
 
 }
 
@@ -22,7 +22,7 @@ resource "aws_route53_record" "www" {
   type    = "CNAME"
   ttl     = "300"
 
-  records = ["getbuzzr.co"]
+  records = ["proxy-ssl.webflow.com"]
 
 }
 
@@ -194,3 +194,4 @@ resource "aws_route53_record" "_11ef41391f7bd06161f4168548fe37be_staging_api_get
 
   records = ["_c01e04ea6fab852bc75e4d1f59bd70e0.zzxlnyslwt.acm-validations.aws"]
 }
+
