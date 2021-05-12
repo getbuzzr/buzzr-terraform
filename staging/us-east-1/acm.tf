@@ -1,4 +1,4 @@
-resource "aws_acm_certificate" "dev_auth_getbuzzr_co" {
+resource "aws_acm_certificate" "staging_auth_getbuzzr_co" {
   domain_name       = "staging.auth.getbuzzr.co"
   validation_method = "DNS"
 
@@ -7,7 +7,7 @@ resource "aws_acm_certificate" "dev_auth_getbuzzr_co" {
   }
 }
 
-resource "aws_acm_certificate" "dev_api_getbuzzr_co" {
+resource "aws_acm_certificate" "staging_api_getbuzzr_co" {
   domain_name       = "staging.api.getbuzzr.co"
   validation_method = "DNS"
 
