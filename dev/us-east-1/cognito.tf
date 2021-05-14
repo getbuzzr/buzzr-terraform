@@ -120,3 +120,10 @@ resource "aws_cognito_identity_provider" "apple" {
     username    = "sub"
   }
 }
+
+resource "aws_cognito_user_pool_ui_customization" "ui_customization" {
+  css        = "span {color: white;}.legalText-customizable {display:none}.background-customizable{background-color:#070D28}.inputField-customizable{border: 1px solid #26DBB0;}.submitButton-customizable{background-color:#26DBB0}"
+  image_file = filebase64("../../assets/img/Buzzr_Logo_Teal.png")
+
+  user_pool_id = aws_cognito_user_pool_domain.default.user_pool_id
+}
