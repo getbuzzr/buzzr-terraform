@@ -27,6 +27,15 @@ resource "aws_cognito_user_pool" "default" {
     require_symbols = false
   }
 
+  schema {
+    attribute_data_type = "String"
+    name                = "given_name"
+  }
+  schema {
+    attribute_data_type = "String"
+    name                = "family_name"
+  }
+
   lambda_config {
     pre_sign_up       = module.cognito_presignup_trigger.arn
     post_confirmation = module.cognito_postsignup_trigger.arn
