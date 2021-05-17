@@ -30,10 +30,17 @@ resource "aws_cognito_user_pool" "dev_user_pool" {
   schema {
     attribute_data_type = "String"
     name                = "given_name"
+    required            = true
   }
   schema {
     attribute_data_type = "String"
     name                = "family_name"
+    required            = true
+  }
+  schema {
+    attribute_data_type = "String"
+    name                = "email"
+    required            = true
   }
 
   lambda_config {
