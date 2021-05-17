@@ -27,6 +27,15 @@ resource "aws_cognito_user_pool" "default" {
     require_symbols = false
   }
 
+  schema {
+    attribute_data_type = "String"
+    name                = "given_name"
+  }
+  schema {
+    attribute_data_type = "String"
+    name                = "family_name"
+  }
+
   lambda_config {
     pre_sign_up       = module.cognito_presignup_trigger.arn
     post_confirmation = module.cognito_postsignup_trigger.arn
@@ -120,3 +129,11 @@ resource "aws_cognito_identity_provider" "apple" {
     username    = "sub"
   }
 }
+
+# NOT SUPPORTED CORRECTLY YET BY TERRAFORM
+# resource "aws_cognito_user_pool_ui_customization" "ui_customization" {
+#   css        = "a{color:#26DBB0}label{color:white !important}span {color: white !important;}.legalText-customizable {display:none}.background-customizable{background-color:#070D28 !important}.inputField-customizable{border: 1px solid #26DBB0;}.submitButton-customizable{background-color:#26DBB0 !important}"
+#   image_file = filebase64("../../assets/img/Buzzr_Logo_Teal.png")
+
+#   user_pool_id = aws_cognito_user_pool_domain.default.user_pool_id
+# }
