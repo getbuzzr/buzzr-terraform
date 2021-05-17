@@ -64,7 +64,7 @@ data "aws_ssm_parameter" "api_db_server_password" {
 resource "aws_ssm_parameter" "cognito_client_pool" {
   name  = "cognito_client_pool"
   type  = "SecureString"
-  value = aws_cognito_user_pool.default.id
+  value = aws_cognito_user_pool.dev_user_pool.id
 }
 
 
