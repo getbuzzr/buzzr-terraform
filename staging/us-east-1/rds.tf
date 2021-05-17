@@ -1,29 +1,30 @@
 
-data "aws_ssm_parameter" "db_server_password" {
-  name = aws_ssm_parameter.api_db_server_password.name
-}
+# data "aws_ssm_parameter" "db_server_password" {
+#   name = aws_ssm_parameter.api_db_server_password.name
+# }
 
-resource "aws_db_subnet_group" "db_subnet_group" {
-  name       = "db"
-  subnet_ids = [aws_subnet.private3.id, aws_subnet.private4.id]
+# resource "aws_db_subnet_group" "db_subnet_group" {
+#   name       = "db"
+#   subnet_ids = [aws_subnet.private3.id, aws_subnet.private4.id]
 
-  tags = {
-    Name = "Private DB subnet"
-  }
-}
-resource "aws_db_subnet_group" "elb_subnet_group" {
-  name       = "db_public"
-  subnet_ids = [aws_subnet.public1.id, aws_subnet.public2.id]
+#   tags = {
+#     Name = "Private DB subnet"
+#   }
+# }
+# resource "aws_db_subnet_group" "elb_subnet_group" {
+#   name       = "db_public"
+#   subnet_ids = [aws_subnet.public1.id, aws_subnet.public2.id]
 
-  tags = {
-    Name = "public DB subnet"
-  }
-}
+#   tags = {
+#     Name = "public DB subnet"
+#   }
+# }
 
 
-# resource "aws_db_instance" "buzzr_dev_staging" {
+
+# resource "aws_db_instance" "buzzr_staging_db" {
 #   allocated_storage      = 10
-#   identifier             = "buzzrstaging"
+#   identifier             = "buzzr"
 #   engine                 = "mysql"
 #   engine_version         = "5.7"
 #   instance_class         = "db.t3.micro"
