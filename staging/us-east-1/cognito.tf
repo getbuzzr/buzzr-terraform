@@ -21,10 +21,17 @@ resource "aws_cognito_user_pool" "default" {
   schema {
     attribute_data_type = "String"
     name                = "given_name"
+    required            = true
   }
   schema {
     attribute_data_type = "String"
     name                = "family_name"
+    required            = true
+  }
+  schema {
+    attribute_data_type = "String"
+    name                = "email"
+    required            = true
   }
   software_token_mfa_configuration {
     enabled = true
