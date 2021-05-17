@@ -8,7 +8,7 @@ resource "aws_ecr_repository" "buzzr_staging_api" {
 }
 
 resource "aws_ecr_lifecycle_policy" "buzzr_staging_api_policy" {
-  repository = aws_ecr_repository.buzzr_dev_api.name
+  repository = aws_ecr_repository.buzzr_staging_api.name
 
   policy = <<EOF
 {
