@@ -109,7 +109,7 @@ resource "aws_route53_record" "dev_auth_getbuzzr_co" {
   type    = "A"
 
   alias {
-    name                   = "dlpdmbxc8jqgb.cloudfront.net"
+    name                   = "d28bj650amctzt.cloudfront.net"
     zone_id                = local.cloudfront_distribution_hosted_zone_id
     evaluate_target_health = true
   }
@@ -195,3 +195,14 @@ resource "aws_route53_record" "_11ef41391f7bd06161f4168548fe37be_staging_api_get
   records = ["_c01e04ea6fab852bc75e4d1f59bd70e0.zzxlnyslwt.acm-validations.aws"]
 }
 
+resource "aws_route53_record" "staging_auth_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "staging.auth.getbuzzr.co"
+  type    = "A"
+
+  alias {
+    name                   = "dcyws1u7krs3a.cloudfront.net"
+    zone_id                = local.cloudfront_distribution_hosted_zone_id
+    evaluate_target_health = true
+  }
+}
