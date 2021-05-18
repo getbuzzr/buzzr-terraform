@@ -25,7 +25,7 @@ resource "aws_elastic_beanstalk_application_version" "buzzr_staging_application"
 resource "aws_elastic_beanstalk_environment" "buzzr_staging_env" {
   name                = "buzzr-staging-env"
   application         = aws_elastic_beanstalk_application.buzzr_staging.name
-  solution_stack_name = "64bit Amazon Linux 2 v3.2.5 running Docker"
+  solution_stack_name = "64bit Amazon Linux 2 v3.3.0 running Docker"
 
   setting {
     namespace = "aws:autoscaling:asg"
