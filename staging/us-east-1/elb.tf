@@ -24,7 +24,7 @@ resource "aws_elastic_beanstalk_application_version" "buzzr_staging_application"
 }
 resource "aws_elastic_beanstalk_environment" "buzzr_staging_env" {
   name                = "buzzr-staging-env"
-  application         = aws_elastic_beanstalk_application.buzzr_staging.name
+  application         = aws_elastic_beanstalk_application.buzzr_staging_application.name
   solution_stack_name = "64bit Amazon Linux 2 v3.2.5 running Docker"
 
   setting {
