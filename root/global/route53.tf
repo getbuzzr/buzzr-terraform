@@ -201,7 +201,7 @@ resource "aws_route53_record" "staging_auth_getbuzzr_co" {
   type    = "A"
 
   alias {
-    name                   = "dcyws1u7krs3a.cloudfront.net"
+    name                   = "d7fmo0pdkcdfe.cloudfront.net"
     zone_id                = local.cloudfront_distribution_hosted_zone_id
     evaluate_target_health = true
   }
