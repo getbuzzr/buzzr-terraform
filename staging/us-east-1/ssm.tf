@@ -170,14 +170,14 @@ resource "aws_ssm_parameter" "google_maps_api_key" {
     ]
   }
 }
-# resource "aws_ssm_parameter" "ios_sns_platform_arn" {
-#   name  = "ios_sns_platform_arn"
-#   type  = "SecureString"
-#   value = aws_sns_platform_application.apns_application.arn
-# }
+resource "aws_ssm_parameter" "ios_sns_platform_arn" {
+  name  = "ios_sns_platform_arn"
+  type  = "SecureString"
+  value = aws_sns_platform_application.apns_application.arn
+}
 
-# resource "aws_ssm_parameter" "gcm_sns_platform_arn" {
-#   name  = "gcm_sns_platform_arn"
-#   type  = "SecureString"
-#   value = aws_sns_platform_application.gcm_application.arn
-# }
+resource "aws_ssm_parameter" "gcm_sns_platform_arn" {
+  name  = "gcm_sns_platform_arn"
+  type  = "SecureString"
+  value = aws_sns_platform_application.gcm_application.arn
+}
