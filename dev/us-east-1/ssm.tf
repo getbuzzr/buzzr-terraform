@@ -185,7 +185,7 @@ resource "aws_ssm_parameter" "gcm_sns_platform_arn" {
 resource "aws_ssm_parameter" "is_store_open" {
   name  = "is_store_open"
   type  = "String"
-  value = ""
+  value = " "
   lifecycle {
     ignore_changes = [
       value
@@ -196,7 +196,7 @@ resource "aws_ssm_parameter" "is_store_open" {
 resource "aws_ssm_parameter" "num_riders_working" {
   name  = "num_riders_working"
   type  = "String"
-  value = ""
+  value = " "
   lifecycle {
     ignore_changes = [
       value
