@@ -47,6 +47,11 @@ resource "aws_cognito_user_pool" "user_pool" {
     pre_sign_up       = module.cognito_presignup_trigger.arn
     post_confirmation = module.cognito_postsignup_trigger.arn
   }
+  lifecycle {
+    ignore_changes = [
+      schema
+    ]
+  }
 }
 resource "aws_cognito_user_pool_domain" "default" {
   user_pool_id    = aws_cognito_user_pool.user_pool.id
