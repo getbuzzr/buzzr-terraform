@@ -109,7 +109,7 @@ resource "aws_route53_record" "dev_auth_getbuzzr_co" {
   type    = "A"
 
   alias {
-    name                   = "d34cu7enlpcge2.cloudfront.net"
+    name                   = "dtuye9my012mi.cloudfront.net"
     zone_id                = local.cloudfront_distribution_hosted_zone_id
     evaluate_target_health = true
   }
@@ -201,7 +201,7 @@ resource "aws_route53_record" "staging_auth_getbuzzr_co" {
   type    = "A"
 
   alias {
-    name                   = "dvgausl6vv09u.cloudfront.net"
+    name                   = "d11k8q9oj3kvt4.cloudfront.net"
     zone_id                = local.cloudfront_distribution_hosted_zone_id
     evaluate_target_health = true
   }
