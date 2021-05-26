@@ -154,6 +154,66 @@ resource "aws_cognito_identity_provider" "apple" {
   }
 }
 
+
+resource "aws_cognito_user_pool" "rider_pool" {
+  name                     = "getbuzzr-rider-pool"
+  auto_verified_attributes = ["email"]
+  username_attributes      = ["email"]
+  mfa_configuration        = "OPTIONAL"
+  software_token_mfa_configuration {
+    enabled = true
+  }
+
+  password_policy {
+    minimum_length  = 8
+    require_symbols = false
+  }
+
+  schema {
+    attribute_data_type = "String"
+    name                = "given_name"
+    required            = true
+    string_attribute_constraints {
+              max_length = "2048"
+              min_length = "0"
+            }
+  }
+  schema {
+    attribute_data_type = "String"
+    name                = "family_name"
+    required            = true
+    string_attribute_constraints {
+              max_length = "2048"
+              min_length = "0"
+            }
+  }
+  schema {
+    attribute_data_type = "String"
+    name                = "email"
+    required            = true
+    string_attribute_constraints {
+              max_length = "2048"
+              min_length = "0"
+            }
+  }
+
+  lambda_config {
+    pre_sign_up       = module.rider_cognito_presignup_trigger.arn
+    post_confirmation = module.rider_cognito_postsignup_trigger.arn
+  }
+  lifecycle {
+    ignore_changes = [
+      schema
+    ]
+  }
+}
+resource "aws_cognito_user_pool_client" "rider_app_client" {
+  name = "rider-app-client"
+
+  user_pool_id = aws_cognito_user_pool.rider_pool.id
+}
+
+
 # NOT SUPPORTED CORRECTLY YET BY TERRAFORM
 # resource "aws_cognito_user_pool_ui_customization" "ui_customization" {
 #   css        = "}a{color:#26DBB0}label{color:white !important}span {color: white !important;}.legalText-customizable {display:none}.background-customizable{background-color:#070D28 !important}.inputField-customizable{border: 1px solid #26DBB0;}.submitButton-customizable{background-color:#26DBB0 !important}.banner-customizable{background:#070D28 !important}"
