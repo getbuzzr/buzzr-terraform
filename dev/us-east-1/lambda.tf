@@ -84,7 +84,7 @@ module "rider_cognito_postsignup_trigger" {
   source = "../../modules/lambda_function"
 
   function_name     = "rider_cognito_postsignup_trigger"
-  role_arn          = module.rider_postsignup_lambda_role.role_arn
+  role_arn          = module.postsignup_lambda_role.role_arn
   handler           = "main.lambda_handler"
   lambda_layer_arns = [aws_lambda_layer_version.pymysql_layer.arn, aws_lambda_layer_version.stripe_layer.arn]
   runtime           = "python3.8"
@@ -97,12 +97,4 @@ module "rider_cognito_postsignup_trigger" {
 
 
 
-}
-
-resource "aws_lambda_permission" "rider_cognito_postsignup_permission" {
-  statement_id  = "AllowExecutionCognito"
-  action        = "lambda:InvokeFunction"
-  function_name = module.rider_cognito_postsignup_trigger.arn
-  principal     = "cognito-idp.amazonaws.com"
-  source_arn    = aws_cognito_user_pool.rider_pool.arn
 }
