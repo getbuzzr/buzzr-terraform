@@ -45,15 +45,7 @@ resource "aws_cognito_user_pool" "user_pool" {
               min_length = "0"
             }
   }
-  schema {
-    attribute_data_type = "String"
-    name                = "email"
-    required            = true
-    string_attribute_constraints {
-              max_length = "2048"
-              min_length = "0"
-            }
-  }
+  
 
   lambda_config {
     pre_sign_up       = module.cognito_presignup_trigger.arn
@@ -187,18 +179,9 @@ resource "aws_cognito_user_pool" "rider_pool" {
               min_length = "0"
             }
   }
-  schema {
-    attribute_data_type = "String"
-    name                = "email"
-    required            = true
-    string_attribute_constraints {
-              max_length = "2048"
-              min_length = "0"
-            }
-  }
+
 
   lambda_config {
-    pre_sign_up       = module.rider_cognito_presignup_trigger.arn
     post_confirmation = module.rider_cognito_postsignup_trigger.arn
   }
   lifecycle {
