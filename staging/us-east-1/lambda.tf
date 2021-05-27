@@ -26,7 +26,7 @@ resource "aws_lambda_permission" "cognito_permission" {
   action        = "lambda:InvokeFunction"
   function_name = module.cognito_presignup_trigger.arn
   principal     = "cognito-idp.amazonaws.com"
-  source_arn    = aws_cognito_user_pool.user_pool_staging.arn
+  source_arn    = aws_cognito_user_pool.use_staging_pool.arn
 }
 
 
@@ -56,5 +56,5 @@ resource "aws_lambda_permission" "cognito_postsignup_permission" {
   action        = "lambda:InvokeFunction"
   function_name = module.cognito_postsignup_trigger.arn
   principal     = "cognito-idp.amazonaws.com"
-  source_arn    = aws_cognito_user_pool.user_pool_staging.arn
+  source_arn    = aws_cognito_user_pool.use_staging_pool.arn
 }
