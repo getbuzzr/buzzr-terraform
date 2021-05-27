@@ -13,7 +13,7 @@ locals {
   cognito_idp_provider_name = "COGNITO"
 }
 
-resource "aws_cognito_user_pool" "cognito_user_pool" {
+resource "aws_cognito_user_pool" "cognito_user_pool_dev" {
   name                     = "getbuzzr-user-pool"
   auto_verified_attributes = ["email"]
   username_attributes      = ["email"]
@@ -60,15 +60,15 @@ resource "aws_cognito_user_pool" "cognito_user_pool" {
     ]
   }
 }
-resource "aws_cognito_user_pool_domain" "default" {
-  user_pool_id    = aws_cognito_user_pool.cognito_user_pool.id
-  domain          = "dev.auth.getbuzzr.co"
-  certificate_arn = aws_acm_certificate.dev_auth_getbuzzr_co.arn
-}
+# resource "aws_cognito_user_pool_domain" "default" {
+#   user_pool_id    = aws_cognito_user_pool.cognito_user_pool_dev.id
+#   domain          = "dev.auth.getbuzzr.co"
+#   certificate_arn = aws_acm_certificate.dev_auth_getbuzzr_co.arn
+# }
 
 module "mobile_app_client" {
   source          = "../../modules/saml_app_client"
-  user_pool_id    = aws_cognito_user_pool.cognito_user_pool.id
+  user_pool_id    = aws_cognito_user_pool.cognito_user_pool_dev.id
   app_client_name = "mobile_app_client"
   supported_identity_providers = [
     local.cognito_idp_provider_name,
@@ -87,7 +87,7 @@ module "mobile_app_client" {
 
 
 resource "aws_cognito_identity_provider" "google" {
-  user_pool_id  = aws_cognito_user_pool.cognito_user_pool.id
+  user_pool_id  = aws_cognito_user_pool.cognito_user_pool_dev.id
   provider_name = "Google"
   provider_type = "Google"
 
@@ -108,7 +108,7 @@ resource "aws_cognito_identity_provider" "google" {
 }
 
 resource "aws_cognito_identity_provider" "facebook" {
-  user_pool_id  = aws_cognito_user_pool.cognito_user_pool.id
+  user_pool_id  = aws_cognito_user_pool.cognito_user_pool_dev.id
   provider_name = "Facebook"
   provider_type = "Facebook"
 
@@ -129,7 +129,7 @@ resource "aws_cognito_identity_provider" "facebook" {
 }
 
 resource "aws_cognito_identity_provider" "apple" {
-  user_pool_id  = aws_cognito_user_pool.cognito_user_pool.id
+  user_pool_id  = aws_cognito_user_pool.cognito_user_pool_dev.id
   provider_name = "SignInWithApple"
   provider_type = "SignInWithApple"
 

@@ -26,7 +26,7 @@ resource "aws_lambda_permission" "cognito_permission" {
   action        = "lambda:InvokeFunction"
   function_name = module.cognito_presignup_trigger.arn
   principal     = "cognito-idp.amazonaws.com"
-  source_arn    = aws_cognito_user_pool.cognito_user_pool.arn
+  source_arn    = aws_cognito_user_pool.cognito_user_pool_dev.arn
 }
 
 
