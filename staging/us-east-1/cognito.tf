@@ -13,7 +13,7 @@ locals {
   cognito_idp_provider_name = "COGNITO"
 }
 
-resource "aws_cognito_user_pool" "user_pool_staging" {
+resource "aws_cognito_user_pool" "use_staging_pool" {
   name                     = "getbuzzr-user-pool"
   auto_verified_attributes = ["email"]
   username_attributes      = ["email"]
@@ -36,15 +36,7 @@ resource "aws_cognito_user_pool" "user_pool_staging" {
               min_length = "0"
             }
   }
-  schema {
-    attribute_data_type = "String"
-    name                = "email"
-    required            = true
-    string_attribute_constraints {
-              max_length = "2048"
-              min_length = "0"
-            }
-  }
+ 
   software_token_mfa_configuration {
     enabled = true
   }
@@ -65,14 +57,14 @@ resource "aws_cognito_user_pool" "user_pool_staging" {
   }
 }
 resource "aws_cognito_user_pool_domain" "default" {
-  user_pool_id    = aws_cognito_user_pool.user_pool_staging.id
+  user_pool_id    = aws_cognito_user_pool.use_staging_pool.id
   domain          = "staging.auth.getbuzzr.co"
   certificate_arn = aws_acm_certificate.staging_auth_getbuzzr_co.arn
 }
 
 module "mobile_app_client" {
   source          = "../../modules/saml_app_client"
-  user_pool_id    = aws_cognito_user_pool.user_pool_staging.id
+  user_pool_id    = aws_cognito_user_pool.use_staging_pool.id
   app_client_name = "mobile_app_client"
   supported_identity_providers = [
     local.cognito_idp_provider_name,
@@ -91,7 +83,7 @@ module "mobile_app_client" {
 
 
 resource "aws_cognito_identity_provider" "google" {
-  user_pool_id  = aws_cognito_user_pool.user_pool_staging.id
+  user_pool_id  = aws_cognito_user_pool.use_staging_pool.id
   provider_name = "Google"
   provider_type = "Google"
 
@@ -112,7 +104,7 @@ resource "aws_cognito_identity_provider" "google" {
 }
 
 resource "aws_cognito_identity_provider" "facebook" {
-  user_pool_id  = aws_cognito_user_pool.user_pool_staging.id
+  user_pool_id  = aws_cognito_user_pool.use_staging_pool.id
   provider_name = "Facebook"
   provider_type = "Facebook"
 
@@ -133,7 +125,7 @@ resource "aws_cognito_identity_provider" "facebook" {
 }
 
 resource "aws_cognito_identity_provider" "apple" {
-  user_pool_id  = aws_cognito_user_pool.user_pool_staging.id
+  user_pool_id  = aws_cognito_user_pool.use_staging_pool.id
   provider_name = "SignInWithApple"
   provider_type = "SignInWithApple"
 
