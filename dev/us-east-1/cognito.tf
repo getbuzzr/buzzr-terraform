@@ -13,7 +13,7 @@ locals {
   cognito_idp_provider_name = "COGNITO"
 }
 
-resource "aws_cognito_user_pool" "user_dev_cognito" {
+resource "aws_cognito_user_pool" "cognito_user_pool" {
   name                     = "getbuzzr-user-pool"
   auto_verified_attributes = ["email"]
   username_attributes      = ["email"]
@@ -31,15 +31,18 @@ resource "aws_cognito_user_pool" "user_dev_cognito" {
     attribute_data_type = "String"
     name                = "given_name"
     required            = true
+    mutable             = true
     string_attribute_constraints {
               max_length = "2048"
               min_length = "0"
             }
   }
+  
   schema {
     attribute_data_type = "String"
     name                = "family_name"
     required            = true
+    mutable             = true
     string_attribute_constraints {
               max_length = "2048"
               min_length = "0"
@@ -58,14 +61,14 @@ resource "aws_cognito_user_pool" "user_dev_cognito" {
   }
 }
 resource "aws_cognito_user_pool_domain" "default" {
-  user_pool_id    = aws_cognito_user_pool.user_dev_cognito.id
+  user_pool_id    = aws_cognito_user_pool.cognito_user_pool.id
   domain          = "dev.auth.getbuzzr.co"
   certificate_arn = aws_acm_certificate.dev_auth_getbuzzr_co.arn
 }
 
 module "mobile_app_client" {
   source          = "../../modules/saml_app_client"
-  user_pool_id    = aws_cognito_user_pool.user_dev_cognito.id
+  user_pool_id    = aws_cognito_user_pool.cognito_user_pool.id
   app_client_name = "mobile_app_client"
   supported_identity_providers = [
     local.cognito_idp_provider_name,
@@ -84,7 +87,7 @@ module "mobile_app_client" {
 
 
 resource "aws_cognito_identity_provider" "google" {
-  user_pool_id  = aws_cognito_user_pool.user_dev_cognito.id
+  user_pool_id  = aws_cognito_user_pool.cognito_user_pool.id
   provider_name = "Google"
   provider_type = "Google"
 
@@ -105,7 +108,7 @@ resource "aws_cognito_identity_provider" "google" {
 }
 
 resource "aws_cognito_identity_provider" "facebook" {
-  user_pool_id  = aws_cognito_user_pool.user_dev_cognito.id
+  user_pool_id  = aws_cognito_user_pool.cognito_user_pool.id
   provider_name = "Facebook"
   provider_type = "Facebook"
 
@@ -126,7 +129,7 @@ resource "aws_cognito_identity_provider" "facebook" {
 }
 
 resource "aws_cognito_identity_provider" "apple" {
-  user_pool_id  = aws_cognito_user_pool.user_dev_cognito.id
+  user_pool_id  = aws_cognito_user_pool.cognito_user_pool.id
   provider_name = "SignInWithApple"
   provider_type = "SignInWithApple"
 
@@ -147,7 +150,7 @@ resource "aws_cognito_identity_provider" "apple" {
 }
 
 
-resource "aws_cognito_user_pool" "rider_dev_pool" {
+resource "aws_cognito_user_pool" "rider_user_pool" {
   name                     = "getbuzzr-rider-pool"
   auto_verified_attributes = ["email"]
   username_attributes      = ["email"]
@@ -165,6 +168,7 @@ resource "aws_cognito_user_pool" "rider_dev_pool" {
     attribute_data_type = "String"
     name                = "given_name"
     required            = true
+    mutable= true
     string_attribute_constraints {
               max_length = "2048"
               min_length = "0"
@@ -174,6 +178,7 @@ resource "aws_cognito_user_pool" "rider_dev_pool" {
     attribute_data_type = "String"
     name                = "family_name"
     required            = true
+    mutable= true 
     string_attribute_constraints {
               max_length = "2048"
               min_length = "0"
@@ -193,7 +198,7 @@ resource "aws_cognito_user_pool" "rider_dev_pool" {
 resource "aws_cognito_user_pool_client" "rider_app_client" {
   name = "rider-app-client"
 
-  user_pool_id = aws_cognito_user_pool.rider_dev_pool.id
+  user_pool_id = aws_cognito_user_pool.rider_user_pool.id
 }
 
 
