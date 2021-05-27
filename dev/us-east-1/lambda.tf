@@ -59,25 +59,25 @@ resource "aws_lambda_permission" "rider_cognito_postsignup_permission" {
   source_arn    = aws_cognito_user_pool.rider_pool.arn
 }
 
-module "rider_cognito_presignup_trigger" {
-  source = "../../modules/lambda_function"
+# module "rider_cognito_presignup_trigger" {
+#   source = "../../modules/lambda_function"
 
-  function_name = "rider_cognito_presignup_trigger"
-  role_arn      = module.presignup_lambda_role.role_arn
-  handler       = "main.lambda_handler"
+#   function_name = "rider_cognito_presignup_trigger"
+#   role_arn      = module.presignup_lambda_role.role_arn
+#   handler       = "main.lambda_handler"
 
 
-  runtime = "python3.8"
+#   runtime = "python3.8"
 
-}
+# }
 
-resource "aws_lambda_permission" "rider_cognito_permission" {
-  statement_id  = "AllowExecutionCognito"
-  action        = "lambda:InvokeFunction"
-  function_name = module.rider_cognito_presignup_trigger.arn
-  principal     = "cognito-idp.amazonaws.com"
-  source_arn    = aws_cognito_user_pool.rider_pool.arn
-}
+# resource "aws_lambda_permission" "rider_cognito_permission" {
+#   statement_id  = "AllowExecutionCognito"
+#   action        = "lambda:InvokeFunction"
+#   function_name = module.rider_cognito_presignup_trigger.arn
+#   principal     = "cognito-idp.amazonaws.com"
+#   source_arn    = aws_cognito_user_pool.rider_pool.arn
+# }
 
 
 module "rider_cognito_postsignup_trigger" {
@@ -94,7 +94,5 @@ module "rider_cognito_postsignup_trigger" {
     DATABASE_URI      = data.aws_ssm_parameter.api_db_server_uri.value,
     environment       = "dev"
   }
-
-
 
 }
