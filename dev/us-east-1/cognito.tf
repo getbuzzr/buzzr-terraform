@@ -182,7 +182,6 @@ resource "aws_cognito_user_pool" "rider_pool" {
 
 
   lambda_config {
-    pre_sign_up       = module.rider_cognito_presignup_trigger.arn
     post_confirmation = module.rider_cognito_postsignup_trigger.arn
   }
   lifecycle {
