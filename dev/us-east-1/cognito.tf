@@ -60,11 +60,11 @@ resource "aws_cognito_user_pool" "cognito_user_pool" {
     ]
   }
 }
-resource "aws_cognito_user_pool_domain" "default" {
-  user_pool_id    = aws_cognito_user_pool.cognito_user_pool.id
-  domain          = "dev.auth.getbuzzr.co"
-  certificate_arn = aws_acm_certificate.dev_auth_getbuzzr_co.arn
-}
+# resource "aws_cognito_user_pool_domain" "default" {
+#   user_pool_id    = aws_cognito_user_pool.cognito_user_pool.id
+#   domain          = "dev.auth.getbuzzr.co"
+#   certificate_arn = aws_acm_certificate.dev_auth_getbuzzr_co.arn
+# }
 
 module "mobile_app_client" {
   source          = "../../modules/saml_app_client"
