@@ -109,7 +109,7 @@ resource "aws_route53_record" "dev_auth_getbuzzr_co" {
   type    = "A"
 
   alias {
-    name                   = "dtuye9my012mi.cloudfront.net"
+    name                   = "d1g2oza1vrpqhf.cloudfront.net"
     zone_id                = local.cloudfront_distribution_hosted_zone_id
     evaluate_target_health = true
   }

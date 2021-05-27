@@ -22,6 +22,7 @@ resource "aws_cognito_user_pool" "user_staging_pool" {
     attribute_data_type = "String"
     name                = "given_name"
     required            = true
+
     string_attribute_constraints {
               max_length = "2048"
               min_length = "0"
@@ -31,6 +32,7 @@ resource "aws_cognito_user_pool" "user_staging_pool" {
     attribute_data_type = "String"
     name                = "family_name"
     required            = true
+    
     string_attribute_constraints {
               max_length = "2048"
               min_length = "0"
