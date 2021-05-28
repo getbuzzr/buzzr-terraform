@@ -217,3 +217,13 @@ resource "aws_route53_record" "staging_api_getbuzzr_co" {
     zone_id                = "Z117KPS5GTRQ2G"
   }
 }
+
+resource "aws_route53_record" "_69b52f93415433e6ab3a317bec31c670_dev_riderauth_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "_69b52f93415433e6ab3a317bec31c670.dev.riderauth.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["_990584480a6b886058fd40c88aff26ea.jddtvkljgg.acm-validations.aws"]
+
+}

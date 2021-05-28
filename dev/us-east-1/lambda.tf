@@ -46,9 +46,6 @@ module "cognito_postsignup_trigger" {
     FACEBOOK_API_KEY  = data.aws_ssm_parameter.facebook_api_key.value,
     environment       = "dev"
   }
-
-
-
 }
 resource "aws_lambda_permission" "cognito_postsignup_permission" {
   statement_id  = "AllowExecutionCognito"

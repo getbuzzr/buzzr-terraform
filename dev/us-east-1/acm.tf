@@ -33,3 +33,12 @@ resource "aws_acm_certificate" "dev_static_getbuzzr_co" {
     create_before_destroy = true
   }
 }
+
+resource "aws_acm_certificate" "dev_riderauth_getbuzzr_co" {
+  domain_name       = "dev.riderauth.getbuzzr.co"
+  validation_method = "DNS"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
