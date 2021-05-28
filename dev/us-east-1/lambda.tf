@@ -50,6 +50,13 @@ module "cognito_postsignup_trigger" {
 
 
 }
+resource "aws_lambda_permission" "cognito_postsignup_permission" {
+  statement_id  = "AllowExecutionCognito"
+  action        = "lambda:InvokeFunction"
+  function_name = module.cognito_postsignup_trigger.arn
+  principal     = "cognito-idp.amazonaws.com"
+  source_arn    = aws_cognito_user_pool.cognito_user_pool_dev.arn
+}
 
 resource "aws_lambda_permission" "rider_cognito_postsignup_permission" {
   statement_id  = "AllowExecutionCognito"
