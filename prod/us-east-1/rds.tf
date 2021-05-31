@@ -44,21 +44,3 @@ module "buzzr_prod_db" {
     Terraform   = "true"
   }
 }
-
-
-resource "aws_db_instance" "buzzr_db" {
-  allocated_storage      = 10
-  identifier             = "buzzr"
-  engine                 = "mysql"
-  engine_version         = "5.7"
-  instance_class         = "db.t3.micro"
-  name                   = "buzzr"
-  username               = "root"
-  password               = data.aws_ssm_parameter.db_server_password.value
-  parameter_group_name   = "default.mysql5.7"
-  skip_final_snapshot    = true
-  multi_az               = true
-  publicly_accessible    = true
-  db_subnet_group_name   = aws_db_subnet_group.db_subnet_group.name
-  vpc_security_group_ids = [aws_security_group.db_server.id]
-}
