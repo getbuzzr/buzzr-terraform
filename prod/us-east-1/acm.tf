@@ -16,7 +16,7 @@ resource "aws_acm_certificate" "auth_getbuzzr_co" {
   }
 }
 
-resource "aws_acm_certificate" "dev_api_getbuzzr_co" {
+resource "aws_acm_certificate" "api_getbuzzr_co" {
   domain_name       = "api.getbuzzr.co"
   validation_method = "DNS"
 
@@ -26,7 +26,7 @@ resource "aws_acm_certificate" "dev_api_getbuzzr_co" {
 }
 
 
-resource "aws_acm_certificate" "dev_static_getbuzzr_co" {
+resource "aws_acm_certificate" "static_getbuzzr_co" {
   domain_name       = "static.getbuzzr.co"
   validation_method = "DNS"
 
