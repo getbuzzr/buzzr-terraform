@@ -1,7 +1,7 @@
 # network acl where the webservers will exists
 resource "aws_network_acl" "webserver" {
   vpc_id     = aws_default_vpc.default.id
-  subnet_ids = [aws_subnet.private1.id, aws_subnet.private2.id]
+  subnet_ids = [aws_subnet.private_webserver1.id, aws_subnet.private_webserver2.id]
 
 }
 # This is the nacl tcp rule for http traffic
@@ -51,7 +51,7 @@ module "webserver_nat_gateway" {
 # network acl where the db will exists
 resource "aws_network_acl" "db" {
   vpc_id     = aws_default_vpc.default.id
-  subnet_ids = [aws_subnet.private3.id, aws_subnet.private4.id]
+  subnet_ids = [aws_subnet.private_db2.id, aws_subnet.private_db1.id]
 
 }
 # This is the nacl rule for db traffic
