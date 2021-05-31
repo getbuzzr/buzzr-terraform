@@ -200,11 +200,11 @@ resource "aws_cognito_user_pool_client" "rider_app_client" {
 
   user_pool_id = aws_cognito_user_pool.rider_user_pool.id
 }
-resource "aws_cognito_user_pool_domain" "rider_cognito_domain" {
-  user_pool_id    = aws_cognito_user_pool.rider_user_pool.id
-  domain          = "dev.riderauth.getbuzzr.co"
-  certificate_arn = aws_acm_certificate.dev_riderauth_getbuzzr_co.arn
-}
+# resource "aws_cognito_user_pool_domain" "rider_cognito_domain" {
+#   user_pool_id    = aws_cognito_user_pool.rider_user_pool.id
+#   domain          = "dev.riderauth.getbuzzr.co"
+#   certificate_arn = aws_acm_certificate.dev_riderauth_getbuzzr_co.arn
+# }
 
 # NOT SUPPORTED CORRECTLY YET BY TERRAFORM
 # resource "aws_cognito_user_pool_ui_customization" "ui_customization" {
