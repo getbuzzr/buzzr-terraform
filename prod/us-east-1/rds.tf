@@ -14,6 +14,7 @@ resource "aws_db_subnet_group" "db_subnet_group" {
 
 module "buzzr_prod_db" {
   source  = "terraform-aws-modules/rds-aurora/aws"
+  version = "5.2.0"
 
   name           = "buzzr"
   engine         = "aurora-mysql"
