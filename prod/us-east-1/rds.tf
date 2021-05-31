@@ -74,7 +74,7 @@ data "aws_iam_policy_document" "enhanced_monitoring" {
 module "buzzr_prod_db" {
   source = "cloudposse/rds-cluster/aws"
   # Cloud Posse recommends pinning every module to a specific version
-  # version     = "x.x.x"
+  version     = "0.45.0"
   engine          = "aurora"
   cluster_family  = "aurora-mysql5.7"
   cluster_size    = 2
