@@ -81,9 +81,24 @@ resource "aws_subnet" "private_db2" {
     Service = "db"
   }
 }
+#  Subnet definitions
+resource "aws_subnet" "nat_gateway_subnet" {
+  vpc_id            = aws_default_vpc.default.id
+  cidr_block        = "172.31.6.0/24"
+  availability_zone = "us-east-1a"
+
+  tags = {
+    Name    = "nat_gateway_subnet"
+    Service = "NAT Gateway"
+    type    = "public"
+  }
+}
 
 # subnet routetable association
-
+resource "aws_route_table_association" "nat_gateway_association" {
+  subnet_id      = aws_subnet.nat_gateway_subnet.id
+  route_table_id = aws_default_route_table.default_route_table.id
+}
 resource "aws_route_table_association" "public_sub_associate_1" {
   subnet_id      = aws_subnet.public_elb1.id
   route_table_id = aws_default_route_table.default_route_table.id
@@ -133,9 +148,23 @@ resource "aws_default_route_table" "default_route_table" {
 
 resource "aws_route_table" "private_route_table" {
   vpc_id = aws_default_vpc.default.id
+ route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nat_gateway.id
+  }
 
   tags = {
     type = "private"
   }
 
 }
+
+# nat gateway
+resource "aws_eip" "nat_gateway_ip" {
+  vpc              = true
+}
+resource "aws_nat_gateway" "nat_gateway" {
+  allocation_id = aws_eip.nat_gateway_ip.id
+  subnet_id     = aws_subnet.nat_gateway_subnet.id
+}
+
