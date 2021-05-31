@@ -27,7 +27,7 @@ module "buzzr_prod_db" {
   replica_count           = 1
   allowed_security_groups = [aws_security_group.db_server.id]
   allowed_cidr_blocks     = ["172.31.4.0/24","172.31.5.0/24"]
-  name                   = "buzzr"
+  database_name                   = "buzzr"
   username               = "root"
   password               = data.aws_ssm_parameter.db_server_password.value
   storage_encrypted   = true
