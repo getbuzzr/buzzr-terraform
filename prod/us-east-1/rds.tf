@@ -113,7 +113,7 @@ resource "aws_rds_cluster" "buzzr_api_cluster" {
   cluster_identifier      = "buzzr-api"
   engine                  = "aurora-mysql"
   engine_version          = "5.7.mysql_aurora.2.03.2"
-  availability_zones      = ["us-west-2a", "us-west-2b", "us-west-2c"]
+  availability_zones      = ["us-east-1d", "us-east-1c"]
   database_name           = "buzzr"
   master_username         = "root"
   master_password         = data.aws_ssm_parameter.db_server_password.value
