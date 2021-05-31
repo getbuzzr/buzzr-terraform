@@ -245,3 +245,11 @@ resource "aws_route53_record" "_abb0812c1b5b8902500429dc942adcc0_api_getbuzzr_co
 
   records = ["_a3b2cd6725188fd8835ca99fee6d43dd.xrchbtpdjs.acm-validations.aws"]
 }
+resource "aws_route53_record" "_2b576a1d66b900bb6efb78ebe90c8360_auth_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "_2b576a1d66b900bb6efb78ebe90c8360.auth.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["_50003255f22cd254edb1f952ea6cf429.zjfbrrwmzc.acm-validations.aws"]
+}
