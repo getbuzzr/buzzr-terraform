@@ -227,3 +227,21 @@ resource "aws_route53_record" "_69b52f93415433e6ab3a317bec31c670_dev_riderauth_g
   records = ["_990584480a6b886058fd40c88aff26ea.jddtvkljgg.acm-validations.aws"]
 
 }
+resource "aws_route53_record" "_e25be5a881a7725554e80e6c2b0d4dd8_static_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "_e25be5a881a7725554e80e6c2b0d4dd8.static.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["_5326ddf773eb0b6be0fcc25f278964f9.xrchbtpdjs.acm-validations.aws"]
+}
+
+
+resource "aws_route53_record" "_abb0812c1b5b8902500429dc942adcc0_api_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "_abb0812c1b5b8902500429dc942adcc0.api.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["_a3b2cd6725188fd8835ca99fee6d43dd.xrchbtpdjs.acm-validations.aws"]
+}
