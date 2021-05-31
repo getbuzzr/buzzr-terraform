@@ -5,3 +5,11 @@ module "oauth_getbuzzr_co" {
   acm_certificate_arn = aws_acm_certificate.oauth_getbuzzr_co.arn
   admin_role_arn      = "arn:aws:iam::980636768267:role/cicd_role"
 }
+
+
+
+module "elb_deploy_bucket" {
+  source        = "../../modules/s3_private_read"
+  bucket_name   = "buzzr-elb-deploy-prod"
+  read_role_arn = module.elb_webserver_role.role_arn
+}
