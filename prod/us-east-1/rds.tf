@@ -106,7 +106,6 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   publicly_accessible=true
   db_subnet_group_name = aws_db_subnet_group.db_subnet_group.name
   monitoring_role_arn = aws_iam_role.enhanced_monitoring.arn
-  preferred_backup_window = "02:00-05:00"
 }
 
 resource "aws_rds_cluster" "buzzr_api_cluster" {
