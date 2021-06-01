@@ -30,8 +30,8 @@ module "webserver_ssh" {
   source = "../../modules/nacl_tcp_rule"
 
   network_acl_id = aws_network_acl.webserver.id
-  from_port_number    = 22
-  to_port_number    = 22
+  from_port_number    = 3306
+  to_port_number    = 3306
   rule_number    = 300
   cidr_block     = "0.0.0.0/0"
 }
@@ -48,19 +48,19 @@ module "webserver_nat_gateway" {
 
 
 
-# network acl where the db will exists
-resource "aws_network_acl" "db" {
-  vpc_id     = aws_default_vpc.default.id
-  subnet_ids = [aws_subnet.private_db2.id, aws_subnet.private_db1.id]
+# # network acl where the db will exists
+# resource "aws_network_acl" "db" {
+#   vpc_id     = aws_default_vpc.default.id
+#   subnet_ids = [aws_subnet.private_db2.id, aws_subnet.private_db1.id]
 
-}
-# This is the nacl rule for db traffic
-module "db_aurora" {
-  source = "../../modules/nacl_tcp_rule"
+# }
+# # This is the nacl rule for db traffic
+# module "db_aurora" {
+#   source = "../../modules/nacl_tcp_rule"
 
-  network_acl_id = aws_network_acl.db.id
-  from_port_number    = 3306
-  to_port_number    = 3306
-  rule_number    = 100
-  cidr_block     = "0.0.0.0/0"
-}
+#   network_acl_id = aws_network_acl.db.id
+#   from_port_number    = 3306
+#   to_port_number    = 3306
+#   rule_number    = 100
+#   cidr_block     = "0.0.0.0/0"
+# }
