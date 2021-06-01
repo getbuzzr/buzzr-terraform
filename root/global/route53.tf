@@ -97,10 +97,12 @@ resource "aws_route53_record" "auth_getbuzzr_co" {
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
   name    = "auth.getbuzzr.co"
   type    = "A"
-  ttl     = "300"
 
-  ## Placeholder
-  records = ["127.0.0.1"]
+  alias {
+    name                   = "d3haizwmi3ej5u.cloudfront.net"
+    zone_id                = local.cloudfront_distribution_hosted_zone_id
+    evaluate_target_health = true
+  }
 }
 
 resource "aws_route53_record" "dev_auth_getbuzzr_co" {
