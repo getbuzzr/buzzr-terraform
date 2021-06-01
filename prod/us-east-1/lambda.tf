@@ -5,7 +5,8 @@ module "cognito_presignup_trigger" {
   role_arn      = module.presignup_lambda_role.role_arn
   handler       = "main.lambda_handler"
 
-
+  vpc_subnet_ids = [aws_subnet.private_webserver1.id, aws_subnet.private_webserver2.id]
+  vpc_security_group_ids = [aws_security_group.lambda_trigger.id]
   runtime = "python3.8"
 
 }
@@ -28,6 +29,8 @@ module "cognito_postsignup_trigger" {
   lambda_layer_arns = [aws_lambda_layer_version.pymysql_layer.arn, aws_lambda_layer_version.stripe_layer.arn]
   runtime           = "python3.8"
   timeout           = 30
+  vpc_subnet_ids = [aws_subnet.private_webserver1.id, aws_subnet.private_webserver2.id]
+  vpc_security_group_ids = [aws_security_group.web_server.id]
   # dont use in prod.. use ssm
   variables = {
     environment       = "prod"
@@ -79,6 +82,8 @@ module "rider_cognito_postsignup_trigger" {
   lambda_layer_arns = [aws_lambda_layer_version.pymysql_layer.arn, aws_lambda_layer_version.stripe_layer.arn]
   runtime           = "python3.8"
   timeout           = 30
+  vpc_subnet_ids = [aws_subnet.private_webserver1.id, aws_subnet.private_webserver2.id]
+  vpc_security_group_ids = [aws_security_group.lambda_trigger.id]
   # dont use in prod.. use ssm
   variables = {
     environment       = "prod"
