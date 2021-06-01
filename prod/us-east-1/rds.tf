@@ -108,8 +108,8 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   monitoring_role_arn = aws_iam_role.enhanced_monitoring.arn
 }
 
-resource "aws_rds_cluster" "buzzr_api_cluster" {
-  cluster_identifier      = "buzzr-api"
+resource "aws_rds_cluster" "buzzr_cluster" {
+  cluster_identifier      = "buzzr"
   engine                  = "aurora-mysql"
   engine_version          = "5.7.mysql_aurora.2.03.2"
   availability_zones      = ["us-east-1d", "us-east-1c"]
