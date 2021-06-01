@@ -30,7 +30,7 @@ module "cognito_postsignup_trigger" {
   timeout           = 30
   # dont use in prod.. use ssm
   variables = {
-    environment       = "dev"
+    environment       = "prod"
   }
 }
 resource "aws_lambda_permission" "cognito_postsignup_permission" {
@@ -81,7 +81,7 @@ module "rider_cognito_postsignup_trigger" {
   timeout           = 30
   # dont use in prod.. use ssm
   variables = {
-    environment       = "dev"
+    environment       = "prod"
   }
 
 }
