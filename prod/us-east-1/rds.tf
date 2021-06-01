@@ -42,17 +42,17 @@ data "aws_iam_policy_document" "enhanced_monitoring" {
 resource "aws_rds_cluster_instance" "cluster_instances" {
   count              = 2
   identifier         = "buzzr-api-${count.index}"
-  cluster_identifier = aws_rds_cluster.buzzr_prod_cluster_rds.id
+  cluster_identifier = aws_rds_cluster.prod_cluster_rds.id
   instance_class     = "db.t3.small"
-  engine             = aws_rds_cluster.buzzr_prod_cluster_rds.engine
-  engine_version     = aws_rds_cluster.buzzr_prod_cluster_rds.engine_version
+  engine             = aws_rds_cluster.prod_cluster_rds.engine
+  engine_version     = aws_rds_cluster.prod_cluster_rds.engine_version
   publicly_accessible=false
   db_subnet_group_name = aws_db_subnet_group.db_subnet_group.name
   monitoring_role_arn = aws_iam_role.enhanced_monitoring.arn
   monitoring_interval = 30
 }
 
-resource "aws_rds_cluster" "buzzr_prod_cluster_rds" {
+resource "aws_rds_cluster" "prod_cluster_rds" {
   cluster_identifier      = "buzzr"
   engine                  = "aurora-mysql"
   engine_version          = "5.7.mysql_aurora.2.03.2"

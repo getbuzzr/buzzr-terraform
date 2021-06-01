@@ -56,31 +56,31 @@ resource "aws_subnet" "private_webserver2" {
   }
 }
 
-resource "aws_subnet" "private_db1" {
-  vpc_id            = aws_default_vpc.default.id
-  cidr_block        = "172.31.4.0/24"
-  availability_zone = "us-east-1c"
+# resource "aws_subnet" "private_db1" {
+#   vpc_id            = aws_default_vpc.default.id
+#   cidr_block        = "172.31.4.0/24"
+#   availability_zone = "us-east-1c"
 
 
-  tags = {
-    Name    = "db1"
-    type    = "private"
-    Service = "db"
-  }
-}
+#   tags = {
+#     Name    = "db1"
+#     type    = "private"
+#     Service = "db"
+#   }
+# }
 
-resource "aws_subnet" "private_db2" {
-  vpc_id            = aws_default_vpc.default.id
-  cidr_block        = "172.31.5.0/24"
-  availability_zone = "us-east-1d"
+# resource "aws_subnet" "private_db2" {
+#   vpc_id            = aws_default_vpc.default.id
+#   cidr_block        = "172.31.5.0/24"
+#   availability_zone = "us-east-1d"
 
 
-  tags = {
-    Name    = "db2"
-    type    = "private"
-    Service = "db"
-  }
-}
+#   tags = {
+#     Name    = "db2"
+#     type    = "private"
+#     Service = "db"
+#   }
+# }
 #  Subnet definitions
 resource "aws_subnet" "nat_gateway_subnet" {
   vpc_id            = aws_default_vpc.default.id
@@ -119,15 +119,15 @@ resource "aws_route_table_association" "private_sub_associate_2" {
   route_table_id = aws_route_table.private_route_table.id
 }
 
-resource "aws_route_table_association" "private_sub_associate_3" {
-  subnet_id      = aws_subnet.private_db1.id
-  route_table_id = aws_route_table.db_route_table.id
-}
+# resource "aws_route_table_association" "private_sub_associate_3" {
+#   subnet_id      = aws_subnet.private_db1.id
+#   route_table_id = aws_route_table.db_route_table.id
+# }
 
-resource "aws_route_table_association" "private_sub_associate_4" {
-  subnet_id      = aws_subnet.private_db2.id
-  route_table_id = aws_route_table.db_route_table.id
-}
+# resource "aws_route_table_association" "private_sub_associate_4" {
+#   subnet_id      = aws_subnet.private_db2.id
+#   route_table_id = aws_route_table.db_route_table.id
+# }
 
 # Route Table Definitions
 resource "aws_default_route_table" "default_route_table" {
