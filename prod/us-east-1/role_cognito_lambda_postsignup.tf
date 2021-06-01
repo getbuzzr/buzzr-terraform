@@ -22,7 +22,9 @@ data "aws_iam_policy_document" "postsignup_lambda_policy" {
     ]
 
     resources = [
-      "arn:aws:ssm:us-east-1:*:parameter/api_db_database_uri"
+      "arn:aws:ssm:us-east-1:*:parameter/api_db_database_uri",
+     "arn:aws:ssm:us-east-1:*:parameter/facebook_api_key" ,
+     "arn:aws:ssm:us-east-1:*:parameter/stripe_secret_key"
     ]
   }
 
