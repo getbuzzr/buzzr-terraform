@@ -13,6 +13,21 @@ data "aws_iam_policy_document" "presignup_lambda_policy" {
       "arn:aws:logs:us-east-1:*:*"
     ]
   }
+  statement {
+    sid = "ec2deploy"
+
+    actions = [
+      "ec2:DescribeNetworkInterfaces",
+        "ec2:CreateNetworkInterface",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DescribeInstances",
+        "ec2:AttachNetworkInterface"
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
 
   statement {
     sid = "PresignupInvokePermissions"

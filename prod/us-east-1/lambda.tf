@@ -30,7 +30,7 @@ module "cognito_postsignup_trigger" {
   runtime           = "python3.8"
   timeout           = 30
   vpc_subnet_ids = [aws_subnet.private_webserver1.id, aws_subnet.private_webserver2.id]
-  vpc_security_group_ids = [aws_security_group.web_server.id]
+  vpc_security_group_ids = [aws_security_group.lambda_trigger.id]
   # dont use in prod.. use ssm
   variables = {
     environment       = "prod"
