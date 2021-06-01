@@ -120,4 +120,5 @@ resource "aws_rds_cluster" "buzzr_api_cluster" {
   preferred_backup_window = "02:00-05:00"
   apply_immediately=true
   db_subnet_group_name =aws_db_subnet_group.db_subnet_group.name
+  final_snapshot_identifier = "buzzr-final"
 }
