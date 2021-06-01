@@ -50,22 +50,21 @@ wCxzxqX4
     ]
   }
 }
-# =================================================
-# data "aws_ssm_parameter" "api_db_server_password" {
-#   name = aws_ssm_parameter.api_db_server_password.name
-# }
+data "aws_ssm_parameter" "api_db_server_password" {
+  name = aws_ssm_parameter.api_db_server_password.name
+}
 
-# resource "aws_ssm_parameter" "api_db_database_uri" {
-#   name  = "api_db_database_uri"
-#   type  = "SecureString"
-#   value = "mysql://${aws_db_instance.buzzr_dev_db.username}:${data.aws_ssm_parameter.api_db_server_password.value}@${aws_db_instance.buzzr_dev_db.endpoint}/${aws_db_instance.buzzr_dev_db.name}"
-# }
+resource "aws_ssm_parameter" "api_db_database_uri" {
+  name  = "api_db_database_uri"
+  type  = "SecureString"
+  value = "mysql://${aws_rds_cluster.buzzr_cluster.master_username}:${data.aws_ssm_parameter.api_db_server_password.value}@${aws_rds_cluster.buzzr_cluster.endpoint}/${aws_rds_cluster.buzzr_cluster.database_name}"
+}
 
-# resource "aws_ssm_parameter" "cognito_client_pool" {
-#   name  = "cognito_client_pool"
-#   type  = "SecureString"
-#   value = aws_cognito_user_pool.cognito_user_pool_dev.id
-# }
+resource "aws_ssm_parameter" "cognito_client_pool" {
+  name  = "cognito_client_pool"
+  type  = "SecureString"
+  value = aws_cognito_user_pool.cognito_user_pool.id
+}
 
 
 resource "aws_ssm_parameter" "api_ecr_repo" {
