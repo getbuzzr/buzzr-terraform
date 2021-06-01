@@ -121,12 +121,12 @@ resource "aws_route_table_association" "private_sub_associate_2" {
 
 resource "aws_route_table_association" "private_sub_associate_3" {
   subnet_id      = aws_subnet.private_db1.id
-  route_table_id = aws_route_table.private_route_table.id
+  route_table_id = aws_route_table.db_route_table.id
 }
 
 resource "aws_route_table_association" "private_sub_associate_4" {
   subnet_id      = aws_subnet.private_db2.id
-  route_table_id = aws_route_table.private_route_table.id
+  route_table_id = aws_route_table.db_route_table.id
 }
 
 # Route Table Definitions
@@ -158,6 +158,15 @@ resource "aws_route_table" "private_route_table" {
   }
 
 }
+
+resource "aws_route_table" "db_route_table" {
+  vpc_id = aws_default_vpc.default.id
+  tags = {
+    type = "private"
+  }
+
+}
+
 
 # nat gateway
 resource "aws_eip" "nat_gateway_ip" {
