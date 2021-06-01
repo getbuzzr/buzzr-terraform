@@ -151,7 +151,7 @@ data "aws_iam_policy_document" "cicd_arp" {
       type = "AWS"
 
       identifiers = [
-        "arn:aws:iam::980636768267:role/cicd_role"
+        "arn:aws:iam::751663269361:user/cicd_deploy"
       ]
     }
   }
