@@ -106,6 +106,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   publicly_accessible=true
   db_subnet_group_name = aws_db_subnet_group.db_subnet_group.name
   monitoring_role_arn = aws_iam_role.enhanced_monitoring.arn
+  monitoring_interval = 30
 }
 
 resource "aws_rds_cluster" "buzzr_cluster" {
@@ -120,5 +121,6 @@ resource "aws_rds_cluster" "buzzr_cluster" {
   preferred_backup_window = "02:00-05:00"
   apply_immediately=true
   db_subnet_group_name =aws_db_subnet_group.db_subnet_group.name
+  skip_final_snapshot=false
   final_snapshot_identifier = "buzzr-final"
 }
