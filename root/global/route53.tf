@@ -145,7 +145,8 @@ resource "aws_route53_record" "ses_domain_txt_verification" {
   name    = "_amazonses.getbuzzr.co"
   type    = "TXT"
   ttl     = "600"
-  records = ["kWV4Tp+f9TBPvK3DwwFzSAVHCm3vS7dUkXGTL2EvfNQ="]
+  records = ["kWV4Tp+f9TBPvK3DwwFzSAVHCm3vS7dUkXGTL2EvfNQ=","JMKkSuniQyYTm8HYDsUWwwsYezPZDjsKvisbeF0FmCw=
+"]
 }
 
 resource "aws_route53_record" "oauth_getbuzzr_co" {
