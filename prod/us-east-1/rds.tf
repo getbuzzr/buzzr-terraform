@@ -46,7 +46,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   instance_class     = "db.t3.small"
   engine             = aws_rds_cluster.buzzr_prod_cluster_rds.engine
   engine_version     = aws_rds_cluster.buzzr_prod_cluster_rds.engine_version
-  publicly_accessible=true
+  publicly_accessible=false
   db_subnet_group_name = aws_db_subnet_group.db_subnet_group.name
   monitoring_role_arn = aws_iam_role.enhanced_monitoring.arn
   monitoring_interval = 30
