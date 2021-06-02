@@ -40,7 +40,7 @@ data "aws_iam_policy_document" "enhanced_monitoring" {
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
-  count              = 2
+  count              = 1
   identifier         = "buzzr-api-${count.index}"
   cluster_identifier = aws_rds_cluster.prod_buzzr_aurora_cluster.id
   instance_class     = "db.t3.small"
@@ -65,4 +65,14 @@ resource "aws_rds_cluster" "prod_buzzr_aurora_cluster" {
   db_subnet_group_name =aws_db_subnet_group.db_subnet_group.name
   skip_final_snapshot=true
   vpc_security_group_ids = [aws_security_group.db_server.id]
+}
+
+resource "aws_rds_cluster_endpoint" "buzzr_prod_endpoint" {
+  cluster_identifier          = aws_rds_cluster.prod_buzzr_aurora_cluster.id
+  cluster_endpoint_identifier = "buzzr-prod"
+  custom_endpoint_type        = "ANY"
+
+  static_members = [
+    aws_rds_cluster_instance.cluster_instances.id,
+  ]
 }
