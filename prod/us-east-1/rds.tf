@@ -72,7 +72,4 @@ resource "aws_rds_cluster_endpoint" "buzzr_prod_endpoint" {
   cluster_endpoint_identifier = "buzzr-prod"
   custom_endpoint_type        = "ANY"
 
-  static_members = [
-    aws_rds_cluster_instance.cluster_instances.id,
-  ]
 }
