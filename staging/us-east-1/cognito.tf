@@ -132,9 +132,9 @@ resource "aws_cognito_identity_provider" "apple" {
   provider_type = "SignInWithApple"
 
   provider_details = {
-    client_id        = "com.sensnet.buzzr.auth"
-    team_id          = "E4M7QG8VQK"
-    key_id           = "CGX5ZW85KD"
+    client_id        = "co.buzzr.oauth.staging"
+    team_id          = "HPU83DG9J6"
+    key_id           = "8RCD4VNND5"
     private_key      = data.aws_ssm_parameter.apple_client_private_key.value
     authorize_scopes = "email name"
   }
