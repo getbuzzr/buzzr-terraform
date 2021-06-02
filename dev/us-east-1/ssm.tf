@@ -203,4 +203,24 @@ resource "aws_ssm_parameter" "num_riders_working" {
     ]
   }
 }
+resource "aws_ssm_parameter" "twilio_auth_token" {
+  name  = "twilio_auth_token"
+  type  = "String"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
 
+resource "aws_ssm_parameter" "twilio_account_sid" {
+  name  = "twilio_account_sid"
+  type  = "String"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
