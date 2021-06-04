@@ -272,7 +272,7 @@ resource "aws_route53_record" "api_getbuzzr_co" {
 
 resource "aws_route53_record" "static_getbuzzr_co" {
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
-  name    = "auth.getbuzzr.co"
+  name    = "static.getbuzzr.co"
   type    = "A"
 
   alias {
