@@ -269,3 +269,15 @@ resource "aws_route53_record" "api_getbuzzr_co" {
     zone_id                = "Z117KPS5GTRQ2G"
   }
 }
+
+resource "aws_route53_record" "static_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "auth.getbuzzr.co"
+  type    = "A"
+
+  alias {
+    name                   = "dam81lp0bo0p7.cloudfront.net"
+    zone_id                = local.cloudfront_distribution_hosted_zone_id
+    evaluate_target_health = true
+  }
+}
