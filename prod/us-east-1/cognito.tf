@@ -18,6 +18,13 @@ resource "aws_cognito_user_pool" "cognito_user_pool" {
   auto_verified_attributes = ["email"]
   username_attributes      = ["email"]
   mfa_configuration        = "OPTIONAL"
+  
+  email_configuration{
+    email_sending_account = "DEVELOPER"
+    from_email_address = "hello@getbuzzr.co"
+    source_arn = aws_ses_email_identity.hello_buzzr_co.arn
+  }
+
   software_token_mfa_configuration {
     enabled = true
   }
