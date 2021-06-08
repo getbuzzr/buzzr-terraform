@@ -59,6 +59,11 @@ resource "aws_cognito_user_pool" "cognito_user_pool_dev" {
       schema
     ]
   }
+  email_configuration{
+    email_sending_account = "DEVELOPER"
+    from_email_address = "hello@getbuzzr.co"
+    source_arn = aws_ses_email_identity.hello_buzzr_co.arn
+  }
 }
 resource "aws_cognito_user_pool_domain" "cognito_domain" {
   user_pool_id    = aws_cognito_user_pool.cognito_user_pool_dev.id
