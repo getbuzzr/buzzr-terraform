@@ -40,7 +40,7 @@ data "aws_iam_policy_document" "enhanced_monitoring" {
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
-  count              = 1
+  count              = 2
   identifier         = "buzzr-api-${count.index}"
   cluster_identifier = aws_rds_cluster.prod_buzzr_aurora_cluster.id
   instance_class     = "db.t3.small"
@@ -55,7 +55,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
 resource "aws_rds_cluster" "prod_buzzr_aurora_cluster" {
   cluster_identifier      = "buzzr-prod"
   engine                  = "aurora-mysql"
-  engine_version          = "5.7.mysql_aurora.2.03.2"
+  engine_version          = "5.7.mysql_aurora.2.07.2"
   database_name           = "buzzr"
   master_username         = "root"
   master_password         = data.aws_ssm_parameter.db_server_password.value
