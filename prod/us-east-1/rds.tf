@@ -40,7 +40,7 @@ data "aws_iam_policy_document" "enhanced_monitoring" {
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
-  count              = 2
+  count              = 1
   identifier         = "buzzr-api-${count.index}"
   cluster_identifier = aws_rds_cluster.prod_buzzr_aurora_cluster.id
   instance_class     = "db.t3.small"
