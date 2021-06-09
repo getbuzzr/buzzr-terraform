@@ -55,7 +55,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
 resource "aws_rds_cluster" "prod_buzzr_aurora_cluster" {
   cluster_identifier      = "buzzr-prod"
   engine                  = "aurora-mysql"
-  engine_version          = "5.7.mysql_aurora.2.03.2"
+  engine_version          = "5.7.mysql_aurora.2.07.2"
   database_name           = "buzzr"
   master_username         = "root"
   master_password         = data.aws_ssm_parameter.db_server_password.value
