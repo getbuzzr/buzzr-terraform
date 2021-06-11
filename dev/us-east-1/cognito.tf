@@ -76,7 +76,6 @@ module "mobile_app_client" {
   user_pool_id    = aws_cognito_user_pool.cognito_user_pool_dev.id
   app_client_name = "mobile_app_client"
   supported_identity_providers = [
-    local.cognito_idp_provider_name,
     aws_cognito_identity_provider.google.provider_name,
     aws_cognito_identity_provider.apple.provider_name,
     aws_cognito_identity_provider.facebook.provider_name
