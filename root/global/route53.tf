@@ -281,3 +281,13 @@ resource "aws_route53_record" "static_getbuzzr_co" {
     evaluate_target_health = true
   }
 }
+
+resource "aws_route53_record" "support" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "support.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["getbuzzr.zendesk.com"]
+
+}
