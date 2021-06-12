@@ -43,7 +43,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   count              = 1
   identifier         = "buzzr-api-${count.index}"
   cluster_identifier = aws_rds_cluster.prod_buzzr_aurora_cluster.id
-  instance_class     = "db.t3.medium"
+  instance_class     = "db.t3.small"
   engine             = aws_rds_cluster.prod_buzzr_aurora_cluster.engine
   engine_version     = aws_rds_cluster.prod_buzzr_aurora_cluster.engine_version
   publicly_accessible=false
