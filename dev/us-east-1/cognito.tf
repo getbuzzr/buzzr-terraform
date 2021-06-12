@@ -81,8 +81,8 @@ module "mobile_app_client" {
     aws_cognito_identity_provider.apple.provider_name,
     aws_cognito_identity_provider.facebook.provider_name
   ]
-  default_redirect_uri = "https://oauth.getbuzzr.co/"
-  callback_urls        = ["https://oauth.getbuzzr.co/"]
+  default_redirect_uri = "https://oauth.getbuzzr.co/dev/"
+  callback_urls        = ["https://oauth.getbuzzr.co/dev/"]
   logout_urls          = []
   depends_on = [
     aws_cognito_identity_provider.google,
