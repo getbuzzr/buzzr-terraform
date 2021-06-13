@@ -309,3 +309,27 @@ resource "aws_route53_record" "_95c25255983a3789a321239ab96f201a_staging_oauth_g
 
   records = ["_eb9b24a4b9e8c983566ff5a0945e875e.xrchbtpdjs.acm-validations.aws"]
 }
+
+resource "aws_route53_record" "dev_oauth_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "dev.oauth.getbuzzr.co"
+  type    = "A"
+
+  alias {
+    name                   = "d7o7a0nwi1mgp.cloudfront.net"
+    zone_id                = local.cloudfront_distribution_hosted_zone_id
+    evaluate_target_health = true
+  }
+}
+
+resource "aws_route53_record" "staging_oauth_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "staging.oauth.getbuzzr.co"
+  type    = "A"
+
+  alias {
+    name                   = "d1x6bqqtm49jzn.cloudfront.net"
+    zone_id                = local.cloudfront_distribution_hosted_zone_id
+    evaluate_target_health = true
+  }
+}
