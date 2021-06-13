@@ -291,3 +291,21 @@ resource "aws_route53_record" "support" {
   records = ["getbuzzr.zendesk.com"]
 
 }
+
+resource "aws_route53_record" "_66662b07025e490ed9bf78f8cbabbdf5_dev_oauth_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "_66662b07025e490ed9bf78f8cbabbdf5.dev.oauth.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["_af718aa6e0e83c9018670b70065ef1f4.xrchbtpdjs.acm-validations.aws"]
+}
+
+resource "aws_route53_record" "_66662b07025e490ed9bf78f8cbabbdf5_dev_oauth_getbuzzr_co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "_66662b07025e490ed9bf78f8cbabbdf5.dev.oauth.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["_af718aa6e0e83c9018670b70065ef1f4.xrchbtpdjs.acm-validations.aws"]
+}
