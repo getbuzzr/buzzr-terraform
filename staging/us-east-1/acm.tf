@@ -25,3 +25,12 @@ resource "aws_acm_certificate" "staging_static_getbuzzr_co" {
     create_before_destroy = true
   }
 }
+
+resource "aws_acm_certificate" "staging_oauth.getbuzzr.co" {
+  domain_name       = "staging.oauth.getbuzzr.co"
+  validation_method = "DNS"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
