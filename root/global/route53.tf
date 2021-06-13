@@ -301,11 +301,11 @@ resource "aws_route53_record" "_66662b07025e490ed9bf78f8cbabbdf5_dev_oauth_getbu
   records = ["_af718aa6e0e83c9018670b70065ef1f4.xrchbtpdjs.acm-validations.aws"]
 }
 
-resource "aws_route53_record" "_66662b07025e490ed9bf78f8cbabbdf5_dev_oauth_getbuzzr_co" {
+resource "aws_route53_record" "_95c25255983a3789a321239ab96f201a_staging_oauth_getbuzzr_co" {
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
-  name    = "_66662b07025e490ed9bf78f8cbabbdf5.dev.oauth.getbuzzr.co"
+  name    = "_95c25255983a3789a321239ab96f201a.staging.oauth.getbuzzr.co"
   type    = "CNAME"
   ttl     = "300"
 
-  records = ["_af718aa6e0e83c9018670b70065ef1f4.xrchbtpdjs.acm-validations.aws"]
+  records = ["_eb9b24a4b9e8c983566ff5a0945e875e.xrchbtpdjs.acm-validations.aws"]
 }
