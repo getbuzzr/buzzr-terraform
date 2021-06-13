@@ -26,7 +26,7 @@ resource "aws_acm_certificate" "staging_static_getbuzzr_co" {
   }
 }
 
-resource "aws_acm_certificate" "staging_oauth_getbuzzr.co" {
+resource "aws_acm_certificate" "staging_oauth_getbuzzr_co" {
   domain_name       = "staging.oauth.getbuzzr.co"
   validation_method = "DNS"
 
