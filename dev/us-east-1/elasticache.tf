@@ -9,11 +9,7 @@ resource "aws_elasticache_cluster" "buzzr_redis" {
   apply_immediately    = true
   port                 = 6379
 }
-resource "aws_elasticache_security_group" "elasticache_security_group" {
-  name                 = "elasticache-security-group"
-  security_group_names = [aws_security_group.db_server.name]
-}
 resource "aws_elasticache_subnet_group" "elasticache_subnet_group" {
   name       = "elasticache-subnet-group"
-  subnet_ids = ["${aws_subnet.private1.id},${aws_subnet.private2.id}"]
+  subnet_ids = [aws_subnet.private1.id, aws_subnet.private2.id]
 }
