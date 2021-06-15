@@ -224,3 +224,9 @@ resource "aws_ssm_parameter" "twilio_account_sid" {
     ]
   }
 }
+
+resource "aws_ssm_parameter" "redis_hostname" {
+  name  = "redis_host_name"
+  type  = "String"
+  value = aws_elasticache_cluster.buzzr_redis.cache_nodes.0.address
+}
