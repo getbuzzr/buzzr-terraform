@@ -57,6 +57,18 @@ data "aws_iam_policy_document" "elb_webserver_policy" {
   }
 
   statement {
+    sid = "setisstoreopen"
+
+    actions = [
+      "ssm:PutParameter"
+    ]
+
+    resources = [
+      "arn:aws:ssm:us-east-1:*:parameter/is_store_open",
+      "arn:aws:ssm:us-east-1:*:parameter/num_riders_working"
+    ]
+  }
+  statement {
     sid = "GetECRImages"
 
     actions = [
