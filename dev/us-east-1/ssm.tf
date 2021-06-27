@@ -230,3 +230,14 @@ resource "aws_ssm_parameter" "redis_hostname" {
   type  = "String"
   value = aws_elasticache_cluster.buzzr_redis.cache_nodes.0.address
 }
+
+resource "aws_ssm_parameter" "opening_hours" {
+  name  = "opening_hours"
+  type  = "String"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}

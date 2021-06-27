@@ -204,3 +204,14 @@ resource "aws_ssm_parameter" "num_riders_working" {
   }
 }
 
+
+resource "aws_ssm_parameter" "opening_hours" {
+  name  = "opening_hours"
+  type  = "String"
+  value = " "
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}
