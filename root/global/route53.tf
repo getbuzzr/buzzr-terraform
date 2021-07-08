@@ -333,3 +333,12 @@ resource "aws_route53_record" "staging_oauth_getbuzzr_co" {
     evaluate_target_health = true
   }
 }
+
+resource "aws_route53_record" "zendesk_spf" {
+
+  name = "getbuzzr.co"
+  type = "TXT"
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  ttl = "3600"
+  records = ["v=spf1 include:mail.zendesk.com ?all"]
+}
