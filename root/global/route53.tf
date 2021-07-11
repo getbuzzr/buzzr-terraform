@@ -342,3 +342,11 @@ resource "aws_route53_record" "zendesk_spf" {
   ttl = "3600"
   records = ["v=spf1 include:mail.zendesk.com ?all"]
 }
+
+resource "aws_route53_record" "zendesk_domain_verification" {
+  name = "zendeskverification.getbuzzr.co"
+  type = "TXT"
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  ttl = "3600"
+  records = ["df453541f8937468"]
+}
