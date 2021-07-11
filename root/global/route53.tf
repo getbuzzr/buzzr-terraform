@@ -336,7 +336,7 @@ resource "aws_route53_record" "staging_oauth_getbuzzr_co" {
 
 resource "aws_route53_record" "zendesk_spf" {
 
-  name = "getbuzzr.co"
+  name = "@"
   type = "TXT"
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
   ttl = "3600"
