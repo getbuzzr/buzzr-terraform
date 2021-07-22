@@ -12,3 +12,7 @@ resource "aws_sns_platform_application" "apns_application" {
   platform_principal           = aws_ssm_parameter.apns_certificate.value
   success_feedback_sample_rate = 100
 }
+
+resource "aws_sns_topic" "marketing_topic" {
+  name = "marketing_topic"
+}
