@@ -241,3 +241,9 @@ resource "aws_ssm_parameter" "opening_hours" {
     ]
   }
 }
+
+resource "aws_ssm_parameter" "marketing_topic_arn" {
+  name  = "marketing_topic_arn"
+  type  = "String"
+  value = aws_sns_topic.marketing_topic.arn
+}
