@@ -55,11 +55,11 @@ data "aws_ssm_parameter" "api_db_server_password" {
   name = aws_ssm_parameter.api_db_server_password.name
 }
 
-resource "aws_ssm_parameter" "api_db_database_uri" {
-  name  = "api_db_database_uri"
-  type  = "SecureString"
-  value = "mysql://${aws_db_instance.buzzr_staging_db.username}:${data.aws_ssm_parameter.api_db_server_password.value}@${aws_db_instance.buzzr_staging_db.endpoint}/${aws_db_instance.buzzr_staging_db.name}"
-}
+# resource "aws_ssm_parameter" "api_db_database_uri" {
+#   name  = "api_db_database_uri"
+#   type  = "SecureString"
+#   value = "mysql://${aws_db_instance.buzzr_staging_db.username}:${data.aws_ssm_parameter.api_db_server_password.value}@${aws_db_instance.buzzr_staging_db.endpoint}/${aws_db_instance.buzzr_staging_db.name}"
+# }
 
 resource "aws_ssm_parameter" "cognito_client_pool" {
   name  = "cognito_client_pool"
