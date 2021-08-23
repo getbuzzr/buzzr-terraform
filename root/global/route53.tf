@@ -350,3 +350,75 @@ resource "aws_route53_record" "zendesk_domain_verification" {
   ttl = "3600"
   records = ["df453541f8937468"]
 }
+
+resource "aws_route53_record" "stripe_txt_verification" {
+
+  name = "getbuzzr.co"
+  type = "TXT"
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  ttl = "3600"
+  records = ["stripe-verification=e5d415b32e089658609d6e2865bfeb03e81a64325ccdfe91231a429773947f74"]
+}
+
+resource "aws_route53_record" "6auv4plqiryzcp2kphypzw7yiu67ulnn._domainkey.getbuzzr.co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "6auv4plqiryzcp2kphypzw7yiu67ulnn._domainkey.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["6auv4plqiryzcp2kphypzw7yiu67ulnn.dkim.custom-email-domain.stripe.com."]
+}
+
+resource "aws_route53_record" "netgfdfey3tjvxyx6millscty52jqnkp._domainkey.getbuzzr.co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "netgfdfey3tjvxyx6millscty52jqnkp._domainkey.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["netgfdfey3tjvxyx6millscty52jqnkp.dkim.custom-email-domain.stripe.com."]
+}
+
+resource "aws_route53_record" "nw2wj6fi3ple644v5hi3pwly5tcbvhae._domainkey.getbuzzr.co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "nw2wj6fi3ple644v5hi3pwly5tcbvhae._domainkey.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["nw2wj6fi3ple644v5hi3pwly5tcbvhae.dkim.custom-email-domain.stripe.com."]
+}
+
+resource "aws_route53_record" "vdwf4tw3uwlp23xr4isnrgpaquoovbeu._domainkey.getbuzzr.co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "vdwf4tw3uwlp23xr4isnrgpaquoovbeu._domainkey.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["vdwf4tw3uwlp23xr4isnrgpaquoovbeu.dkim.custom-email-domain.stripe.com."]
+}
+
+resource "aws_route53_record" "a5qboma6jsx7whyozuarevc5nddnqpvu._domainkey.getbuzzr.co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "a5qboma6jsx7whyozuarevc5nddnqpvu._domainkey.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["a5qboma6jsx7whyozuarevc5nddnqpvu.dkim.custom-email-domain.stripe.com."]
+}
+
+resource "aws_route53_record" "sohjjp5ouczjl5bbi3vd44czyucham2p._domainkey.getbuzzr.co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "sohjjp5ouczjl5bbi3vd44czyucham2p.dkim.custom-email-domain.stripe.com."
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["sohjjp5ouczjl5bbi3vd44czyucham2p.dkim.custom-email-domain.stripe.com."]
+}
+
+resource "aws_route53_record" "bounce.getbuzzr.co" {
+  zone_id = aws_route53_zone.getbuzzr_co.zone_id
+  name    = "bounce.getbuzzr.co"
+  type    = "CNAME"
+  ttl     = "300"
+
+  records = ["custom-email-domain.stripe.com."]
+}
