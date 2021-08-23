@@ -168,7 +168,7 @@ resource "aws_route53_record" "google_search_domain_ownership_verification" {
   ttl     = "600"
 
   name    = "getbuzzr.co"
-  records = ["google-site-verification=dRox-FtNK1rv1m4_ajopE72MvL3ykID6yNAEnGigJjI"]
+  records = ["google-site-verification=dRox-FtNK1rv1m4_ajopE72MvL3ykID6yNAEnGigJjI", "stripe-verification=e5d415b32e089658609d6e2865bfeb03e81a64325ccdfe91231a429773947f74"]
 }
 
 resource "aws_route53_record" "_aa1b956d1bae8b641350d6ea43a92e9d_staging_static_getbuzzr_co" {
@@ -349,15 +349,6 @@ resource "aws_route53_record" "zendesk_domain_verification" {
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
   ttl = "3600"
   records = ["df453541f8937468"]
-}
-
-resource "aws_route53_record" "stripe_txt_verification" {
-
-  name = "getbuzzr.co"
-  type = "TXT"
-  zone_id = aws_route53_zone.getbuzzr_co.zone_id
-  ttl = "3600"
-  records = ["stripe-verification=e5d415b32e089658609d6e2865bfeb03e81a64325ccdfe91231a429773947f74"]
 }
 
 resource "aws_route53_record" "_6auv4plqiryzcp2kphypzw7yiu67ulnn_domainkey_getbuzzr_co" {
