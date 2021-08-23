@@ -398,7 +398,7 @@ resource "aws_route53_record" "_a5qboma6jsx7whyozuarevc5nddnqpvu_domainkey_getbu
 
 resource "aws_route53_record" "_sohjjp5ouczjl5bbi3vd44czyucham2p_domainkey_getbuzzr_co" {
   zone_id = aws_route53_zone.getbuzzr_co.zone_id
-  name    = "sohjjp5ouczjl5bbi3vd44czyucham2p.dkim.custom-email-domain.stripe.com."
+  name    = "sohjjp5ouczjl5bbi3vd44czyucham2p._domainkey.getbuzzr.co"
   type    = "CNAME"
   ttl     = "300"
 
